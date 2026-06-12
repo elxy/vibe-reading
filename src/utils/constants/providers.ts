@@ -1,6 +1,5 @@
 import type { AllProviderTypes, APIProviderTypes, LLMProviderModels, ProviderConfig, ProvidersConfig } from "@/types/config/provider"
 import type { Theme } from "@/types/config/theme"
-import { i18n } from "#imports"
 import customProviderLogo from "@/assets/providers/custom-provider.svg?url&no-inline"
 import { API_PROVIDER_TYPES, CUSTOM_LLM_PROVIDER_TYPES, NON_CUSTOM_LLM_PROVIDER_TYPES, TRANSLATE_PROVIDER_TYPES } from "@/types/config/provider"
 import { pick } from "@/types/utils"
@@ -47,7 +46,6 @@ export const DEFAULT_PROVIDER_CONFIG = {
   "openai-compatible": {
     id: "openai-compatible-default",
     name: PROVIDER_ITEMS["openai-compatible"].name,
-    description: i18n.t("options.apiProviders.providers.description.openaiCompatible"),
     enabled: true,
     provider: "openai-compatible",
     baseURL: "https://api.example.com/v1",
@@ -56,7 +54,6 @@ export const DEFAULT_PROVIDER_CONFIG = {
   "openai": {
     id: "openai-default",
     name: PROVIDER_ITEMS.openai.name,
-    description: i18n.t("options.apiProviders.providers.description.openai"),
     enabled: true,
     provider: "openai",
     model: DEFAULT_LLM_PROVIDER_MODELS.openai,
@@ -64,7 +61,6 @@ export const DEFAULT_PROVIDER_CONFIG = {
   "deepseek": {
     id: "deepseek-default",
     name: PROVIDER_ITEMS.deepseek.name,
-    description: i18n.t("options.apiProviders.providers.description.deepseek"),
     enabled: true,
     provider: "deepseek",
     model: DEFAULT_LLM_PROVIDER_MODELS.deepseek,
