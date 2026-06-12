@@ -1,15 +1,17 @@
 # Vibe Reading
 
-Vibe Reading is a browser extension for reading, translating, and learning from
-web pages with local configuration and user-provided AI or translation providers.
+Vibe Reading is a browser extension for reading and translating web pages with
+local configuration and user-provided AI or translation providers.
 
-This fork focuses on one core workflow: translate full web pages reliably without
-depending on a project-hosted backend. Features that need a network service,
-such as AI translation, use the provider endpoints and API keys configured by the
-user.
+This fork is intentionally narrow: **reading only**. It keeps the full-page
+reading and translation workflow, removes the product-suite features around it,
+and does not depend on a project-hosted backend. Features that need a network
+service, such as AI translation, use the provider endpoints and API keys
+configured by the user.
 
 ## Features
 
+- 📖 Reading-first full-page translation.
 - Full-page translation with bilingual and translation-only display modes.
 - Paragraph and page-title translation for content-heavy pages.
 - LLM-based language detection for auto-translate and skip-language rules.
@@ -21,25 +23,39 @@ user.
 - No Notebase, hosted account, hosted storage, telemetry dashboard, or project
   backend dependency.
 
-## Differences From Upstream
+## Proudly Missing
 
-Vibe Reading is intentionally smaller than the upstream Read Frog project. The
-following upstream capabilities are not included in this fork:
+Vibe Reading is smaller on purpose. Compared with the upstream Read Frog project,
+Immersive Translate-style translation suites, browser built-in translators, and
+general AI sidebar tools, this fork proudly avoids features that distract from
+reading.
 
-| Upstream capability                                         | Vibe Reading status | Reason                                                                         |
-| ----------------------------------------------------------- | ------------------- | ------------------------------------------------------------------------------ |
-| Notebase hosted storage and backend-backed project features | Removed             | The extension is designed to work without a project-hosted backend.            |
-| Custom AI Actions                                           | Removed             | Keeps the product focused on page translation instead of general AI workflows. |
-| Video Subtitles                                             | Removed             | Outside the core full-page translation workflow.                               |
-| Input Translation                                           | Removed             | Avoids injecting translation behavior into user input fields.                  |
-| Overlay Tools                                               | Removed             | Reduces page UI surface and content-script complexity.                         |
-| Text to Speech                                              | Removed             | Keeps the extension focused on reading and translation, not audio playback.    |
-| translation-hub                                             | Removed             | Avoids bundled upstream hub integrations.                                      |
-| Config Backup                                               | Removed             | Local import/export remains available; hosted backup is not included.          |
-| Beta Experience                                             | Removed             | Removes experimental feature gates from the fork.                              |
-| Extension Activation Mode                                   | Removed             | Page translation is controlled directly by translation actions and page rules. |
-| Statistics                                                  | Removed             | Avoids local analytics dashboards and charting dependencies.                   |
-| Language Detection mode setting                             | Removed             | Language detection always uses the configured LLM path.                        |
+| Product or category                              | What they often include                         | What Vibe Reading proudly does not include                   | What Vibe Reading keeps                  |
+| ------------------------------------------------ | ----------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------- |
+| 🐸 Upstream Read Frog                            | Learning tools, hosted integrations, more modes | Notebase, hosted storage, Custom AI Actions, Beta Experience | Focused page reading and translation     |
+| 🌊 Immersive Translate-style translation suites  | Broad translation surfaces across many media    | Video subtitles, input translation, overlay tools, TTS       | Web page reading translation             |
+| 🌐 Browser built-in translators                  | Simple automatic page translation               | Browser-account coupling, opaque provider choice             | User-selected providers and local config |
+| 🤖 General AI sidebar or assistant extensions    | Chat, writing, summarizing, action panels       | General AI workspace, prompt launcher, assistant overlay     | Translation prompts for reading context  |
+| 📊 Productivity or telemetry-heavy browser tools | Dashboards, usage statistics, sync accounts     | Statistics, hosted config backup, telemetry dashboard        | Local import/export only                 |
+
+## Removed Upstream Features
+
+| Removed capability                                     | Why it is absent                                                                 |
+| ------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| 🗄️ Notebase hosted storage and backend-backed features | Vibe Reading does not rely on a project-hosted backend.                          |
+| 🧠 Custom AI Actions                                   | This fork is not a general AI action launcher.                                   |
+| 🎬 Video Subtitles                                     | Video translation is outside the reading-only scope.                             |
+| ⌨️ Input Translation                                   | Vibe Reading avoids modifying text input workflows.                              |
+| 🧰 Overlay Tools                                       | Less overlay UI means fewer distractions on reading pages.                       |
+| 🔊 Text to Speech                                      | Audio playback is outside the reading-only scope.                                |
+| 🔗 translation-hub                                     | No bundled upstream hub integration.                                             |
+| ☁️ Config Backup                                       | Hosted backup is removed; local import/export remains.                           |
+| 🧪 Beta Experience                                     | Experimental feature gates are removed.                                          |
+| 🚦 Extension Activation Mode                           | Page translation is controlled by direct translation actions and page rules.     |
+| 📈 Statistics                                          | No local analytics dashboard or charting dependency.                             |
+| 🌍 Language Detection mode setting                     | Language detection always follows the LLM path; there is no basic/LLM mode knob. |
+
+The result is deliberately simple: **Vibe Reading is for reading.**
 
 ## Development
 
