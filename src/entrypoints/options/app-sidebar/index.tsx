@@ -1,7 +1,7 @@
 import { IconSearch } from "@tabler/icons-react"
 import { useSetAtom } from "jotai"
 import { i18n } from "#imports"
-import readFrogLogo from "@/assets/icons/read-frog.png"
+import vibeReadingLogo from "@/assets/icons/vibe-reading.png"
 import {
   InputGroup,
   InputGroupAddon,
@@ -17,10 +17,8 @@ import {
 import { getCommandPaletteShortcutHint } from "@/utils/os"
 import { version } from "../../../../package.json"
 import { commandPaletteOpenAtom } from "../command-palette/atoms"
-import { ProductNav } from "./product-nav"
 import { SettingsNav } from "./settings-nav"
 import { ToolsNav } from "./tools-nav"
-import { WhatsNewFooter } from "./whats-new-footer"
 
 export function AppSidebar() {
   const setCommandPaletteOpen = useSetAtom(commandPaletteOpenAtom)
@@ -29,13 +27,13 @@ export function AppSidebar() {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className="group-data-[state=expanded]:px-5 group-data-[state=expanded]:pt-4 transition-all">
-        <a href="https://readfrog.app" className="flex items-center gap-2">
-          <img src={readFrogLogo} alt="Logo" className="h-8 w-8 shrink-0" />
+        <div className="flex items-center gap-2">
+          <img src={vibeReadingLogo} alt="Logo" className="h-8 w-8 shrink-0" />
           <span className="text-md font-bold overflow-hidden truncate">{i18n.t("name")}</span>
           <span className="text-xs text-muted-foreground overflow-hidden truncate">
             {`v${version}`}
           </span>
-        </a>
+        </div>
         <InputGroup
           onClick={() => setCommandPaletteOpen(true)}
           className="bg-background"
@@ -59,11 +57,8 @@ export function AppSidebar() {
       <SidebarContent className="group-data-[state=expanded]:px-2 transition-all">
         <SettingsNav />
         <ToolsNav />
-        <ProductNav />
       </SidebarContent>
-      <SidebarFooter className="group-data-[state=expanded]:px-2 transition-all">
-        <WhatsNewFooter />
-      </SidebarFooter>
+      <SidebarFooter className="group-data-[state=expanded]:px-2 transition-all" />
     </Sidebar>
   )
 }

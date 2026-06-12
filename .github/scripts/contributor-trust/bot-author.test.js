@@ -19,7 +19,7 @@ describe("isBotAuthor", () => {
 
   it("does not flag human authors", () => {
     expect(isBotAuthor({
-      login: "mengxi-ream",
+      login: "vibe-reading",
       type: "User",
     })).toBe(false)
   })
@@ -35,7 +35,7 @@ describe("getBotAuthorSkipReason", () => {
 
   it("returns null for human-authored pull requests", () => {
     expect(getBotAuthorSkipReason({
-      login: "mengxi-ream",
+      login: "vibe-reading",
       type: "User",
     })).toBeNull()
   })

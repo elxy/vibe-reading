@@ -1,7 +1,6 @@
 name: 読書カエル
 extName: 読書カエル - 翻訳して学ぶ
 extDescription: 読書カエルは、あらゆるウェブサイトから言語を深く学ぶために設計されたオープンソースのブラウザ拡張機能です。
-uninstallSurveyUrl: https://tally.so/r/nPK6Ob
 dataTypes:
   string: テキスト
   number: 数値
@@ -10,7 +9,7 @@ contextMenu:
   translateSelection: 「%s」を翻訳
   showOriginal: 原文を表示
 sidePanel:
-  firefoxUserActionHint: Firefox では、ブラウザーのサイドバーから Read Frog を開いてください。
+  firefoxUserActionHint: Firefox では、ブラウザーのサイドバーから Vibe Reading を開いてください。
   firefoxUserActionHelpText: Firefox サイドバーの開き方を見る
   firefoxUserActionHelpUrl: https://support.mozilla.org/ja/kb/use-sidebar-access-tools-and-vertical-tabs
 popup:
@@ -281,7 +280,7 @@ options:
     floatingButton:
       globalToggle:
         title: フローティングボタンを有効化
-        description: ウェブページにフローティングボタンを表示し、Read Frog機能に素早くアクセス
+        description: ウェブページにフローティングボタンを表示し、Vibe Reading機能に素早くアクセス
       closeMenu:
         disableForSite: このサイトで無効化
         disableGlobally: グローバルで無効化
@@ -391,49 +390,6 @@ options:
             description: この出力フィールドは削除されます。
             confirm: 削除
             cancel: キャンセル
-          notebase:
-            title: Notebase 接続
-            description: このアクションの構造化された結果をリモート Notebase に保存します。
-            loginRequiredTitle: Notebase を設定するにはログインが必要です
-            loginRequiredDescription: notebase を選択したりマッピングを編集したりする前に、readfrog.app にログインしてください。
-            loginRequiredConnectedDescription: この接続は下のアカウントで作成されました。同じアカウントでログインするとフィールドマッピングが復元されます。別のアカウントでログインした場合、Notebase を作成または接続すると以前のマッピングは消去されます。
-            loginAction: ログイン
-            connectedAccountLabel: 接続済みアカウント
-            currentAccountLabel: 現在のアカウント
-            unknownConnectedAccount: 不明なアカウント
-            tableLabel: Notebase
-            tablePlaceholder: notebase を選択
-            tableClearOption: notebase を接続しない
-            clearConnectionAction: 接続をクリア
-            refreshAction: 更新
-            emptyTitle: Notebase がまだありません
-            emptyDescription: readfrog.app で notebase を作成してから、ここに戻ってフィールドをマッピングしてください。
-            openNotebaseAction: Notebase を開く
-            betaLockedTitle: このアカウントは Notebase ベータ対象外です
-            betaLockedDescription: このアクション設定は保持できますが、Notebase の選択と結果の同期は現在一部のベータアカウントのみに提供されています。
-            accountMismatchTitle: Notebase 接続は別のアカウントに属しています
-            accountMismatchDescription: この接続は下の接続済みアカウントに紐づいています。接続をクリアするか、現在のアカウントで利用できる Notebase を選択してください。
-            tableUnavailableTitle: 選択した notebase は利用できなくなりました
-            tableUnavailableDescription: この Notebase は存在しないか開けません。接続をクリアするか、別の Notebase を選択してください。
-            tableUnavailableOption: 利用不可
-            schemaErrorTitle: notebase スキーマの読み込みに失敗しました
-            schemaErrorDescription: 少し待ってからもう一度更新してください。
-            schemaLoading: notebase スキーマを読み込み中...
-            mappingsLabel: フィールドマッピング
-            mappingsEmpty: まだマッピングはありません。フィールドを保存する準備ができたら追加してください。
-            addMappingAction: マッピングを追加
-            removeMappingAction: マッピングを削除
-            localFieldLabel: アクションフィールド
-            localFieldPlaceholder: アクションフィールドを選択
-            remoteFieldLabel: Notebase フィールド
-            remoteFieldPlaceholder: notebase フィールドを選択
-            columnUnavailableOption: 削除済み
-            invalidMappingsTitle: 一部のマッピングに対応が必要です
-            invalidMappingsDescription: 無効なマッピングは保持されます。Notebase に保存する前に修正してください。
-            mappingMissingLocal: マッピングされたアクションフィールドは存在しなくなりました。
-            mappingMissingRemote: マッピングされた notebase フィールドは存在しなくなりました。
-            mappingMissingSchema: このマッピングを検証するには、notebase スキーマを更新してください。
-            mappingIncompatible: フィールドの型が一致しなくなりました。
           tokens:
             selection: 選択したテキスト内容
             paragraphs: 選択範囲と交差する段落内容。空行で連結され、カスタム AI アクションに送信する際は先頭 2000 文字に切り詰められます
@@ -494,8 +450,6 @@ options:
     personalizedPrompts:
       title: 個人化プロンプト
       description: 異なるタイプのプロンプトをカスタマイズすることで、翻訳時にプロンプトタイプを自ら調整できます。プロンプトとは、ユーザーがLLMに送信するテキストを指します。
-      communityPrompts: コミュニティからプロンプトを取得・共有
-      communityPromptsUrl: https://github.com/mengxi-ream/read-frog/discussions/821
       addPrompt: プロンプトを追加
       default: デフォルト
       importSuccess: インポート成功
@@ -548,7 +502,7 @@ options:
         editor:
           placeholder: |
             /* 例：カスタムカラーと背景のスタイル */
-            [data-read-frog-custom-translation-style='custom'] {
+            [data-vibe-reading-custom-translation-style='custom'] {
               color: #414535;
               background-color: light-dark(#F2E3BC, #C19875);
               padding: 2px 4px;
@@ -635,7 +589,7 @@ options:
       fallback: フォールバック
       selectPlaceholder: ボイスを選択
       preview: 試聴
-      previewSample: Read Frog からこんにちは！朗読するときはこのように聞こえます。
+      previewSample: Vibe Reading からこんにちは！朗読するときはこのように聞こえます。
     languageVoice:
       label: 言語別ボイス
       reset: デフォルトにリセット
@@ -660,12 +614,9 @@ options:
   config:
     title: 設定
     about:
-      title: Read Frog について
-      description: Read Frog は 2025 年 4 月に生まれました
-      mission: Read Frog は、AI 時代における質の高い教育機会への平等なアクセスを広げるため、語学学習、医学、その他の知識集約型分野で、実際の教師に近い学習体験を手頃な価格で提供することを目指しています。
-      analytics:
-        title: ユーザー体験の改善に協力する
-        tooltip: 有効にすると、Read Frog は匿名の利用シグナルを送信し、機能の安定性確認、性能や UX の改善、今後優先すべき機能の判断に役立てます。
+      title: Vibe Reading について
+      description: Vibe Reading は 2025 年 4 月に生まれました
+      mission: Vibe Reading は、AI 時代における質の高い教育機会への平等なアクセスを広げるため、語学学習、医学、その他の知識集約型分野で、実際の教師に近い学習体験を手頃な価格で提供することを目指しています。
     sync:
       title: 手動設定同期
       description: 手動で設定をインポート・エクスポート
@@ -674,7 +625,7 @@ options:
       importSuccess: 設定のインポートが完了しました
       exportSuccess: 設定のエクスポートが完了しました
       importError: インポートに失敗しました
-      versionTooNew: インポートされた設定のバージョンが新しいため、Read Frogを最新バージョンにアップグレードしてください
+      versionTooNew: インポートされた設定のバージョンが新しいため、Vibe Readingを最新バージョンにアップグレードしてください
       migrationError: 移行に失敗しました
       validationError: 設定の検証に失敗しました
       exportOptions:
@@ -686,53 +637,6 @@ options:
       viewConfig:
         expand: 設定を展開
         collapse: 設定を折りたたむ
-      googleDrive:
-        title: Google Driveクラウド同期
-        description: リモートが新しい場合はダウンロード、ローカルが新しい場合はアップロード
-        sync: Google Driveに同期
-        syncing: 同期中...
-        syncSuccess:
-          uploaded: ローカル設定をクラウドにアップロードしました
-          downloaded: リモート設定を適用しました
-          sameChanges: ローカルとリモートの変更が一致、同期しました
-          noChange: 既に同期済みです
-          unresolved: 競合を解決し、ローカルとクラウドに同期しました
-        syncError: 同期に失敗しました。もう一度お試しください
-        metadataCorrupted: 同期メタデータが破損しています。リモート設定を適用しました
-        lastSyncTime: 最終同期時間
-        logout: ログアウト
-        logoutSuccess: Googleアカウントからログアウトしました
-        unresolved:
-          title: 設定の同期解決
-          description: ローカルとリモートの設定が異なります。各フィールドについて、保持するバージョンを選択してください。
-          resolved: 解決済み
-          unresolved: 未解決
-          localValue: ローカル値
-          remoteValue: リモート値
-          useLocal: ローカルを使用
-          useRemote: リモートを使用
-          useAllLocal: すべてローカルを使用
-          useAllRemote: すべてリモートを使用
-          reset: 選択をリセット
-          progress: $1/$2 個の変更を解決しました
-          confirm: 同期を確認
-          cancel: キャンセル
-          hasUnresolvedInChildren: ⚠ 未解決の変更を含む
-          item: 項目
-          items: 項目
-          unresolvedPrompt: "[未解決 - 選択してください]"
-          localLatest: ローカル最新
-          remoteLatest: リモート最新
-          bothChanged: 両方が変更されました
-          localChanged: ローカルが変更されました
-          remoteChanged: リモートが変更されました
-          configValid: 設定は有効です
-          configInvalid: 設定は無効です
-          resolveToContinue: 続行するには競合を解決してください
-          validationAlert:
-            title: マージされた設定に検証エラーがあります
-            description: 以下の差異を調整して修正してください：
-          moreErrors: ...他 $1 件のエラー
     backup:
       title: 設定のバックアップ
       description: 設定が変更された場合、1時間ごとに自動的にバックアップが作成されます。以前の設定をここで復元できます。（最大 $1 個のバックアップ）
@@ -842,12 +746,6 @@ options:
           webTitle: ウェブページタイトル
           webDescription: ページメタデータのウェブページ説明
           videoSummary: 動画要約（AI スマートコンテキストが必要）
-  whatsNew:
-    title: 新機能
-  survey:
-    title: Notebase 先行体験
-  rateUs:
-    title: レビューを書く
 side:
   sourceLang: ソース言語
   targetLang: 翻訳言語
@@ -893,33 +791,7 @@ action:
   copied: コピー済み
   regenerate: 再生成
   viewContextDetails: コンテキスト
-  saveToNotebase: Notebase に保存
-  saveToNotebaseSaving: 保存中...
-  saveToNotebaseSuccess: Notebase に保存しました
-  saveToNotebaseFailed: Notebase への保存に失敗しました
-  saveToNotebaseLoginRequired: Notebase に保存するには readfrog.app にログインしてください
-  saveToNotebaseBetaRequired: このアカウントはまだ Notebase ベータに参加していません
-  saveToNotebaseTableUnavailable: 選択した Notebase は利用できなくなりました
-  saveToNotebaseConnectionInvalid: この Notebase 接続は古くなっています。Custom AI Actions で更新し、マッピングを修正してください。
-  saveToNotebaseNoMappings: 保存する前に、少なくとも1つの有効なマッピングを追加してください
-  saveToNotebaseCreateTitle: Notebase を作成しますか？
-  saveToNotebaseCreateDescription: この Custom Action の出力フィールドに合わせた列を持つ Notebase を作成し、現在の結果を最初のノートとして保存します。
-  saveToNotebaseCreateAndSave: 作成して保存
-  saveToNotebaseCreateAndSaveShort: 作成して保存
-  saveToNotebaseLoginAndCreate: ログインして自動作成
-  saveToNotebaseLoginAndSave: ログインして保存
-  saveToNotebaseConnectExisting: 既存の Notebase に接続
-  saveToNotebaseGoConfigure: 設定へ
-  saveToNotebaseLoginConnectedTitle: ログインして保存しますか？
-  saveToNotebaseLoginConnectedDescription: この Custom Action は下のアカウントに接続されています。ログイン後、可能であれば既存の Notebase に保存し、利用できない場合はログイン中のアカウント用に新しい Notebase を作成します。
-  saveToNotebaseConnectionUnavailableTitle: Notebase 接続を利用できません
-  saveToNotebaseMissingNotebaseDescription: 以前の Notebase は存在しないか、このアカウントでは開けません。新しい Notebase を作成して保存するか、Custom AI Actions で既存の Notebase に接続してください。
-  saveToNotebaseAccountUnavailableDescription: ログイン中のアカウントが下の接続済みアカウントと一致しません。作成して保存すると、以前の接続設定とフィールドマッピングが置き換えられます。Custom AI Actions で既存の Notebase に接続することもできます。
-  saveToNotebasePendingLogin: ログイン後に保存を完了
-  saveToNotebasePendingLoginDescription: ログイン後、Read Frog が Notebase を作成し、この結果を自動で保存します。
-  saveToNotebasePendingConnectedLoginDescription: ログイン後、Read Frog は可能であれば接続済み Notebase に保存します。このアカウントで利用できない場合は、新しい Notebase を作成して保存します。
   openCustomActions: Custom AI Actions を開く
-  openNotebase: Notebase を開く
   contextDetailsTitleLabel: タイトル
   contextDetailsParagraphsLabel: 段落内容
   translation: 翻訳
@@ -940,7 +812,7 @@ subtitles:
     downloadTranslatedComplete: 翻訳字幕をダウンロードしました
     downloadSource: 元字幕をダウンロード
   state:
-    loading: Read Frog 字幕読み込み中
+    loading: Vibe Reading 字幕読み込み中
     error: エラーが発生しました
   errors:
     http429: 429 YouTube字幕APIへのリクエストが多すぎます。しばらくしてから再試行してください

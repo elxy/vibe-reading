@@ -6,7 +6,7 @@ import { useDownloadTranslatedSubtitles } from "./use-download-translated-subtit
 
 export function DownloadTranslatedSubtitles() {
   const { message, progress, isRunning, download } = useDownloadTranslatedSubtitles()
-  const buttonId = "read-frog-download-translated-subtitles"
+  const buttonId = "vibe-reading-download-translated-subtitles"
   const title = i18n.t("subtitles.actions.downloadTranslated")
 
   return (

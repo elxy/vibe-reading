@@ -11,11 +11,6 @@ on:
         required: true
         type: string
 
-env:
-  WXT_GOOGLE_CLIENT_ID: ${{ secrets.WXT_GOOGLE_CLIENT_ID || vars.WXT_GOOGLE_CLIENT_ID }}
-  WXT_POSTHOG_API_KEY: ${{ secrets.WXT_POSTHOG_API_KEY || vars.WXT_POSTHOG_API_KEY }}
-  WXT_POSTHOG_HOST: ${{ secrets.WXT_POSTHOG_HOST || vars.WXT_POSTHOG_HOST }}
-
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
@@ -104,8 +99,8 @@ jobs:
             --arg timestamp "$TIMESTAMP" \
             '{
               embeds: [{
-                title: "🐸 Read Frog Release!",
-                description: ("**Read Frog** version `" + $version + "` has been released!"),
+                title: "🐸 Vibe Reading Release!",
+                description: ("**Vibe Reading** version `" + $version + "` has been released!"),
                 url: $url,
                 color: 48253,
                 fields: $fields,

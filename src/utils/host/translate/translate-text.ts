@@ -1,10 +1,10 @@
-import type { LangCodeISO6393, LangLevel } from "@read-frog/definitions"
+import type { LangCodeISO6393, LangLevel } from "@/definitions"
 import type { Config } from "@/types/config/config"
 import type { ProviderConfig } from "@/types/config/provider"
 import type { WebPagePromptContext } from "@/types/content"
-import { LANG_CODE_TO_EN_NAME } from "@read-frog/definitions"
 import { toast } from "sonner"
 import { i18n } from "#imports"
+import { LANG_CODE_TO_EN_NAME } from "@/definitions"
 import { isAPIProviderConfig, isLLMProviderConfig } from "@/types/config/provider"
 import { getProviderConfigById } from "@/utils/config/helpers"
 

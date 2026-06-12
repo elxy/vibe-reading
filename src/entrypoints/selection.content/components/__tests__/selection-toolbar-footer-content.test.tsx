@@ -67,7 +67,7 @@ describe("selectionToolbarFooterContent", () => {
           onProviderChange={onProviderChange}
           onRegenerate={onRegenerate}
         >
-          <button type="button">Save to Notebase</button>
+          <button type="button">Extra action</button>
         </SelectionToolbarFooterContent>
       </TooltipProvider>,
     )
@@ -83,7 +83,7 @@ describe("selectionToolbarFooterContent", () => {
     expect(screen.getByText(i18n.t("action.contextDetailsParagraphsLabel"))).toBeInTheDocument()
     expect(screen.getByText("Page Title")).toBeInTheDocument()
     expect(screen.getByText("Context text")).toBeInTheDocument()
-    expect(screen.getByRole("button", { name: "Save to Notebase" })).toBeInTheDocument()
+    expect(screen.getByRole("button", { name: "Extra action" })).toBeInTheDocument()
     const contextPreview = screen.getByText("Context text").closest("[data-slot='selection-toolbar-footer-preview-value']")
 
     expect(contextPreview).toHaveClass("max-h-36", "overflow-y-auto", "break-words")

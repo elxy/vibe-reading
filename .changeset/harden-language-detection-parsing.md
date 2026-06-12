@@ -1,5 +1,5 @@
 ---
-"@read-frog/extension": patch
+"@vibe-reading/extension": patch
 ---
 
 fix(language-detection): harden LLM output parsing with JSON prompt and code fence stripping

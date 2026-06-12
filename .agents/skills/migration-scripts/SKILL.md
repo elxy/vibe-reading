@@ -2,7 +2,7 @@
 name: migration-scripts
 description: Use when writing or reviewing database/config migration scripts or migration registries. Enforces frozen-snapshot migrations, safe registration, and lean import boundaries.
 metadata:
-  author: read-frog
+  author: vibe-reading
   version: "1.1.0"
 ---
 

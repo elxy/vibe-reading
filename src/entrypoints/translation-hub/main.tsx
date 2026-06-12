@@ -4,8 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query"
 import { Provider as JotaiProvider } from "jotai"
 import { useHydrateAtoms } from "jotai/utils"
 import * as React from "react"
-import FrogToast from "@/components/frog-toast"
-import { HelpButton } from "@/components/help-button"
+import AppToast from "@/components/app-toast"
 import { ThemeProvider } from "@/components/providers/theme-provider"
 import { TooltipProvider } from "@/components/ui/base-ui/tooltip"
 import { configAtom } from "@/utils/atoms/config"
@@ -51,8 +50,7 @@ async function initApp() {
             <ThemeProvider>
               <TooltipProvider>
                 <App />
-                <FrogToast />
-                <HelpButton />
+                <AppToast />
               </TooltipProvider>
             </ThemeProvider>
           </HydrateAtoms>

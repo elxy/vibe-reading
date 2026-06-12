@@ -13,11 +13,6 @@ on:
         default: false
         type: boolean
 
-env:
-  WXT_GOOGLE_CLIENT_ID: ${{ secrets.WXT_GOOGLE_CLIENT_ID || vars.WXT_GOOGLE_CLIENT_ID }}
-  WXT_POSTHOG_API_KEY: ${{ secrets.WXT_POSTHOG_API_KEY || vars.WXT_POSTHOG_API_KEY }}
-  WXT_POSTHOG_HOST: ${{ secrets.WXT_POSTHOG_HOST || vars.WXT_POSTHOG_HOST }}
-
 jobs:
   submit:
     name: Submit to Stores

@@ -164,7 +164,7 @@ describe("getModelById", () => {
           },
           headers: {
             "HTTP-Referer": "https://example.com",
-            "X-Title": "Read Frog",
+            "X-Title": "Vibe Reading",
           },
         },
       ],
@@ -180,7 +180,7 @@ describe("getModelById", () => {
       apiKey: "custom-key",
       headers: {
         "HTTP-Referer": "https://example.com",
-        "X-Title": "Read Frog",
+        "X-Title": "Vibe Reading",
       },
     }))
     expect(openAICompatibleLanguageModelMock).toHaveBeenCalledWith("huihui-hy-mt1.5-1.8b-abliterated")

@@ -169,7 +169,7 @@ function walkAndLabelVisibleParagraphs(element: HTMLElement, walkId: string) {
     }
   }
 
-  element.setAttribute("data-read-frog-walked", walkId)
+  element.setAttribute("data-vibe-reading-walked", walkId)
 
   for (const child of element.children) {
     if (child instanceof HTMLElement) {
@@ -178,7 +178,7 @@ function walkAndLabelVisibleParagraphs(element: HTMLElement, walkId: string) {
   }
 
   if (element.tagName === "P" && element.textContent?.trim()) {
-    element.setAttribute("data-read-frog-paragraph", "")
+    element.setAttribute("data-vibe-reading-paragraph", "")
   }
 
   return {

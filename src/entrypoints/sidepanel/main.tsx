@@ -2,7 +2,7 @@ import "@/utils/zod-config"
 import type { ThemeMode } from "@/types/config/theme"
 import { Provider as JotaiProvider } from "jotai"
 import { useHydrateAtoms } from "jotai/utils"
-import readFrogLogo from "@/assets/icons/read-frog.png?url&no-inline"
+import vibeReadingLogo from "@/assets/icons/vibe-reading.png?url&no-inline"
 import { ThemeProvider } from "@/components/providers/theme-provider"
 import { baseThemeModeAtom } from "@/utils/atoms/theme"
 import { APP_NAME } from "@/utils/constants/app"
@@ -29,7 +29,7 @@ function SidePanelShell() {
     <main className="bg-background text-foreground flex min-h-screen flex-col px-5 py-6">
       <section className="flex flex-1 flex-col items-center justify-center gap-4 text-center">
         <img
-          src={readFrogLogo}
+          src={vibeReadingLogo}
           alt={APP_NAME}
           className="size-16 rounded-full"
         />

@@ -299,8 +299,8 @@ export function SelectionToolbar() {
 
         const selectionSnapshot = readSelectionSnapshot(selection)
 
-        // https://github.com/mengxi-ream/read-frog/issues/547
-        // https://github.com/mengxi-ream/read-frog/pull/790
+        // historical regression
+        // historical regression
         if (!isInputOrTextarea && interactiveTarget && !selection?.containsNode(interactiveTarget, true)) {
           return
         }

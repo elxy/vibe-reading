@@ -9,7 +9,7 @@ vi.mock("react-dom/client", () => ({
   createRoot: createRootMock,
 }))
 
-const REACT_ROOT_REGISTRY_KEY = Symbol.for("read-frog.react-root-registry")
+const REACT_ROOT_REGISTRY_KEY = Symbol.for("vibe-reading.react-root-registry")
 
 function createMockRoot() {
   return {

@@ -12,7 +12,7 @@ import { applyTheme } from "@/utils/theme"
 import { SubtitlesContainer } from "../ui/subtitles-container"
 import { SubtitlesProviders } from "../ui/subtitles-ui-context"
 
-const SUBTITLES_UI_HOST_ID = "read-frog-subtitles-ui-host"
+const SUBTITLES_UI_HOST_ID = "vibe-reading-subtitles-ui-host"
 
 interface MountSubtitlesUIOptions {
   adapter: SubtitlesProvidersAdapter

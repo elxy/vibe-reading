@@ -16,13 +16,13 @@ export const TRANSLATE_LOOK_AHEAD_MS = 30_000
 export const PROCESS_LOOK_AHEAD_MS = 60_000
 
 // DOM IDs
-export const TRANSLATE_BUTTON_CONTAINER_ID = "read-frog-subtitles-translate-button-container"
-export const HIDE_NATIVE_CAPTIONS_STYLE_ID = "read-frog-hide-native-captions"
+export const TRANSLATE_BUTTON_CONTAINER_ID = "vibe-reading-subtitles-translate-button-container"
+export const HIDE_NATIVE_CAPTIONS_STYLE_ID = "vibe-reading-hide-native-captions"
 
 // Class names
-export const SUBTITLES_VIEW_CLASS = "read-frog-subtitles-view"
-export const STATE_MESSAGE_CLASS = "read-frog-subtitles-state-message"
-export const TRANSLATE_BUTTON_CLASS = "read-frog-subtitles-translate-button"
+export const SUBTITLES_VIEW_CLASS = "vibe-reading-subtitles-view"
+export const STATE_MESSAGE_CLASS = "vibe-reading-subtitles-state-message"
+export const TRANSLATE_BUTTON_CLASS = "vibe-reading-subtitles-translate-button"
 
 // YouTube specific
 export const YOUTUBE_WATCH_URL_PATTERN = "youtube.com/watch"

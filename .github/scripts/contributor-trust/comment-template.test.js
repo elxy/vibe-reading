@@ -29,7 +29,7 @@ describe("buildTrustComment", () => {
           },
         ],
       },
-      owner: "mengxi-ream",
+      owner: "vibe-reading",
       plan: {
         needsMaintainerReview: false,
         targetTrustLabel: "contrib-trust:trusted",
@@ -41,7 +41,7 @@ describe("buildTrustComment", () => {
         state: "open",
         title: "fix: storage false value reset and backup delete dialog not showing",
       },
-      repo: "read-frog",
+      repo: "vibe-reading",
       score: {
         bucket: "trusted",
         communityStanding: 6,

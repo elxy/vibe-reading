@@ -4,7 +4,7 @@ import { useAtom, useAtomValue } from "jotai"
 import { useEffect, useRef, useState } from "react"
 import { toast } from "sonner"
 import { browser, i18n } from "#imports"
-import readFrogLogo from "@/assets/icons/read-frog.png?url&no-inline"
+import vibeReadingLogo from "@/assets/icons/vibe-reading.png?url&no-inline"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,7 +23,7 @@ import { shadowWrapper } from "../../index"
 import HiddenButton from "./components/hidden-button"
 import TranslateButton from "./translate-button"
 
-const readFrogLogoUrl = new URL(readFrogLogo, browser.runtime.getURL("/")).href
+const vibeReadingLogoUrl = new URL(vibeReadingLogo, browser.runtime.getURL("/")).href
 const LONG_PRESS_DELAY_MS = 350
 const DRAG_START_DISTANCE_PX = 6
 const MIN_FLOATING_CONTAINER_TOP_PX = 30
@@ -384,7 +384,7 @@ export default function FloatingButton() {
           onMouseEnter={handleMouseEnter}
         >
           <img
-            src={readFrogLogoUrl}
+            src={vibeReadingLogoUrl}
             alt={APP_NAME}
             className={cn(
               "h-8 w-8 rounded-full",

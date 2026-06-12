@@ -1,6 +1,6 @@
-import { langCodeISO6393Schema, langLevel } from "@read-frog/definitions"
-
 import { z } from "zod"
+
+import { langCodeISO6393Schema, langLevel } from "@/definitions"
 import { FEATURE_PROVIDER_DEFS } from "@/utils/constants/feature-providers"
 import {
   MAX_SELECTION_OVERLAY_OPACITY,

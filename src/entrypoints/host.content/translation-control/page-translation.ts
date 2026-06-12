@@ -425,14 +425,14 @@ export class PageTranslationManager implements IPageTranslationManager {
 
     walkAndLabelElement(container, this.walkId, config)
     // if container itself has paragraph and the id
-    if (container.hasAttribute("data-read-frog-paragraph") && container.getAttribute("data-read-frog-walked") === this.walkId) {
+    if (container.hasAttribute("data-vibe-reading-paragraph") && container.getAttribute("data-vibe-reading-walked") === this.walkId) {
       observer.observe(container)
       return
     }
 
     const paragraphs = this.collectParagraphElementsDeep(container, this.walkId)
     const topLevelParagraphs = paragraphs.filter((el) => {
-      const ancestor = el.parentElement?.closest("[data-read-frog-paragraph]")
+      const ancestor = el.parentElement?.closest("[data-vibe-reading-paragraph]")
       // keep it if either:
       //  • no paragraph ancestor at all, or
       //  • the ancestor is *not* inside container
@@ -448,7 +448,7 @@ export class PageTranslationManager implements IPageTranslationManager {
     const result: HTMLElement[] = []
 
     const collectFromContainer = (root: HTMLElement | Document | ShadowRoot) => {
-      const elements = root.querySelectorAll<HTMLElement>(`[data-read-frog-paragraph][data-read-frog-walked="${CSS.escape(walkId)}"]`)
+      const elements = root.querySelectorAll<HTMLElement>(`[data-vibe-reading-paragraph][data-vibe-reading-walked="${CSS.escape(walkId)}"]`)
       result.push(...[...elements])
     }
 

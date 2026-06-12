@@ -1,0 +1,38 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cover" x1="44" y1="53" x2="212" y2="221" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F766E"/>
+      <stop offset="1" stop-color="#174E61"/>
+    </linearGradient>
+    <linearGradient id="leftPage" x1="69" y1="63" x2="131" y2="202" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF7E8"/>
+      <stop offset="1" stop-color="#F5E2C5"/>
+    </linearGradient>
+    <linearGradient id="rightPage" x1="187" y1="63" x2="125" y2="202" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF7E8"/>
+      <stop offset="1" stop-color="#F5E2C5"/>
+    </linearGradient>
+    <linearGradient id="centerWave" x1="98" y1="72" x2="158" y2="177" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F766E"/>
+      <stop offset="1" stop-color="#FF6B4A"/>
+    </linearGradient>
+    <filter id="shadow" x="24" y="38" width="208" height="202" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#12343B" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+  <g filter="url(#shadow)">
+    <path d="M38 82C38 69 49 59 62 62C85 67 108 78 128 101C148 78 171 67 194 62C207 59 218 69 218 82V186C218 199 207 208 195 205C170 200 148 211 128 232C108 211 86 200 61 205C49 208 38 199 38 186V82Z" fill="url(#cover)"/>
+    <path d="M57 70C82 74 107 88 128 111V219C108 198 86 188 57 192V70Z" fill="url(#leftPage)"/>
+    <path d="M199 70C174 74 149 88 128 111V219C148 198 170 188 199 192V70Z" fill="url(#rightPage)"/>
+    <path d="M72 180C92 176 111 182 128 198C145 182 164 176 184 180C161 185 144 197 128 216C112 197 95 185 72 180Z" fill="#4C5F9F"/>
+    <path d="M92 129C92 125 95 122 99 122C103 122 106 125 106 129V155C106 159 103 162 99 162C95 162 92 159 92 155V129Z" fill="#0F766E"/>
+    <path d="M112 110C112 106 115 103 119 103C123 103 126 106 126 110V171C126 175 123 178 119 178C115 178 112 175 112 171V110Z" fill="#0F766E"/>
+    <path d="M73 140C73 136 76 133 80 133C84 133 87 136 87 140V150C87 154 84 157 80 157C76 157 73 154 73 150V140Z" fill="#0F766E"/>
+    <path d="M130 86C130 82 133 79 137 79C141 79 144 82 144 86V172C144 176 141 179 137 179C133 179 130 176 130 172V86Z" fill="url(#centerWave)"/>
+    <path d="M151 116C151 112 154 109 158 109C162 109 165 112 165 116V170C165 174 162 177 158 177C154 177 151 174 151 170V116Z" fill="#FF6B4A"/>
+    <path d="M170 133C170 129 173 126 177 126C181 126 184 129 184 133V157C184 161 181 164 177 164C173 164 170 161 170 157V133Z" fill="#FF6B4A"/>
+    <path d="M189 141C189 137 192 134 196 134C200 134 203 137 203 141V149C203 153 200 156 196 156C192 156 189 153 189 149V141Z" fill="#FF6B4A"/>
+    <path d="M128 35L136 58L159 66L136 74L128 98L120 74L97 66L120 58L128 35Z" fill="#FF6B4A"/>
+    <path d="M169 64L174 77L187 82L174 87L169 100L164 87L151 82L164 77L169 64Z" fill="#4C5F9F"/>
+  </g>
+</svg>

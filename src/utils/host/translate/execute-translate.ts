@@ -1,7 +1,7 @@
 import type { PromptResolver } from "./api/ai"
 import type { Config } from "@/types/config/config"
 import type { ProviderConfig } from "@/types/config/provider"
-import { ISO6393_TO_6391, LANG_CODE_TO_EN_NAME } from "@read-frog/definitions"
+import { ISO6393_TO_6391, LANG_CODE_TO_EN_NAME } from "@/definitions"
 import { isLLMProviderConfig, isNonAPIProvider, isPureAPIProvider } from "@/types/config/provider"
 import { aiTranslate } from "./api/ai"
 import { deeplTranslate } from "./api/deepl"

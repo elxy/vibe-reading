@@ -13,7 +13,7 @@ describe("selectOwnedNonForkRepositories", () => {
     const result = selectOwnedNonForkRepositories([
       {
         isFork: true,
-        nameWithOwner: "kilidoc/read-frog",
+        nameWithOwner: "kilidoc/vibe-reading",
         owner: { login: "kilidoc" },
         stargazerCount: 5040,
       },
@@ -31,14 +31,14 @@ describe("selectOwnedNonForkRepositories", () => {
       },
       {
         isFork: false,
-        nameWithOwner: "mengxi-ream/read-frog",
-        owner: { login: "mengxi-ream" },
+        nameWithOwner: "vibe-reading/vibe-reading",
+        owner: { login: "vibe-reading" },
         stargazerCount: 5041,
       },
       {
         isFork: false,
-        nameWithOwner: "better-auth/better-auth",
-        owner: { login: "better-auth" },
+        nameWithOwner: "neutral-org/toolkit",
+        owner: { login: "neutral-org" },
         stargazerCount: 27534,
       },
     ], "kilidoc")
@@ -123,8 +123,8 @@ describe("countAuthorCommitsInRepo", () => {
     try {
       const count = await countAuthorCommitsInRepo(
         "token",
-        "mengxi-ream",
-        "read-frog",
+        "vibe-reading",
+        "vibe-reading",
         "Sufyr",
       )
 
@@ -145,8 +145,8 @@ describe("countAuthorCommitsInRepo", () => {
     try {
       const count = await countAuthorCommitsInRepo(
         "token",
-        "mengxi-ream",
-        "read-frog",
+        "vibe-reading",
+        "vibe-reading",
         "Sufyr",
       )
 
@@ -192,8 +192,8 @@ describe("countReviewsOnOthersPullRequestsInRepo", () => {
     try {
       const count = await countReviewsOnOthersPullRequestsInRepo(
         "token",
-        "mengxi-ream",
-        "read-frog",
+        "vibe-reading",
+        "vibe-reading",
         "Sufyr",
         50,
       )

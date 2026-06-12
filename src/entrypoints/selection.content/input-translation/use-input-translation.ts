@@ -8,8 +8,8 @@ import { translateTextForInput } from "@/utils/host/translate/translate-variants
 
 const SPACE_KEY = " "
 const TRIGGER_COUNT = 3
-const LAST_CYCLE_SWAPPED_KEY = "read-frog-input-translation-last-cycle-swapped"
-const SPINNER_ID = "read-frog-input-translation-spinner"
+const LAST_CYCLE_SWAPPED_KEY = "vibe-reading-input-translation-last-cycle-swapped"
+const SPINNER_ID = "vibe-reading-input-translation-spinner"
 
 function getLastCycleSwapped(): boolean {
   try {

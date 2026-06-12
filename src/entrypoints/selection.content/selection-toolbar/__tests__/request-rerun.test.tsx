@@ -857,16 +857,6 @@ describe("selection toolbar requests", () => {
     await waitFor(() => {
       expect(screen.getByTestId("translation-result").textContent).toBe("Context menu result")
     })
-
-    const { sendMessage } = await import("@/utils/message")
-    expect(vi.mocked(sendMessage)).toHaveBeenCalledWith(
-      "trackFeatureUsedEvent",
-      expect.objectContaining({
-        feature: "selection_translation",
-        surface: "context_menu",
-        outcome: "success",
-      }),
-    )
   })
 
   it("reuses the same captured session for cross-node context-menu translation", async () => {
@@ -994,18 +984,6 @@ describe("selection toolbar requests", () => {
 
     expect(screen.getByTestId("footer-paragraphs").textContent).toContain("Selected text inside a paragraph.")
     expect(toastErrorMock).not.toHaveBeenCalled()
-
-    const { sendMessage } = await import("@/utils/message")
-    expect(vi.mocked(sendMessage)).toHaveBeenCalledWith(
-      "trackFeatureUsedEvent",
-      expect.objectContaining({
-        feature: "custom_ai_action",
-        surface: "context_menu",
-        outcome: "success",
-        action_id: action.id,
-        action_name: action.name,
-      }),
-    )
   })
 
   it("renders the custom action tooltip as non-interactive and closes it on hover leave", async () => {
@@ -1064,18 +1042,6 @@ describe("selection toolbar requests", () => {
       "options.floatingButtonAndToolbar.selectionToolbar.errors.missingSelection",
     )
     expect(streamBackgroundStructuredObjectMock).not.toHaveBeenCalled()
-
-    const { sendMessage } = await import("@/utils/message")
-    expect(vi.mocked(sendMessage)).toHaveBeenCalledWith(
-      "trackFeatureUsedEvent",
-      expect.objectContaining({
-        feature: "custom_ai_action",
-        surface: "context_menu",
-        outcome: "failure",
-        action_id: action.id,
-        action_name: action.name,
-      }),
-    )
   })
 
   it("does not rerun custom action requests on passive config refresh, but reruns when request values change", async () => {
@@ -1331,18 +1297,6 @@ describe("selection toolbar requests", () => {
     expect(alert).toHaveTextContent("options.floatingButtonAndToolbar.selectionToolbar.errors.customActionFailed")
     expect(alert).toHaveTextContent("options.floatingButtonAndToolbar.selectionToolbar.errors.missingSelection")
     expect(streamBackgroundStructuredObjectMock).not.toHaveBeenCalled()
-
-    const { sendMessage } = await import("@/utils/message")
-    expect(vi.mocked(sendMessage)).toHaveBeenCalledWith(
-      "trackFeatureUsedEvent",
-      expect.objectContaining({
-        feature: "custom_ai_action",
-        surface: "selection_toolbar",
-        outcome: "failure",
-        action_id: DEFAULT_CONFIG.selectionToolbar.customActions[0]?.id,
-        action_name: DEFAULT_CONFIG.selectionToolbar.customActions[0]?.name,
-      }),
-    )
   })
 
   it("renders custom action errors inline and clears them after a successful rerun", async () => {

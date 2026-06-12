@@ -425,7 +425,7 @@ describe("translate", () => {
     })
     describe("block node -> shallow inline node (inline node) -> single inline node + block node", () => {
       it("bilingual mode: should translate the unwrapped inline parent as a single inline wrapper", async () => {
-        // https://github.com/mengxi-ream/read-frog/pull/1055
+        // historical regression
         render(
           <div data-testid="test-node">
             <div style={{ display: "inline" }}>
@@ -451,7 +451,7 @@ describe("translate", () => {
         expect(node.textContent).toBe(`${MOCK_ORIGINAL_TEXT}${MOCK_ORIGINAL_TEXT}`)
       })
       it("translation only mode: should replace the unwrapped inline parent content with a single wrapper", async () => {
-        // https://github.com/mengxi-ream/read-frog/pull/1055
+        // historical regression
         render(
           <div data-testid="test-node">
             <div style={{ display: "inline" }}>
@@ -574,7 +574,7 @@ describe("translate", () => {
     })
     describe("inline nodes with aria-hidden block children", () => {
       it("bilingual mode: should treat inline node with aria-hidden block child as inline and translate as one paragraph", async () => {
-        // Github issue: https://github.com/mengxi-ream/read-frog/issues/737
+        // Historical regression
         render(
           <div data-testid="test-node">
             <div style={{ display: "inline" }}>{MOCK_ORIGINAL_TEXT}</div>
@@ -892,7 +892,7 @@ describe("translate", () => {
         expect(node.textContent).toBe(`${MOCK_ORIGINAL_TEXT}${MOCK_ORIGINAL_TEXT}${MOCK_ORIGINAL_TEXT}`)
       })
       it("bilingual mode: should let br node to make its ancestor node to be forced block node", async () => {
-        // Github issue: https://github.com/mengxi-ream/read-frog/issues/587
+        // Historical regression
         render(
           <div data-testid="test-node">
             {MOCK_ORIGINAL_TEXT}
@@ -978,7 +978,7 @@ describe("translate", () => {
       })
     })
     describe("inline node has only one block node child", () => {
-      // Github issue: https://github.com/mengxi-ream/read-frog/issues/530
+      // Historical regression
       it("bilingual mode: should treat inline node with only one block node child as inline", async () => {
         render(
           <div data-testid="test-node">
@@ -1020,7 +1020,7 @@ describe("translate", () => {
         expect(node.textContent).toBe(`${MOCK_ORIGINAL_TEXT}${MOCK_ORIGINAL_TEXT}${MOCK_ORIGINAL_TEXT}`)
       })
       it("should treat inline element with only one meaningful block child as inline (not block)", async () => {
-        // https://github.com/mengxi-ream/read-frog/issues/530
+        // historical regression
         render(
           <div data-testid="test-node">
             <span style={{ display: "inline" }}>
@@ -1116,7 +1116,7 @@ describe("translate", () => {
         expect(node.textContent).toBe(`${MOCK_ORIGINAL_TEXT}${MOCK_ORIGINAL_TEXT}${MOCK_ORIGINAL_TEXT}`)
       })
       it("bilingual mode: should skip ruby annotations without splitting the paragraph", async () => {
-        // https://github.com/mengxi-ream/read-frog/pull/1055
+        // historical regression
         render(
           <p data-testid="test-node">
             {MOCK_ORIGINAL_TEXT}
@@ -1148,7 +1148,7 @@ describe("translate", () => {
     })
   })
   describe("don't walk into siblings (SVG, style, etc.)", () => {
-    // https://github.com/mengxi-ream/read-frog/issues/754
+    // historical regression
     it("bilingual mode: should filter out SVG and style siblings and translate inside inline div", async () => {
       render(
         <div data-testid="test-node">
@@ -1199,7 +1199,7 @@ describe("translate", () => {
   })
   describe("empty nodes in multiple child nodes", () => {
     it("bilingual mode: should not insert translation wrapper", async () => {
-      // https://github.com/mengxi-ream/read-frog/issues/717
+      // historical regression
       render(
         <div data-testid="test-node">
           <div><div style={{ display: "inline" }}>{MOCK_ORIGINAL_TEXT}</div></div>

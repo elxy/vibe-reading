@@ -37,13 +37,6 @@ const CONFIG_SEARCH_ITEMS = [
     pageKey: "options.config.title",
   },
   {
-    sectionId: "google-drive-sync",
-    route: "/config",
-    titleKey: "options.config.sync.googleDrive.title",
-    descriptionKey: "options.config.sync.googleDrive.description",
-    pageKey: "options.config.title",
-  },
-  {
     sectionId: "manual-config-sync",
     route: "/config",
     titleKey: "options.config.sync.title",

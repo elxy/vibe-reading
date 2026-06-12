@@ -356,7 +356,7 @@ describe("selectionToolbar - isInputOrTextarea logic", () => {
 
     await clearToolbarState()
 
-    const shadowHost = document.createElement("read-frog-selection")
+    const shadowHost = document.createElement("vibe-reading-selection")
     const shadowButton = document.createElement("button")
     shadowButton.type = "button"
     let dispatchComplete = false

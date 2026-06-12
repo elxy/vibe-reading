@@ -9,9 +9,9 @@ import { sendMessage } from "@/utils/message"
 import { ensureInitializedConfig } from "./config"
 import { getPageTranslationEnabled, setPageTranslationEnabled } from "./page-translation-state"
 
-export const MENU_ID_TRANSLATE = "read-frog-translate"
-export const MENU_ID_SELECTION_TRANSLATE = "read-frog-selection-translate"
-export const MENU_ID_SELECTION_CUSTOM_ACTION_PREFIX = "read-frog-selection-custom-action:"
+export const MENU_ID_TRANSLATE = "vibe-reading-translate"
+export const MENU_ID_SELECTION_TRANSLATE = "vibe-reading-selection-translate"
+export const MENU_ID_SELECTION_CUSTOM_ACTION_PREFIX = "vibe-reading-selection-custom-action:"
 
 function getSelectionCustomActionMenuId(actionId: string) {
   return `${MENU_ID_SELECTION_CUSTOM_ACTION_PREFIX}${actionId}`

@@ -40,7 +40,7 @@ export function extractTextContent(node: TransNode, config: Config): string {
   // We already don't walk and label the element which isDontWalkIntoElement
   // for the parent element we already walk and label, if we have a notranslate element inside this parent element,
   // we should extract the text content of the parent.
-  // see this issue: https://github.com/mengxi-ream/read-frog/issues/249
+  // Historical regression
   // if (isDontWalkIntoButTranslateAsChildElement(node)) {
   //   return ''
   // }

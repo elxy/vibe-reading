@@ -1,6 +1,5 @@
 import type { InputTranslationLang } from "@/types/config/config"
 import { Icon } from "@iconify/react"
-import { langCodeISO6393Schema } from "@read-frog/definitions"
 import { useAtom } from "jotai"
 import { Activity } from "react"
 import { i18n } from "#imports"
@@ -14,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/base-ui/select"
+import { langCodeISO6393Schema } from "@/definitions"
 import { configFieldsAtomMap } from "@/utils/atoms/config"
 import { getLanguageLabel } from "@/utils/language-labels"
 import { ConfigCard } from "../../components/config-card"

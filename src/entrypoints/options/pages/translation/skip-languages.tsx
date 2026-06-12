@@ -1,4 +1,4 @@
-import type { LangCodeISO6393 } from "@read-frog/definitions"
+import type { LangCodeISO6393 } from "@/definitions"
 import { Icon } from "@iconify/react"
 import { useAtom } from "jotai"
 import { i18n } from "#imports"

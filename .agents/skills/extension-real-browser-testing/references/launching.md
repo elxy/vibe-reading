@@ -25,7 +25,7 @@ Preferred browser for this workflow in this environment.
 
 ```js
 import fs from 'node:fs';
-import { chromium } from '/Users/frog/.hermes/hermes-agent/node_modules/playwright/index.mjs';
+import { chromium } from '/ABS/PATH/TO/playwright/index.mjs';
 
 const extensionPath = '/ABS/PATH/TO/.output/chrome-mv3';
 const userDataDir = '/tmp/extension-edge-profile';

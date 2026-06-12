@@ -1,7 +1,6 @@
-name: Read Frog
-extName: Read Frog - Переводи и учись
-extDescription: Read Frog — расширение браузера с открытым исходным кодом, которое поможет вам глубоко изучать языки на любом веб-сайте.
-uninstallSurveyUrl: https://tally.so/r/nPK6Ob
+name: Vibe Reading
+extName: Vibe Reading - Переводи и учись
+extDescription: Vibe Reading — расширение браузера с открытым исходным кодом, которое поможет вам глубоко изучать языки на любом веб-сайте.
 dataTypes:
   string: Текст
   number: Число
@@ -10,7 +9,7 @@ contextMenu:
   translateSelection: Перевести "%s"
   showOriginal: Показать оригинал
 sidePanel:
-  firefoxUserActionHint: В Firefox откройте Read Frog из боковой панели браузера.
+  firefoxUserActionHint: В Firefox откройте Vibe Reading из боковой панели браузера.
   firefoxUserActionHelpText: Как открыть боковую панель Firefox
   firefoxUserActionHelpUrl: https://support.mozilla.org/ru/kb/ispolzovanije-bokovoi-paneli-dostup-instrumenty-i-vertikalnyje-vkladki
 popup:
@@ -41,7 +40,7 @@ popup:
   discord:
     tooltip: Присоединяйтесь к Discord, чтобы связаться с разработчиками и получить ранний доступ к новым функциям
   blog:
-    notification: Что нового в Read Frog
+    notification: Что нового в Vibe Reading
   aiSmartContext: Умный контекст ИИ
   aiSmartContextDescription: Использует контекст веб-страницы для улучшения качества перевода. Требуется LLM-провайдер перевода.
   more:
@@ -281,7 +280,7 @@ options:
     floatingButton:
       globalToggle:
         title: Включить плавающую кнопку
-        description: Отображать плавающую кнопку на веб-страницах для быстрого доступа к функциям Read Frog
+        description: Отображать плавающую кнопку на веб-страницах для быстрого доступа к функциям Vibe Reading
       closeMenu:
         disableForSite: Отключить для этого сайта
         disableGlobally: Отключить глобально
@@ -391,49 +390,6 @@ options:
             description: Это поле вывода будет удалено.
             confirm: Удалить
             cancel: Отмена
-          notebase:
-            title: Подключение Notebase
-            description: Сохранить структурированные результаты этого действия в удалённую Notebase.
-            loginRequiredTitle: Войдите, чтобы настроить Notebase
-            loginRequiredDescription: Войдите на readfrog.app, прежде чем выбирать notebase или редактировать сопоставления.
-            loginRequiredConnectedDescription: Это подключение создано аккаунтом ниже. Если войти в тот же аккаунт, сопоставления полей будут восстановлены. Если войти в другой аккаунт, прежние сопоставления будут очищены при создании или подключении Notebase.
-            loginAction: Войти
-            connectedAccountLabel: Подключённый аккаунт
-            currentAccountLabel: Текущий аккаунт
-            unknownConnectedAccount: Неизвестный аккаунт
-            tableLabel: Notebase
-            tablePlaceholder: Выберите notebase
-            tableClearOption: Не подключать notebase
-            clearConnectionAction: Очистить подключение
-            refreshAction: Обновить
-            emptyTitle: Notebase пока нет
-            emptyDescription: Создайте notebase на readfrog.app, затем вернитесь сюда и сопоставьте поля.
-            openNotebaseAction: Открыть Notebase
-            betaLockedTitle: Этот аккаунт ещё не участвует в beta Notebase
-            betaLockedDescription: Вы можете сохранить текущую настройку action, но выбор Notebase и синхронизация результатов пока доступны только выбранным beta-аккаунтам.
-            accountMismatchTitle: Подключение Notebase принадлежит другому аккаунту
-            accountMismatchDescription: Это подключение связано с аккаунтом ниже. Очистите его или выберите Notebase, доступную текущему аккаунту.
-            tableUnavailableTitle: Выбранная notebase больше недоступна
-            tableUnavailableDescription: Эта Notebase больше не существует или не открывается. Очистите подключение или выберите другую Notebase.
-            tableUnavailableOption: недоступно
-            schemaErrorTitle: Не удалось загрузить схему notebase
-            schemaErrorDescription: Попробуйте обновить схему ещё раз чуть позже.
-            schemaLoading: Загрузка схемы notebase...
-            mappingsLabel: Сопоставления полей
-            mappingsEmpty: Сопоставлений пока нет. Добавьте хотя бы одно, когда будете готовы сохранять поля.
-            addMappingAction: Добавить сопоставление
-            removeMappingAction: Удалить сопоставление
-            localFieldLabel: Поле действия
-            localFieldPlaceholder: Выберите поле действия
-            remoteFieldLabel: Поле Notebase
-            remoteFieldPlaceholder: Выберите поле notebase
-            columnUnavailableOption: удалено
-            invalidMappingsTitle: Некоторые сопоставления требуют внимания
-            invalidMappingsDescription: Некорректные сопоставления сохранены. Исправьте их перед сохранением в Notebase.
-            mappingMissingLocal: Сопоставленное поле действия больше не существует.
-            mappingMissingRemote: Сопоставленное поле notebase больше не существует.
-            mappingMissingSchema: Обновите схему notebase, чтобы проверить это сопоставление.
-            mappingIncompatible: Типы полей больше не совпадают.
           tokens:
             selection: Содержимое выделенного текста
             paragraphs: Текст абзацев, пересекающихся с выделением, объединённый пустыми строками; при отправке в пользовательские AI-действия обрезается до первых 2000 символов
@@ -494,8 +450,6 @@ options:
     personalizedPrompts:
       title: Персонализированные промпты
       description: Настройка различных типов промптов позволяет вам самостоятельно изменять тип промпта во время перевода. Промпт — это текст, который пользователь отправляет LLM.
-      communityPrompts: Получайте или делитесь промптами с сообществом
-      communityPromptsUrl: https://github.com/mengxi-ream/read-frog/discussions/821
       addPrompt: Добавить промпт
       default: По умолчанию
       importSuccess: Импорт успешен
@@ -548,7 +502,7 @@ options:
         editor:
           placeholder: |
             /* Пример: Пользовательский стиль с цветом и фоном */
-            [data-read-frog-custom-translation-style='custom'] {
+            [data-vibe-reading-custom-translation-style='custom'] {
               color: #414535;
               background-color: light-dark(#F2E3BC, #C19875);
               padding: 2px 4px;
@@ -635,7 +589,7 @@ options:
       fallback: Резервный
       selectPlaceholder: Выберите голос
       preview: Предпросмотр
-      previewSample: Привет от Read Frog! Так я буду звучать при чтении вслух.
+      previewSample: Привет от Vibe Reading! Так я буду звучать при чтении вслух.
     languageVoice:
       label: Голос для языка
       reset: Сбросить на значение по умолчанию
@@ -661,11 +615,8 @@ options:
     title: Конфигурация
     about:
       title: О приложении
-      description: Read Frog появился в апреле 2025 года
-      mission: Read Frog стремится расширить равный доступ к качественному образованию в эпоху ИИ, делая обучение, максимально похожее на занятия с настоящим преподавателем, доступным по цене в языках, медицине и других знанияемких областях.
-      analytics:
-        title: Помочь улучшить пользовательский опыт
-        tooltip: Когда параметр включен, Read Frog отправляет анонимные сигналы об использовании продукта, чтобы мы могли проверять надежность функций, улучшать производительность и UX-детали, а также понимать, что развивать дальше в первую очередь.
+      description: Vibe Reading появился в апреле 2025 года
+      mission: Vibe Reading стремится расширить равный доступ к качественному образованию в эпоху ИИ, делая обучение, максимально похожее на занятия с настоящим преподавателем, доступным по цене в языках, медицине и других знанияемких областях.
     sync:
       title: Ручная синхронизация конфигурации
       description: Ручной импорт и экспорт настроек конфигурации
@@ -674,7 +625,7 @@ options:
       importSuccess: Конфигурация успешно импортирована
       exportSuccess: Конфигурация успешно экспортирована
       importError: Ошибка импорта
-      versionTooNew: Версия импортированной конфигурации новее, пожалуйста, обновите Read Frog до последней версии
+      versionTooNew: Версия импортированной конфигурации новее, пожалуйста, обновите Vibe Reading до последней версии
       migrationError: Ошибка миграции
       validationError: Ошибка валидации конфигурации
       exportOptions:
@@ -686,53 +637,6 @@ options:
       viewConfig:
         expand: Развернуть конфигурацию
         collapse: Свернуть конфигурацию
-      googleDrive:
-        title: Облачная синхронизация Google Drive
-        description: Загружает, когда удалённая версия новее, выгружает, когда локальная версия новее
-        sync: Синхронизировать с Google Drive
-        syncing: Синхронизация...
-        syncSuccess:
-          uploaded: Локальная конфигурация загружена в облако
-          downloaded: Удалённая конфигурация применена
-          sameChanges: Изменения совпадают, синхронизировано
-          noChange: Уже синхронизировано
-          unresolved: Конфликты разрешены и синхронизированы
-        syncError: Ошибка синхронизации, попробуйте снова
-        metadataCorrupted: Метаданные синхронизации повреждены, применена удалённая конфигурация
-        lastSyncTime: Последняя синхронизация
-        logout: Выйти
-        logoutSuccess: Выполнен выход из аккаунта Google
-        unresolved:
-          title: Разрешение синхронизации конфигурации
-          description: Локальная и удалённая конфигурации отличаются. Пожалуйста, выберите, какую версию сохранить для каждого поля.
-          resolved: Разрешено
-          unresolved: Не разрешено
-          localValue: Локальное значение
-          remoteValue: Удалённое значение
-          useLocal: Использовать локальное
-          useRemote: Использовать удалённое
-          useAllLocal: Использовать всё локальное
-          useAllRemote: Использовать всё удалённое
-          reset: Сбросить выбор
-          progress: Разрешено $1/$2 изменений
-          confirm: Подтвердить синхронизацию
-          cancel: Отмена
-          hasUnresolvedInChildren: ⚠ Содержит неразрешённые изменения
-          item: элемент
-          items: элементов
-          unresolvedPrompt: "[Не разрешено - Выберите]"
-          localLatest: Локальная последняя
-          remoteLatest: Удалённая последняя
-          bothChanged: Оба изменены
-          localChanged: Локальное изменено
-          remoteChanged: Удалённое изменено
-          configValid: Конфигурация действительна
-          configInvalid: Конфигурация недействительна
-          resolveToContinue: Разрешите конфликты для продолжения
-          validationAlert:
-            title: Объединённая конфигурация содержит ошибки валидации
-            description: "Настройте различия ниже для исправления:"
-          moreErrors: ...и ещё $1 ошибок
     backup:
       title: Резервное копирование конфигурации
       description: Автоматические резервные копии создаются каждый час при изменении конфигурации. Вы можете восстановить предыдущие конфигурации здесь. (Максимум $1 резервных копий)
@@ -842,12 +746,6 @@ options:
           webTitle: Заголовок веб-страницы
           webDescription: Описание веб-страницы из метаданных
           videoSummary: Краткое содержание видео (требуется умный контекст ИИ)
-  whatsNew:
-    title: Что нового
-  survey:
-    title: Ранний доступ к Notebase
-  rateUs:
-    title: Оцените нас
 side:
   sourceLang: Исходный язык
   targetLang: Целевой язык
@@ -893,33 +791,7 @@ action:
   copied: Скопировано
   regenerate: Сгенерировать заново
   viewContextDetails: Контекст
-  saveToNotebase: Сохранить в Notebase
-  saveToNotebaseSaving: Сохранение...
-  saveToNotebaseSuccess: Сохранено в Notebase
-  saveToNotebaseFailed: Не удалось сохранить в Notebase
-  saveToNotebaseLoginRequired: Войдите на readfrog.app, чтобы сохранить в Notebase
-  saveToNotebaseBetaRequired: Для этого аккаунта beta-доступ к Notebase пока не включён
-  saveToNotebaseTableUnavailable: Выбранная Notebase больше недоступна
-  saveToNotebaseConnectionInvalid: Это подключение Notebase устарело. Обновите его в Custom AI Actions и исправьте сопоставления.
-  saveToNotebaseNoMappings: Добавьте хотя бы одно корректное сопоставление перед сохранением
-  saveToNotebaseCreateTitle: Создать Notebase?
-  saveToNotebaseCreateDescription: Создать Notebase с колонками из этого Custom Action и сохранить текущий результат как первую заметку.
-  saveToNotebaseCreateAndSave: Создать и сохранить
-  saveToNotebaseCreateAndSaveShort: Создать и сохранить
-  saveToNotebaseLoginAndCreate: Войти и создать автоматически
-  saveToNotebaseLoginAndSave: Войти и сохранить
-  saveToNotebaseConnectExisting: Подключить существующую Notebase
-  saveToNotebaseGoConfigure: Настроить
-  saveToNotebaseLoginConnectedTitle: Войти и сохранить?
-  saveToNotebaseLoginConnectedDescription: Этот Custom Action подключён к аккаунту ниже. После входа Read Frog сохранит в существующую Notebase, если это возможно, или создаст новую Notebase для текущего аккаунта.
-  saveToNotebaseConnectionUnavailableTitle: Подключение Notebase недоступно
-  saveToNotebaseMissingNotebaseDescription: Старая Notebase больше не существует или недоступна этому аккаунту. Создайте новую Notebase и сохраните результат либо подключите существующую Notebase в Custom AI Actions.
-  saveToNotebaseAccountUnavailableDescription: Текущий аккаунт не совпадает с подключённым аккаунтом ниже. Создание и сохранение заменит прежнее подключение и сопоставления полей. Также можно подключить существующую Notebase в Custom AI Actions.
-  saveToNotebasePendingLogin: Войдите, чтобы завершить сохранение
-  saveToNotebasePendingLoginDescription: После входа Read Frog автоматически создаст Notebase и сохранит этот результат.
-  saveToNotebasePendingConnectedLoginDescription: После входа Read Frog сохранит в подключённую Notebase, если это возможно. Если аккаунт не может её использовать, будет создана новая Notebase.
   openCustomActions: Открыть Custom AI Actions
-  openNotebase: Открыть Notebase
   contextDetailsTitleLabel: Заголовок
   contextDetailsParagraphsLabel: Абзацы
   translation: Перевод
@@ -940,7 +812,7 @@ subtitles:
     downloadTranslatedComplete: Переведённые субтитры скачаны
     downloadSource: Скачать исходные субтитры
   state:
-    loading: Read Frog загрузка субтитров
+    loading: Vibe Reading загрузка субтитров
     error: Произошла ошибка
   errors:
     http429: 429 Слишком много запросов к API YouTube субтитров, пожалуйста, попробуйте снова позже

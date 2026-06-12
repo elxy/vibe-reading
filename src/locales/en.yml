@@ -1,7 +1,6 @@
-name: Read Frog
-extName: "Read Frog - Translate & Learn"
-extDescription: Read Frog is an open source browser extension designed to help you learn languages deeply from any website.
-uninstallSurveyUrl: https://tally.so/r/nPK6Ob
+name: Vibe Reading
+extName: "Vibe Reading - Translate & Learn"
+extDescription: Vibe Reading is an open source browser extension designed to help you learn languages deeply from any website.
 dataTypes:
   string: Text
   number: Number
@@ -10,7 +9,7 @@ contextMenu:
   translateSelection: Translate "%s"
   showOriginal: Show Original
 sidePanel:
-  firefoxUserActionHint: In Firefox, open Read Frog from the browser sidebar.
+  firefoxUserActionHint: In Firefox, open Vibe Reading from the browser sidebar.
   firefoxUserActionHelpText: Learn how to open the Firefox sidebar
   firefoxUserActionHelpUrl: https://support.mozilla.org/en-US/kb/use-sidebar-access-tools-and-vertical-tabs
 popup:
@@ -41,7 +40,7 @@ popup:
   discord:
     tooltip: Join Discord to connect with developers and get early access to new features
   blog:
-    notification: What's new in Read Frog
+    notification: What's new in Vibe Reading
   aiSmartContext: AI Smart Context
   aiSmartContextDescription: Uses webpage context to improve translation quality. Requires LLM translation provider.
   more:
@@ -282,7 +281,7 @@ options:
     floatingButton:
       globalToggle:
         title: Enable Floating Button
-        description: Display the floating button on web pages for quick access to Read Frog features
+        description: Display the floating button on web pages for quick access to Vibe Reading features
       closeMenu:
         disableForSite: Disable for this site
         disableGlobally: Disable globally
@@ -392,49 +391,6 @@ options:
             description: This output field will be removed.
             confirm: Delete
             cancel: Cancel
-          notebase:
-            title: Notebase Connection
-            description: Save this action's structured results to a remote notebase.
-            loginRequiredTitle: Log in to configure Notebase
-            loginRequiredDescription: Sign in on readfrog.app before choosing a notebase or editing mappings.
-            loginRequiredConnectedDescription: This connection was created by the account below. If you log in as the same account, field mappings will be restored. If you log in as another account, the previous mappings will be cleared when you create or connect a Notebase.
-            loginAction: Log in
-            connectedAccountLabel: Connected account
-            currentAccountLabel: Current account
-            unknownConnectedAccount: Unknown account
-            tableLabel: Notebase
-            tablePlaceholder: Select a notebase
-            tableClearOption: Disconnect notebase
-            clearConnectionAction: Clear connection
-            refreshAction: Refresh
-            emptyTitle: No notebases yet
-            emptyDescription: Create a notebase on readfrog.app, then come back here to map fields.
-            openNotebaseAction: Open Notebase
-            betaLockedTitle: This account is not in the Notebase beta
-            betaLockedDescription: You can keep this action configured, but choosing notebases and syncing results is limited to selected beta accounts for now.
-            accountMismatchTitle: Notebase connection belongs to another account
-            accountMismatchDescription: This connection is tied to the connected account below. Clear it, or choose a Notebase available to the current account.
-            tableUnavailableTitle: Selected notebase is no longer available
-            tableUnavailableDescription: This Notebase no longer exists or cannot be opened. Clear the connection or choose another Notebase.
-            tableUnavailableOption: unavailable
-            schemaErrorTitle: Failed to load notebase schema
-            schemaErrorDescription: Try refreshing the schema again in a moment.
-            schemaLoading: Loading notebase schema...
-            mappingsLabel: Field Mappings
-            mappingsEmpty: No mappings yet. Add one when you are ready to save fields.
-            addMappingAction: Add Mapping
-            removeMappingAction: Remove mapping
-            localFieldLabel: Action field
-            localFieldPlaceholder: Select an action field
-            remoteFieldLabel: Notebase field
-            remoteFieldPlaceholder: Select a notebase field
-            columnUnavailableOption: removed
-            invalidMappingsTitle: Some mappings need attention
-            invalidMappingsDescription: Invalid mappings are preserved. Fix them before saving to Notebase.
-            mappingMissingLocal: The mapped action field no longer exists.
-            mappingMissingRemote: The mapped notebase field no longer exists.
-            mappingMissingSchema: Refresh the notebase schema to validate this mapping.
-            mappingIncompatible: The field types no longer match.
           tokens:
             selection: Selected text content
             paragraphs: Intersecting paragraph text joined with blank lines, truncated to the first 2000 characters when sent to custom AI actions
@@ -609,8 +565,6 @@ options:
     personalizedPrompts:
       title: Personalized Prompts
       description: Customizing different types of Prompts allows you to adjust the Prompt type yourself during translation. A Prompt represents the text that the user sends to the LLM.
-      communityPrompts: Get or share prompts from community
-      communityPromptsUrl: https://github.com/mengxi-ream/read-frog/discussions/821
       addPrompt: Add Prompt
       default: Default
       importSuccess: Import Success
@@ -663,7 +617,7 @@ options:
         editor:
           placeholder: |
             /* Example: Custom style with color and background */
-            [data-read-frog-custom-translation-style='custom'] {
+            [data-vibe-reading-custom-translation-style='custom'] {
               color: #414535;
               background-color: light-dark(#F2E3BC, #C19875);
               padding: 2px 4px;
@@ -750,7 +704,7 @@ options:
       fallback: Fallback
       selectPlaceholder: Select a voice
       preview: Preview
-      previewSample: Hello from Read Frog! This is how I will sound when reading aloud.
+      previewSample: Hello from Vibe Reading! This is how I will sound when reading aloud.
     languageVoice:
       label: Language Voice
       reset: Reset to Default
@@ -776,11 +730,8 @@ options:
     title: Config
     about:
       title: About
-      description: Read Frog was born in April 2025
-      mission: Read Frog aims to expand equal access to high-quality education in the AI era by making learning experiences that feel closer to a real teacher affordable across language learning, medicine, and other knowledge-heavy fields.
-      analytics:
-        title: Help improve user experience
-        tooltip: When enabled, Read Frog sends anonymous product usage signals so we can verify feature reliability, improve performance and UX polish, and prioritize future work.
+      description: Vibe Reading was born in April 2025
+      mission: Vibe Reading aims to expand equal access to high-quality education in the AI era by making learning experiences that feel closer to a real teacher affordable across language learning, medicine, and other knowledge-heavy fields.
     sync:
       title: Manual Config Sync
       description: Manually import and export your configuration settings
@@ -789,7 +740,7 @@ options:
       importSuccess: Config imported successfully
       exportSuccess: Config exported successfully
       importError: Import failed
-      versionTooNew: The imported config version is newer, please upgrade Read Frog to the latest version
+      versionTooNew: The imported config version is newer, please upgrade Vibe Reading to the latest version
       migrationError: Migration failed
       validationError: Config validation failed
       exportOptions:
@@ -801,53 +752,6 @@ options:
       viewConfig:
         expand: Expand Config
         collapse: Collapse Config
-      googleDrive:
-        title: Google Drive Cloud Sync
-        description: Downloads config when remote is newer, uploads config when local is newer
-        sync: Sync to Google Drive
-        syncing: Syncing...
-        syncSuccess:
-          uploaded: Local config uploaded to cloud
-          downloaded: Remote config applied
-          sameChanges: Same changes on both sides, synced
-          noChange: Already in sync
-          unresolved: Conflicts resolved and synced
-        syncError: Sync failed, please try again
-        metadataCorrupted: Sync metadata corrupted, remote config applied
-        lastSyncTime: Last sync at
-        logout: Logout
-        logoutSuccess: Logged out from Google account
-        unresolved:
-          title: Configuration Sync Resolution
-          description: Local and remote configurations differ. Please choose which version to keep for each field.
-          resolved: Resolved
-          unresolved: Unresolved
-          localValue: Local Value
-          remoteValue: Remote Value
-          useLocal: Use Local
-          useRemote: Use Remote
-          useAllLocal: Use All Local
-          useAllRemote: Use All Remote
-          reset: Reset Selection
-          progress: Resolved $1/$2 changes
-          confirm: Confirm Sync
-          cancel: Cancel
-          hasUnresolvedInChildren: ⚠ Contains unresolved changes
-          item: item
-          items: items
-          unresolvedPrompt: "[Unresolved - Please select]"
-          localLatest: Local Latest
-          remoteLatest: Remote Latest
-          bothChanged: Both changed
-          localChanged: Local changed
-          remoteChanged: Remote changed
-          configValid: Config is valid
-          configInvalid: Config is invalid
-          resolveToContinue: Resolve conflicts to continue
-          validationAlert:
-            title: The merged config has validation errors.
-            description: "Adjust the differences below to fix:"
-          moreErrors: ...and $1 more errors
     backup:
       title: Config Backup
       description: Automatic backups are created every hour if the config is changed. You can restore previous configurations here. (Maximum $1 backups)
@@ -957,12 +861,6 @@ options:
           webTitle: Webpage title
           webDescription: Webpage description from page metadata
           videoSummary: Video summary (requires AI Smart Context)
-  whatsNew:
-    title: What's New
-  survey:
-    title: Notebase Early Access
-  rateUs:
-    title: Rate Us
 side:
   sourceLang: Source Language
   targetLang: Target Language
@@ -1008,33 +906,7 @@ action:
   copied: Copied
   regenerate: Regenerate
   viewContextDetails: Context
-  saveToNotebase: Save to Notebase
-  saveToNotebaseSaving: Saving...
-  saveToNotebaseSuccess: Saved to Notebase
-  saveToNotebaseFailed: Failed to save to Notebase
-  saveToNotebaseLoginRequired: Log in on readfrog.app to save to Notebase
-  saveToNotebaseBetaRequired: This account is not enrolled in the Notebase beta yet
-  saveToNotebaseTableUnavailable: The selected Notebase is no longer available
-  saveToNotebaseConnectionInvalid: This Notebase connection is out of date. Refresh it in Custom AI Actions and fix the mappings.
-  saveToNotebaseNoMappings: Add at least one valid mapping before saving
-  saveToNotebaseCreateTitle: Create a Notebase?
-  saveToNotebaseCreateDescription: Create a new Notebase with columns matching this Custom Action, then save this result as the first note.
-  saveToNotebaseCreateAndSave: Create and save
-  saveToNotebaseCreateAndSaveShort: Create and save
-  saveToNotebaseLoginAndCreate: Log in and auto-create
-  saveToNotebaseLoginAndSave: Log in and save
-  saveToNotebaseConnectExisting: Connect existing Notebase
-  saveToNotebaseGoConfigure: Configure
-  saveToNotebaseLoginConnectedTitle: Log in to save?
-  saveToNotebaseLoginConnectedDescription: This Custom Action is connected to the account below. After login, Read Frog will save to the existing Notebase when possible, or create a new Notebase for the logged-in account.
-  saveToNotebaseConnectionUnavailableTitle: Notebase connection unavailable
-  saveToNotebaseMissingNotebaseDescription: The old Notebase no longer exists or cannot be opened by this account. Create a new Notebase and save this result, or connect an existing Notebase in Custom AI Actions.
-  saveToNotebaseAccountUnavailableDescription: The logged-in account does not match the connected account below. Creating and saving will replace the previous connection and field mappings. You can also connect an existing Notebase in Custom AI Actions.
-  saveToNotebasePendingLogin: Log in to finish saving
-  saveToNotebasePendingLoginDescription: After login, Read Frog will create the Notebase and save this result automatically.
-  saveToNotebasePendingConnectedLoginDescription: After login, Read Frog will save to the connected Notebase when possible. If this account cannot use it, Read Frog will create a new Notebase and save this result.
   openCustomActions: Open Custom AI Actions
-  openNotebase: Open Notebase
   contextDetailsTitleLabel: Title
   contextDetailsParagraphsLabel: Paragraphs
   translation: Translation
@@ -1055,7 +927,7 @@ subtitles:
     downloadTranslatedComplete: Translated subtitles downloaded
     downloadSource: Download source subtitles
   state:
-    loading: Read Frog loading captions
+    loading: Vibe Reading loading captions
     error: Error occurred
   errors:
     http429: 429 Too many requests to youtube subtitle API, please try again later

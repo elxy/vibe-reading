@@ -49,7 +49,7 @@ interface SelectionPopoverContentContextValue {
 
 const SelectionPopoverRootContext = React.createContext<SelectionPopoverRootContextValue | null>(null)
 const SelectionPopoverContentContext = React.createContext<SelectionPopoverContentContextValue | null>(null)
-const SELECTION_POPOVER_OPEN_EVENT = "read-frog:selection-popover-open"
+const SELECTION_POPOVER_OPEN_EVENT = "vibe-reading:selection-popover-open"
 
 function useSelectionPopoverRootContext() {
   const context = React.use(SelectionPopoverRootContext)

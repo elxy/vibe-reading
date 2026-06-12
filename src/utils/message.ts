@@ -1,5 +1,5 @@
-import type { LangCodeISO6393 } from "@read-frog/definitions"
-import type { FeatureUsageContext, FeatureUsedEventProperties } from "@/types/analytics"
+import type { LangCodeISO6393 } from "@/definitions"
+import type { FeatureUsageContext } from "@/types/analytics"
 import type {
   BackgroundGenerateTextPayload,
   BackgroundGenerateTextResponse,
@@ -46,8 +46,6 @@ interface ProtocolMap {
   askManagerToTogglePageTranslation: (data: { enabled: boolean, analyticsContext?: FeatureUsageContext }) => void
   openSelectionTranslationFromContextMenu: (data: { selectionText: string }) => void
   openSelectionCustomActionFromContextMenu: (data: { actionId: string, selectionText: string }) => void
-  // analytics
-  trackFeatureUsedEvent: (data: FeatureUsedEventProperties) => void
   // user guide
   pinStateChanged: (data: { isPinned: boolean }) => void
   getPinState: () => boolean

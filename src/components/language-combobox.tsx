@@ -1,5 +1,5 @@
-import type { LangCodeISO6393 } from "@read-frog/definitions"
 import type { LanguageItem } from "./language-combobox-options"
+import type { LangCodeISO6393 } from "@/definitions"
 import { useMemo } from "react"
 import { i18n } from "#imports"
 import {

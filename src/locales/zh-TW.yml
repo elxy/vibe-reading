@@ -1,7 +1,6 @@
 name: 陪讀蛙
 extName: 陪讀蛙 - 翻譯與學習
 extDescription: 陪讀蛙是一款開放原始碼的瀏覽器擴充功能，幫助你在任何網站上深入學習語言。
-uninstallSurveyUrl: https://tally.so/r/3E9XDL
 dataTypes:
   string: 文字
   number: 數字
@@ -391,49 +390,6 @@ options:
             description: 此輸出欄位將被移除。
             confirm: 刪除
             cancel: 取消
-          notebase:
-            title: 筆記庫連線
-            description: 將這個指令的結構化結果儲存到遠端筆記庫。
-            loginRequiredTitle: 登入後才能設定筆記庫
-            loginRequiredDescription: 先到 readfrog.app 登入，再選擇筆記庫與編輯對應。
-            loginRequiredConnectedDescription: 這個連線來自下方帳號。如果登入原帳號，會恢復欄位對應；如果登入其他帳號，建立或連接筆記庫時會清除先前的欄位對應。
-            loginAction: 前往登入
-            connectedAccountLabel: 已連接帳號
-            currentAccountLabel: 目前帳號
-            unknownConnectedAccount: 未知帳號
-            tableLabel: 筆記庫
-            tablePlaceholder: 選擇一個筆記庫
-            tableClearOption: 不連接筆記庫
-            clearConnectionAction: 清空連線
-            refreshAction: 重新整理
-            emptyTitle: 還沒有筆記庫
-            emptyDescription: 先到 readfrog.app 建立一個筆記庫，再回來對應欄位。
-            openNotebaseAction: 開啟筆記庫
-            betaLockedTitle: 目前帳號尚未加入 Notebase Beta
-            betaLockedDescription: 你可以保留目前的 action 設定，但選擇筆記庫與同步結果目前僅對部分 Beta 帳號開放。
-            accountMismatchTitle: 筆記庫連線屬於其他帳號
-            accountMismatchDescription: 目前連線綁定到下方已連接帳號。你可以清空連線，或選擇目前帳號可存取的筆記庫。
-            tableUnavailableTitle: 選取的筆記庫已不可用
-            tableUnavailableDescription: 這個筆記庫不存在，或目前帳號無法開啟。可以清空連線，或重新選擇一個筆記庫。
-            tableUnavailableOption: 不可用
-            schemaErrorTitle: 載入筆記庫 schema 失敗
-            schemaErrorDescription: 請稍後再試一次重新整理。
-            schemaLoading: 正在載入筆記庫 schema…
-            mappingsLabel: 欄位對應
-            mappingsEmpty: 尚未建立對應，準備好後即可新增。
-            addMappingAction: 新增對應
-            removeMappingAction: 移除對應
-            localFieldLabel: 指令欄位
-            localFieldPlaceholder: 選擇一個指令欄位
-            remoteFieldLabel: 筆記庫欄位
-            remoteFieldPlaceholder: 選擇一個筆記庫欄位
-            columnUnavailableOption: 已刪除
-            invalidMappingsTitle: 有些對應需要處理
-            invalidMappingsDescription: 無效對應會被保留。儲存到筆記庫前請先修復它們。
-            mappingMissingLocal: 對應的指令欄位已不存在。
-            mappingMissingRemote: 對應的筆記庫欄位已不存在。
-            mappingMissingSchema: 重新整理筆記庫 schema 後才能驗證這個對應。
-            mappingIncompatible: 欄位類型已不相容。
           tokens:
             selection: 選取的文字內容
             paragraphs: 與選取範圍相交的段落內容，會以空行串接，傳給自訂 AI 指令時會截斷到前 2000 個字元
@@ -494,8 +450,6 @@ options:
     personalizedPrompts:
       title: 個人化提示詞
       description: 自訂不同類型的提示詞，可以在翻譯時自行調整提示詞類型。提示詞表示以使用者身份發送給 LLM 的文字。
-      communityPrompts: 取得或分享社群提示詞
-      communityPromptsUrl: https://github.com/mengxi-ream/read-frog/discussions/820
       addPrompt: 新增提示詞
       default: 通用
       importSuccess: 匯入成功
@@ -548,7 +502,7 @@ options:
         editor:
           placeholder: |
             /* 範例：自訂顏色和背景樣式 */
-            [data-read-frog-custom-translation-style='custom'] {
+            [data-vibe-reading-custom-translation-style='custom'] {
               color: #414535;
               background-color: light-dark(#F2E3BC, #C19875);
               padding: 2px 4px;
@@ -635,7 +589,7 @@ options:
       fallback: 備用
       selectPlaceholder: 請選擇一個語音
       preview: 試聽
-      previewSample: Read Frog 向你問好！這是朗讀功能的語音。
+      previewSample: Vibe Reading 向你問好！這是朗讀功能的語音。
     languageVoice:
       label: 語言語音
       reset: 重設為預設
@@ -661,11 +615,8 @@ options:
     title: 設定
     about:
       title: 關於
-      description: Read Frog 於 2025 年 4 月誕生
-      mission: Read Frog 致力於在 AI 時代擴大高品質教育機會的平等可及性，透過更低成本地提供盡可能接近真人教師的學習體驗，涵蓋語言學習、醫學以及其他知識密集型領域。
-      analytics:
-        title: 幫助改進使用者體驗
-        tooltip: 開啟後，Read Frog 會傳送匿名的產品使用訊號，用於驗證功能是否穩定、優化效能與互動細節，並幫助我們決定接下來優先投入的方向。
+      description: Vibe Reading 於 2025 年 4 月誕生
+      mission: Vibe Reading 致力於在 AI 時代擴大高品質教育機會的平等可及性，透過更低成本地提供盡可能接近真人教師的學習體驗，涵蓋語言學習、醫學以及其他知識密集型領域。
     sync:
       title: 手動設定同步
       description: 手動匯入和匯出你的設定
@@ -674,7 +625,7 @@ options:
       importSuccess: 設定匯入成功
       exportSuccess: 設定匯出成功
       importError: 匯入失敗
-      versionTooNew: 匯入的設定版本較新，請升級 Read Frog 到最新版本
+      versionTooNew: 匯入的設定版本較新，請升級 Vibe Reading 到最新版本
       migrationError: 遷移失敗
       validationError: 設定驗證失敗
       exportOptions:
@@ -686,53 +637,6 @@ options:
       viewConfig:
         expand: 展開設定
         collapse: 收起設定
-      googleDrive:
-        title: Google Drive 雲端同步
-        description: 遠端設定較新時下載，本機設定較新時上傳
-        sync: 同步到 Google Drive
-        syncing: 同步中…
-        syncSuccess:
-          uploaded: 本機設定已上傳至雲端
-          downloaded: 已套用遠端設定
-          sameChanges: 本機和遠端修改一致，已同步
-          noChange: 已是最新狀態
-          unresolved: 衝突已解決並同步至本機和雲端
-        syncError: 同步失敗，請重試
-        metadataCorrupted: 同步資料損壞，已自動套用遠端設定
-        lastSyncTime: 最後同步時間
-        logout: 登出帳號
-        logoutSuccess: 已登出 Google 帳號
-        unresolved:
-          title: 設定同步解決
-          description: 本機與雲端設定存在差異，請選擇每個欄位要保留的版本。
-          resolved: 已解決
-          unresolved: 未解決
-          localValue: 本機值
-          remoteValue: 遠端值
-          useLocal: 使用本機
-          useRemote: 使用遠端
-          useAllLocal: 全選本機
-          useAllRemote: 全選遠端
-          reset: 撤銷選擇
-          progress: 已解決 $1/$2 個變更
-          confirm: 確認同步
-          cancel: 取消
-          hasUnresolvedInChildren: ⚠ 包含待解決項
-          item: 項
-          items: 項
-          unresolvedPrompt: "[待解決 - 請選擇]"
-          localLatest: 本機最新
-          remoteLatest: 遠端最新
-          bothChanged: 雙方已變更
-          localChanged: 本機已變更
-          remoteChanged: 遠端已變更
-          configValid: 設定有效
-          configInvalid: 設定無效
-          resolveToContinue: 解決衝突後繼續
-          validationAlert:
-            title: 合併後的設定存在驗證錯誤
-            description: 請調整下方差異以修復：
-          moreErrors: …還有 $1 個錯誤
     backup:
       title: 設定備份
       description: 如果設定有變更，每小時會自動建立備份。你可以在這裡還原先前的設定。（最多 $1 個備份）
@@ -842,12 +746,6 @@ options:
           webTitle: 網頁標題
           webDescription: 頁面中繼資料的網頁描述
           videoSummary: 影片摘要（需啟用 AI 智慧上下文）
-  whatsNew:
-    title: 最近更新
-  survey:
-    title: 筆記庫（單字本）搶先體驗
-  rateUs:
-    title: 給予好評
 side:
   sourceLang: 來源語言
   targetLang: 目標語言
@@ -893,33 +791,7 @@ action:
   copied: 已複製
   regenerate: 重新產生
   viewContextDetails: 上下文
-  saveToNotebase: 儲存到筆記庫
-  saveToNotebaseSaving: 儲存中…
-  saveToNotebaseSuccess: 已儲存到筆記庫
-  saveToNotebaseFailed: 儲存到筆記庫失敗
-  saveToNotebaseLoginRequired: 請先到 readfrog.app 登入後再儲存到筆記庫
-  saveToNotebaseBetaRequired: 目前帳號尚未加入 Notebase Beta
-  saveToNotebaseTableUnavailable: 選取的筆記庫已不可用
-  saveToNotebaseConnectionInvalid: 目前的筆記庫連線已過期，請到自訂 AI 指令重新整理並修復對應
-  saveToNotebaseNoMappings: 至少新增一個有效對應後才能儲存
-  saveToNotebaseCreateTitle: 建立筆記庫？
-  saveToNotebaseCreateDescription: 建立一個與此 Custom Action 輸出欄位相符的筆記庫，並將目前結果儲存為第一則筆記。
-  saveToNotebaseCreateAndSave: 直接建立並儲存
-  saveToNotebaseCreateAndSaveShort: 建立並儲存
-  saveToNotebaseLoginAndCreate: 登入並自動建立
-  saveToNotebaseLoginAndSave: 登入並儲存
-  saveToNotebaseConnectExisting: 連接現有筆記庫
-  saveToNotebaseGoConfigure: 去設定
-  saveToNotebaseLoginConnectedTitle: 登入後繼續儲存？
-  saveToNotebaseLoginConnectedDescription: 這個 Custom Action 已連接到下方帳號。登入後，如果可以使用原筆記庫會直接儲存；如果目前帳號無法使用它，會建立新的筆記庫並儲存。
-  saveToNotebaseConnectionUnavailableTitle: 目前筆記庫連線不可用
-  saveToNotebaseMissingNotebaseDescription: 舊筆記庫不存在，或目前帳號無法開啟。可以建立新的筆記庫並儲存目前結果，或到 Custom AI Actions 連接既有筆記庫。
-  saveToNotebaseAccountUnavailableDescription: 目前登入帳號和下方已連接帳號不同。選擇建立並儲存會替換先前的連線設定和欄位映射；也可以到 Custom AI Actions 連接既有筆記庫。
-  saveToNotebasePendingLogin: 登入後繼續儲存
-  saveToNotebasePendingLoginDescription: 登入完成後，Read Frog 會自動建立筆記庫並儲存目前結果。
-  saveToNotebasePendingConnectedLoginDescription: 登入完成後，Read Frog 會優先儲存到已連接的筆記庫；如果目前帳號無法使用它，會建立新的筆記庫並儲存目前結果。
   openCustomActions: 開啟 Custom AI Actions
-  openNotebase: 開啟筆記庫
   contextDetailsTitleLabel: 標題
   contextDetailsParagraphsLabel: 段落內容
   translation: 翻譯
@@ -940,7 +812,7 @@ subtitles:
     downloadTranslatedComplete: 翻譯字幕已下載
     downloadSource: 下載原始字幕
   state:
-    loading: Read Frog 字幕載入中
+    loading: Vibe Reading 字幕載入中
     error: 發生錯誤
   errors:
     http429: 429 YouTube 字幕介面請求次數過多，請稍後再試

@@ -79,7 +79,7 @@ describe("main", () => {
 
     process.env.GITHUB_EVENT_NAME = "workflow_dispatch"
     process.env.GITHUB_EVENT_PATH = eventPath
-    process.env.GITHUB_REPOSITORY = "read-frog/read-frog"
+    process.env.GITHUB_REPOSITORY = "vibe-reading/vibe-reading"
     process.env.GITHUB_STEP_SUMMARY = summaryPath
     process.env.GITHUB_TOKEN = "test-token"
     process.env.TRUST_PR_NUMBER = "42"
@@ -125,7 +125,7 @@ describe("main", () => {
       state: "open",
       title: "fix: keep contributor trust scoring for humans",
       user: {
-        login: "mengxi-ream",
+        login: "vibe-reading",
         type: "User",
       },
     })
@@ -136,9 +136,9 @@ describe("main", () => {
       author: {
         createdAt: "2020-01-01T00:00:00Z",
         followers: 12,
-        login: "mengxi-ream",
+        login: "vibe-reading",
         name: "Mengxi Ream",
-        url: "https://github.com/mengxi-ream",
+        url: "https://github.com/vibe-reading",
       },
       repoHistory: {
         closedPrs: 1,
@@ -195,9 +195,9 @@ describe("main", () => {
     expect(mocks.ensureRepositoryLabels).toHaveBeenCalledTimes(1)
     expect(mocks.getCollaboratorPermission).toHaveBeenCalledWith(
       "test-token",
-      "read-frog",
-      "read-frog",
-      "mengxi-ream",
+      "vibe-reading",
+      "vibe-reading",
+      "vibe-reading",
     )
     expect(mocks.getAuthorMetrics).toHaveBeenCalledTimes(1)
     expect(mocks.createIssueComment).toHaveBeenCalledTimes(1)

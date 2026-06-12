@@ -1,5 +1,5 @@
 name: Feature request
-description: Suggest an idea for Read Frog
+description: Suggest an idea for Vibe Reading
 title: "[FEATURE] "
 labels: [enhancement]
 assignees: []
@@ -9,8 +9,7 @@ body:
     attributes:
       label: Before you begin
       description: |
-        Please confirm the following before submitting. For questions and quick help, join our Discord community.
-        Discord: https://discord.gg/ej45e3PezJ
+        Please confirm the following before submitting.
       options:
         - label: I have searched existing issues to avoid duplicates
           required: true
@@ -19,9 +18,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        This template is used for suggesting a feature for Read Frog.
+        This template is used for suggesting a feature for Vibe Reading.
 
-        Bug reports should be opened via the [Bug Report Form](https://github.com/mengxi-ream/read-frog/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml&title=)
+        Bug reports should be opened with the bug report template.
   - type: textarea
     id: problem
     attributes:

@@ -1,8 +1,7 @@
-import type { LangCodeISO6393 } from "@read-frog/definitions"
 import type { LanguageItem } from "./language-combobox-options"
+import type { LangCodeISO6393 } from "@/definitions"
 import { Combobox as ComboboxPrimitive } from "@base-ui/react"
 import { Icon } from "@iconify/react"
-import { langCodeISO6393Schema } from "@read-frog/definitions"
 import { useMemo } from "react"
 import { i18n } from "#imports"
 import { Button } from "@/components/ui/base-ui/button"
@@ -14,6 +13,7 @@ import {
   ComboboxItem,
   ComboboxList,
 } from "@/components/ui/base-ui/combobox"
+import { langCodeISO6393Schema } from "@/definitions"
 import { getLanguageLabel } from "@/utils/language-labels"
 import { filterLanguage } from "./language-combobox-options"
 

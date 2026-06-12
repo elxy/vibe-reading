@@ -3,15 +3,15 @@ import * as React from "react"
 import { Toaster } from "sonner"
 
 import { browser } from "#imports"
-import frogIcon from "@/assets/icons/read-frog.png?url&no-inline"
+import vibeReadingIcon from "@/assets/icons/vibe-reading.png?url&no-inline"
 import { APP_NAME } from "@/utils/constants/app"
 
-const frogIconUrl = new URL(frogIcon, browser.runtime.getURL("/")).href
+const vibeReadingIconUrl = new URL(vibeReadingIcon, browser.runtime.getURL("/")).href
 
-const frogIconElement = (
+const vibeReadingIconElement = (
   <img
-    src={frogIconUrl}
-    alt="🐸"
+    src={vibeReadingIconUrl}
+    alt={APP_NAME}
     style={{
       maxWidth: "100%",
       height: "auto",
@@ -21,18 +21,18 @@ const frogIconElement = (
   />
 )
 
-function FrogToast({ position = "bottom-left", toastOptions, ...props }: React.ComponentProps<typeof Toaster>) {
+function AppToast({ position = "bottom-left", toastOptions, ...props }: React.ComponentProps<typeof Toaster>) {
   return (
     <Toaster
       {...props}
       position={position}
       richColors
       icons={{
-        warning: frogIconElement,
-        success: frogIconElement,
-        error: frogIconElement,
-        info: frogIconElement,
-        loading: frogIconElement,
+        warning: vibeReadingIconElement,
+        success: vibeReadingIconElement,
+        error: vibeReadingIconElement,
+        info: vibeReadingIconElement,
+        loading: vibeReadingIconElement,
       }}
       toastOptions={{
         ...toastOptions,
@@ -43,4 +43,4 @@ function FrogToast({ position = "bottom-left", toastOptions, ...props }: React.C
   )
 }
 
-export default FrogToast
+export default AppToast

@@ -1,5 +1,5 @@
-import type { LangCodeISO6393 } from "@read-frog/definitions"
-import { langCodeISO6393Schema } from "@read-frog/definitions"
+import type { LangCodeISO6393 } from "@/definitions"
+import { langCodeISO6393Schema } from "@/definitions"
 import { DEFAULT_DETECTED_CODE } from "../constants/config"
 import { sendMessage } from "../message"
 

@@ -2,7 +2,7 @@
 name: extension-real-browser-testing
 description: Test browser extensions in real browsers using built artifacts, Edge + Playwright automation, runtime-message triggering, DOM debugging, and truthful screenshot capture.
 metadata:
-  author: read-frog
+  author: vibe-reading
   version: "1.1.0"
 ---
 
@@ -25,7 +25,7 @@ Apply this skill when:
 | Topic | Reference |
 |-------|-----------|
 | Browser discovery, Edge launch patterns, unpacked extension loading | [references/launching.md](references/launching.md) |
-| Real-browser verification workflow, debugging heuristics, read-frog capture recipe | [references/workflow.md](references/workflow.md) |
+| Real-browser verification workflow, debugging heuristics, Vibe Reading capture recipe | [references/workflow.md](references/workflow.md) |
 
 ## General workflow
 
@@ -61,16 +61,16 @@ Important environment lessons:
 
 If Chrome behaves strangely, switch to Edge instead of continuing to guess.
 
-## Read-frog page-translation workflow
+## Vibe Reading page-translation workflow
 
-For read-frog page translation, a reliable automation path was:
+For Vibe Reading page translation, a reliable automation path was:
 
 1. Open a real content page first.
 2. Open `chrome-extension://<id>/popup.html`.
 3. From the popup page, locate the actual content tab.
 4. Explicitly set config in `chrome.storage.local` instead of assuming defaults.
 5. Trigger the same runtime message used by the extension in production.
-6. Wait for `.read-frog-spinner` nodes and record live DOM evidence.
+6. Wait for `.vibe-reading-spinner` nodes and record live DOM evidence.
 7. Take the raw screenshot while spinner nodes are still present.
 8. Keep waiting until translated wrapper nodes contain Chinese text to prove the run was real.
 
@@ -126,29 +126,29 @@ const setup = await popup.evaluate(async ({ targetUrl }) => {
 }, { targetUrl: page.url() });
 ```
 
-Good loading-time evidence for read-frog:
+Good loading-time evidence for Vibe Reading:
 
 ```js
 await page.waitForFunction(
-  () => document.querySelectorAll('.read-frog-spinner').length >= 4,
+  () => document.querySelectorAll('.vibe-reading-spinner').length >= 4,
   null,
   { timeout: 45000 },
 );
 
 const loadingEvidence = await page.evaluate(() => ({
-  spinnerCount: document.querySelectorAll('.read-frog-spinner').length,
-  sampleSpinnerStyles: Array.from(document.querySelectorAll('.read-frog-spinner'))
+  spinnerCount: document.querySelectorAll('.vibe-reading-spinner').length,
+  sampleSpinnerStyles: Array.from(document.querySelectorAll('.vibe-reading-spinner'))
     .slice(0, 3)
     .map(node => node.getAttribute('style')),
 }));
 ```
 
-Good completion-time evidence for read-frog:
+Good completion-time evidence for Vibe Reading:
 
 ```js
 await page.waitForFunction(
   () => {
-    const wrappers = Array.from(document.querySelectorAll('.read-frog-translated-content-wrapper'));
+    const wrappers = Array.from(document.querySelectorAll('.vibe-reading-translated-content-wrapper'));
     return wrappers.some(node => /[\u3400-\u9FFF]/.test(node.textContent || ''));
   },
   null,
@@ -190,4 +190,4 @@ For reproducible browser bugs, collect at least:
 ## References
 
 - See `references/launching.md` for exact Edge launch patterns.
-- See `references/workflow.md` for the real-browser checklist, debugging heuristics, and read-frog capture recipe.
+- See `references/workflow.md` for the real-browser checklist, debugging heuristics, and Vibe Reading capture recipe.

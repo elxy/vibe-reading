@@ -33,7 +33,7 @@ Typical output:
 
 ```js
 import fs from 'node:fs';
-import { chromium } from '/Users/frog/.hermes/hermes-agent/node_modules/playwright/index.mjs';
+import { chromium } from '/ABS/PATH/TO/playwright/index.mjs';
 
 const extensionPath = '/ABS/PATH/TO/.output/chrome-mv3';
 const userDataDir = '/tmp/extension-edge-profile';
@@ -71,7 +71,7 @@ await options.goto(`chrome-extension://${extensionId}/options.html`)
 
 ### 4. Trigger the real extension flow
 
-For read-frog page translation, a reliable approach was:
+For Vibe Reading page translation, a reliable approach was:
 - open a real content page first
 - locate the real content tab from the popup page
 - set `language.targetCode = 'cmn'`
@@ -132,14 +132,14 @@ const setup = await popup.evaluate(async ({ targetUrl }) => {
 
 ```js
 await page.waitForFunction(
-  () => document.querySelectorAll('.read-frog-spinner').length >= 4,
+  () => document.querySelectorAll('.vibe-reading-spinner').length >= 4,
   null,
   { timeout: 45000 },
 );
 
 const loadingEvidence = await page.evaluate(() => ({
-  spinnerCount: document.querySelectorAll('.read-frog-spinner').length,
-  sampleSpinnerStyles: Array.from(document.querySelectorAll('.read-frog-spinner'))
+  spinnerCount: document.querySelectorAll('.vibe-reading-spinner').length,
+  sampleSpinnerStyles: Array.from(document.querySelectorAll('.vibe-reading-spinner'))
     .slice(0, 3)
     .map(node => node.getAttribute('style')),
 }));
@@ -150,7 +150,7 @@ Then verify completion:
 ```js
 await page.waitForFunction(
   () => {
-    const wrappers = Array.from(document.querySelectorAll('.read-frog-translated-content-wrapper'));
+    const wrappers = Array.from(document.querySelectorAll('.vibe-reading-translated-content-wrapper'));
     return wrappers.some(node => /[\u3400-\u9FFF]/.test(node.textContent || ''));
   },
   null,

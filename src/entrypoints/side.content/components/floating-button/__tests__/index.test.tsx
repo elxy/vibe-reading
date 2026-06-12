@@ -284,7 +284,7 @@ describe("floatingButton controls", () => {
     )
   })
 
-  it("turns the frog into the only visible control after a long press", () => {
+  it("turns the logo into the only visible control after a long press", () => {
     vi.useFakeTimers()
     renderFloatingButton()
 
