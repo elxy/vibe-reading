@@ -7,14 +7,6 @@ const alarmsAddListenerMock = vi.fn()
 const translationDeleteMock = vi.fn()
 const translationWhereMock = vi.fn()
 
-const requestCountMock = vi.fn()
-const requestOrderByToArrayMock = vi.fn()
-const requestOrderByLimitMock = vi.fn()
-const requestOrderByMock = vi.fn()
-const requestBulkDeleteMock = vi.fn()
-const requestDeleteByAgeMock = vi.fn()
-const requestWhereMock = vi.fn()
-
 const summaryDeleteMock = vi.fn()
 const summaryWhereMock = vi.fn()
 
@@ -51,13 +43,6 @@ vi.mock("@/utils/db/dexie/db", () => ({
       where: translationWhereMock,
       clear: vi.fn(),
     },
-    batchRequestRecord: {
-      count: requestCountMock,
-      orderBy: requestOrderByMock,
-      bulkDelete: requestBulkDeleteMock,
-      where: requestWhereMock,
-      clear: vi.fn(),
-    },
     articleSummaryCache: {
       where: summaryWhereMock,
       clear: vi.fn(),
@@ -90,22 +75,6 @@ describe("setUpDatabaseCleanup", () => {
       }),
     })
 
-    requestCountMock.mockResolvedValue(0)
-    requestOrderByToArrayMock.mockResolvedValue([])
-    requestOrderByLimitMock.mockReturnValue({
-      toArray: requestOrderByToArrayMock,
-    })
-    requestOrderByMock.mockReturnValue({
-      limit: requestOrderByLimitMock,
-    })
-    requestBulkDeleteMock.mockResolvedValue(undefined)
-    requestDeleteByAgeMock.mockResolvedValue(0)
-    requestWhereMock.mockReturnValue({
-      below: () => ({
-        delete: requestDeleteByAgeMock,
-      }),
-    })
-
     summaryDeleteMock.mockResolvedValue(0)
     summaryWhereMock.mockReturnValue({
       below: () => ({
@@ -118,18 +87,16 @@ describe("setUpDatabaseCleanup", () => {
     const { setUpDatabaseCleanup } = await import("../db-cleanup")
     await setUpDatabaseCleanup()
 
-    expect(alarmsCreateMock).toHaveBeenCalledTimes(3)
+    expect(alarmsCreateMock).toHaveBeenCalledTimes(2)
     expect(alarmsAddListenerMock).toHaveBeenCalledTimes(1)
 
     expect(translationWhereMock).not.toHaveBeenCalled()
-    expect(requestCountMock).not.toHaveBeenCalled()
     expect(summaryWhereMock).not.toHaveBeenCalled()
   })
 
   it("does not recreate alarms when they already exist", async () => {
     alarmsGetMock
       .mockResolvedValueOnce({ name: "cache-cleanup" })
-      .mockResolvedValueOnce({ name: "request-record-cleanup" })
       .mockResolvedValueOnce({ name: "summary-cache-cleanup" })
 
     const { setUpDatabaseCleanup } = await import("../db-cleanup")
@@ -146,7 +113,6 @@ describe("setUpDatabaseCleanup", () => {
 
     const {
       setUpDatabaseCleanup,
-      REQUEST_RECORD_CLEANUP_ALARM,
       SUMMARY_CACHE_CLEANUP_ALARM,
       TRANSLATION_CACHE_CLEANUP_ALARM,
     } = await import("../db-cleanup")
@@ -158,11 +124,6 @@ describe("setUpDatabaseCleanup", () => {
 
     await alarmListener({ name: TRANSLATION_CACHE_CLEANUP_ALARM })
     expect(translationWhereMock).toHaveBeenCalledTimes(1)
-    expect(requestCountMock).not.toHaveBeenCalled()
-    expect(summaryWhereMock).not.toHaveBeenCalled()
-
-    await alarmListener({ name: REQUEST_RECORD_CLEANUP_ALARM })
-    expect(requestCountMock).toHaveBeenCalledTimes(1)
     expect(summaryWhereMock).not.toHaveBeenCalled()
 
     await alarmListener({ name: SUMMARY_CACHE_CLEANUP_ALARM })

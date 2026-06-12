@@ -40,13 +40,6 @@ export function SettingsNav() {
           </SidebarMenuItem>
 
           <SidebarMenuItem>
-            <SidebarMenuButton render={<Link to="/statistics" />} isActive={pathname === "/statistics"}>
-              <Icon icon="tabler:chart-dots" />
-              <span>{i18n.t("options.statistics.title")}</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-
-          <SidebarMenuItem>
             <SidebarMenuButton render={<Link to="/config" />} isActive={pathname === "/config"}>
               <Icon icon="tabler:settings" />
               <span>{i18n.t("options.config.title")}</span>

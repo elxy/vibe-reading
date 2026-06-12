@@ -25,13 +25,6 @@ export const SEARCH_ITEMS: SearchItem[] = [
     pageKey: "options.general.title",
   },
   {
-    sectionId: "site-control-mode",
-    route: "/",
-    titleKey: "options.siteControl.mode.title",
-    descriptionKey: "options.siteControl.mode.description",
-    pageKey: "options.general.title",
-  },
-  {
     sectionId: "appearance",
     route: "/",
     titleKey: "options.general.appearance.title",

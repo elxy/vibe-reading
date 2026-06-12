@@ -23,7 +23,7 @@ async function getConfigOrThrow(): Promise<Config> {
 async function isTextAlreadyInTargetLanguage(text: string, targetCode: LangCodeISO6393) {
   if (text.length < MIN_LENGTH_FOR_TARGET_LANG_DETECTION)
     return false
-  const detected = await detectLanguage(text, { enableLLM: false })
+  const detected = await detectLanguage(text)
   return detected === targetCode
 }
 
@@ -82,7 +82,6 @@ async function translateTextUsingPageConfig(
     const shouldSkip = await shouldSkipByLanguage(
       preparedText,
       skipLanguages,
-      config.languageDetection.mode === "llm",
     )
     if (shouldSkip) {
       logger.info(`translateTextForPage: skipping translation because text is in skip language list. text: ${preparedText}`)

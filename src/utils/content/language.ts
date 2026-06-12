@@ -1,12 +1,8 @@
 import type { LangCodeISO6393 } from "@/definitions"
 import type { BackgroundGenerateTextPayload } from "@/types/background-generate-text"
+import type { Config } from "@/types/config/config"
 import type { LLMProviderConfig } from "@/types/config/provider"
-import { franc } from "franc"
-import { toast } from "sonner"
-import { i18n } from "#imports"
-import { langCodeISO6393Schema } from "@/definitions"
 import { isLLMProviderConfig } from "@/types/config/provider"
-import { getProviderConfigById } from "@/utils/config/helpers"
 import { getLocalConfig } from "@/utils/config/storage"
 import { logger } from "@/utils/logger"
 import { sendMessage } from "@/utils/message"
@@ -17,15 +13,12 @@ import { cleanText } from "./utils"
 
 const DEFAULT_MIN_LENGTH = 10
 const DEFAULT_MAX_LENGTH_FOR_LLM = 500
-const LLM_DETECTION_FALLBACK_TOAST_ID = "llm-detection-fallback"
 
-export type DetectionSource = "llm" | "franc" | "fallback"
+export type DetectionSource = "llm" | "fallback"
 
 export interface DetectLanguageOptions {
   /** Minimum text length to attempt detection (default: 10) */
   minLength?: number
-  /** Enable LLM detection */
-  enableLLM?: boolean
   /** LLM provider config for detection (non-LLM providers not supported) */
   providerConfig?: LLMProviderConfig
   /** Max text length for LLM detection (default: 500) */
@@ -38,7 +31,7 @@ export interface DetectLanguageResult {
 }
 
 /**
- * Detect language of text using franc, with optional LLM enhancement.
+ * Detect language of text using LLM.
  * Returns both the detected code and the detection source.
  * @param text - Text to detect language for
  * @param options - Detection options
@@ -55,43 +48,21 @@ export async function detectLanguageWithSource(
     return { code: "und", source: "fallback" }
   }
 
-  // Try LLM detection first if enabled
-  if (options?.enableLLM) {
-    try {
-      const maxLength = options.maxLengthForLLM ?? DEFAULT_MAX_LENGTH_FOR_LLM
-      const textForLLM = cleanText(trimmedText, maxLength)
-      const llmResult = await detectLanguageWithLLM(
-        textForLLM,
-        options?.providerConfig,
-      )
-      if (llmResult && llmResult !== "und") {
-        return { code: llmResult, source: "llm" }
-      }
-    }
-    catch (error) {
-      logger.warn("LLM detection failed, falling back to franc:", error)
-      toast.warning(i18n.t("languageDetection.llmFailed"), {
-        id: LLM_DETECTION_FALLBACK_TOAST_ID,
-      })
-    }
+  const maxLength = options?.maxLengthForLLM ?? DEFAULT_MAX_LENGTH_FOR_LLM
+  const textForLLM = cleanText(trimmedText, maxLength)
+  const llmResult = await detectLanguageWithLLM(
+    textForLLM,
+    options?.providerConfig,
+  )
+  if (llmResult && llmResult !== "und") {
+    return { code: llmResult, source: "llm" }
   }
 
-  // Fallback to franc
-  const francResult = franc(trimmedText)
-  if (francResult === "und") {
-    return { code: "und", source: "fallback" }
-  }
-
-  const parsedFrancResult = langCodeISO6393Schema.safeParse(francResult)
-  if (!parsedFrancResult.success) {
-    return { code: "und", source: "fallback" }
-  }
-
-  return { code: parsedFrancResult.data, source: "franc" }
+  return { code: "und", source: "fallback" }
 }
 
 /**
- * Detect language of text using franc, with optional LLM enhancement.
+ * Detect language of text using LLM.
  * @param text - Text to detect language for
  * @param options - Detection options
  * @returns Detected language code or null if detection failed
@@ -102,6 +73,15 @@ export async function detectLanguage(
 ): Promise<LangCodeISO6393 | null> {
   const result = await detectLanguageWithSource(text, options)
   return result.code === "und" ? null : result.code
+}
+
+function selectLanguageDetectionProvider(config: Config): LLMProviderConfig | undefined {
+  const translateProvider = config.providersConfig.find(provider => provider.id === config.translate.providerId)
+  if (translateProvider?.enabled && isLLMProviderConfig(translateProvider)) {
+    return translateProvider
+  }
+
+  return config.providersConfig.find(provider => provider.enabled && isLLMProviderConfig(provider)) as LLMProviderConfig | undefined
 }
 
 /**
@@ -131,17 +111,9 @@ export async function detectLanguageWithLLM(
         logger.warn("No config found for language detection")
         return null
       }
-      const ldProviderId = globalConfig.languageDetection.providerId
-      if (!ldProviderId) {
-        logger.info("No LLM provider configured for language detection")
-        return null
-      }
-      const globalProvider = getProviderConfigById(
-        globalConfig.providersConfig,
-        ldProviderId,
-      )
-      if (!globalProvider || !isLLMProviderConfig(globalProvider)) {
-        logger.info("No LLM provider configured for page translation")
+      const globalProvider = selectLanguageDetectionProvider(globalConfig)
+      if (!globalProvider) {
+        logger.info("No enabled LLM provider available for language detection")
         return null
       }
       config = globalProvider

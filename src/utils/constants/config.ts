@@ -6,11 +6,10 @@ import { DEFAULT_AUTO_TRANSLATE_SHORTCUT_KEY, DEFAULT_BATCH_CONFIG, DEFAULT_MIN_
 import { TRANSLATION_NODE_STYLE_ON_INSTALLED } from "./translation-node-style"
 
 export const CONFIG_STORAGE_KEY = "config"
-export const LAST_SYNCED_CONFIG_STORAGE_KEY = "lastSyncedConfig"
 
 export const THEME_STORAGE_KEY = "theme"
 export const DEFAULT_DETECTED_CODE = "eng" as const
-export const CONFIG_SCHEMA_VERSION = 77
+export const CONFIG_SCHEMA_VERSION = 79
 
 export const DEFAULT_CONFIG: Config = {
   language: {
@@ -56,14 +55,6 @@ export const DEFAULT_CONFIG: Config = {
       isCustom: false,
       customCSS: null,
     },
-  },
-  languageDetection: {
-    mode: "basic",
-  },
-  siteControl: {
-    mode: "blacklist",
-    blacklistPatterns: [],
-    whitelistPatterns: [],
   },
 }
 

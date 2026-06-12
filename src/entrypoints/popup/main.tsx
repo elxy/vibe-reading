@@ -21,7 +21,6 @@ import { getLocalThemeMode } from "@/utils/theme"
 import App from "./app"
 import { getIsInPatterns, isCurrentSiteInPatternsAtom, isPageTranslatedAtom } from "./atoms/auto-translate"
 import { isIgnoreTabAtom, isIgnoreUrl } from "./atoms/ignore"
-import { isCurrentSiteInBlacklistAtom, isCurrentSiteInWhitelistAtom, isInSiteControlList } from "./atoms/site-control"
 import "@/assets/styles/text-small.css"
 import "@/assets/styles/theme.css"
 
@@ -34,8 +33,6 @@ function HydrateAtoms({
     [typeof isPageTranslatedAtom, boolean],
     [typeof isCurrentSiteInPatternsAtom, boolean],
     [typeof isIgnoreTabAtom, boolean],
-    [typeof isCurrentSiteInWhitelistAtom, boolean],
-    [typeof isCurrentSiteInBlacklistAtom, boolean],
     [typeof baseThemeModeAtom, ThemeMode],
   ]
   children: React.ReactNode
@@ -74,12 +71,6 @@ async function initApp() {
 
   const activeTabUrl = activeTab[0]?.url || ""
   const isIgnoreTab = isIgnoreUrl(activeTabUrl)
-  const isInWhitelist = activeTabUrl
-    ? isInSiteControlList(config.siteControl.whitelistPatterns, activeTabUrl)
-    : false
-  const isInBlacklist = activeTabUrl
-    ? isInSiteControlList(config.siteControl.blacklistPatterns, activeTabUrl)
-    : false
 
   renderPersistentReactRoot(root, (
     <React.StrictMode>
@@ -91,8 +82,6 @@ async function initApp() {
               [isPageTranslatedAtom, isPageTranslated],
               [isCurrentSiteInPatternsAtom, isInPatterns],
               [isIgnoreTabAtom, isIgnoreTab],
-              [isCurrentSiteInWhitelistAtom, isInWhitelist],
-              [isCurrentSiteInBlacklistAtom, isInBlacklist],
               [baseThemeModeAtom, themeMode],
             ]}
           >

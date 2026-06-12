@@ -14,7 +14,7 @@ vi.mock("../language", () => ({
 describe("detectPageLanguageLightweight", () => {
   beforeEach(() => {
     mockDetectLanguageWithSource.mockReset()
-    mockDetectLanguageWithSource.mockResolvedValue({ code: "eng", source: "franc" })
+    mockDetectLanguageWithSource.mockResolvedValue({ code: "eng", source: "llm" })
 
     document.documentElement.removeAttribute("lang")
     document.head.innerHTML = ""
@@ -49,7 +49,7 @@ describe("detectPageLanguageLightweight", () => {
   })
 
   it("prefers Chinese text detection over conflicting English metadata", async () => {
-    mockDetectLanguageWithSource.mockResolvedValueOnce({ code: "cmn", source: "franc" })
+    mockDetectLanguageWithSource.mockResolvedValueOnce({ code: "cmn", source: "llm" })
     document.documentElement.lang = "en"
     document.title = "阅读 - 源仓库"
     document.body.textContent = "源仓库 资源中心 文章列表 地址发布页 首页 阅读 登录 阅读 书源 书源合集 订阅源 订阅源合集 其他 新建".repeat(2)
@@ -58,16 +58,15 @@ describe("detectPageLanguageLightweight", () => {
 
     expect(result).toEqual({
       detectedCodeOrUnd: "cmn",
-      detectionSource: "franc",
+      detectionSource: "llm",
     })
     expect(mockDetectLanguageWithSource).toHaveBeenCalledWith(
       expect.stringContaining("阅读 - 源仓库"),
-      { enableLLM: false },
     )
   })
 
   it("prefers text detection over conflicting non-English metadata", async () => {
-    mockDetectLanguageWithSource.mockResolvedValueOnce({ code: "eng", source: "franc" })
+    mockDetectLanguageWithSource.mockResolvedValueOnce({ code: "eng", source: "llm" })
     document.documentElement.lang = "ja-JP"
     document.body.textContent = "English body text with enough visible content to verify incorrect page metadata. ".repeat(2)
 
@@ -75,12 +74,12 @@ describe("detectPageLanguageLightweight", () => {
 
     expect(result).toEqual({
       detectedCodeOrUnd: "eng",
-      detectionSource: "franc",
+      detectionSource: "llm",
     })
   })
 
   it("keeps English metadata when text detection agrees", async () => {
-    mockDetectLanguageWithSource.mockResolvedValueOnce({ code: "eng", source: "franc" })
+    mockDetectLanguageWithSource.mockResolvedValueOnce({ code: "eng", source: "llm" })
     document.documentElement.lang = "en"
     document.body.textContent = "English body text with enough visible content to verify matching page metadata. ".repeat(2)
 
@@ -93,7 +92,7 @@ describe("detectPageLanguageLightweight", () => {
   })
 
   it("keeps traditional Chinese metadata when text detection returns generic Chinese", async () => {
-    mockDetectLanguageWithSource.mockResolvedValueOnce({ code: "cmn", source: "franc" })
+    mockDetectLanguageWithSource.mockResolvedValueOnce({ code: "cmn", source: "llm" })
     document.head.innerHTML = `<meta property="og:locale" content="zh_TW">`
     document.body.textContent = "繁體中文內容用來驗證頁面語言中繼資料，這段文字需要足夠長，避免短文本時跳過正文偵測。".repeat(2)
 
@@ -118,12 +117,11 @@ describe("detectPageLanguageLightweight", () => {
 
     expect(result).toEqual({
       detectedCodeOrUnd: "eng",
-      detectionSource: "franc",
+      detectionSource: "llm",
     })
     expect(mockDetectLanguageWithSource).toHaveBeenCalledTimes(1)
     expect(mockDetectLanguageWithSource).toHaveBeenCalledWith(
       expect.stringContaining("A useful article title"),
-      { enableLLM: false },
     )
     const [textForDetection] = mockDetectLanguageWithSource.mock.calls[0]
     expect(textForDetection).not.toContain("hidden")

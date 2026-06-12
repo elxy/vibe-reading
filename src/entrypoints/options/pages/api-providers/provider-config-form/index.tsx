@@ -1,4 +1,3 @@
-import type { Config } from "@/types/config/config"
 import type { ProvidersConfig } from "@/types/config/provider"
 import { useStore } from "@tanstack/react-form"
 import { useAtom, useAtomValue, useSetAtom } from "jotai"
@@ -21,7 +20,6 @@ import { isAPIProviderConfig, isLLMProvider, isNonAPIProvider, isTranslateProvid
 import { configAtom, configFieldsAtomMap, writeConfigAtom } from "@/utils/atoms/config"
 import { providerConfigAtom } from "@/utils/atoms/provider"
 import {
-  computeLanguageDetectionFallbackAfterDeletion,
   computeProviderFallbacksAfterDeletion,
   findFeatureMissingProvider,
 } from "@/utils/config/helpers"
@@ -95,18 +93,7 @@ export function ProviderConfigForm() {
     }
 
     const fallbacks = computeProviderFallbacksAfterDeletion(providerConfig.id, config, updatedAllProviders)
-    let patch = buildFeatureProviderPatch(fallbacks)
-
-    const ldFallback = computeLanguageDetectionFallbackAfterDeletion(providerConfig.id, config, updatedAllProviders)
-    if (ldFallback !== null) {
-      patch = {
-        ...patch,
-        languageDetection: {
-          ...config.languageDetection,
-          providerId: ldFallback,
-        },
-      } as Partial<Config>
-    }
+    const patch = buildFeatureProviderPatch(fallbacks)
 
     if (Object.keys(patch).length > 0) {
       await setConfig(patch)

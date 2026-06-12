@@ -104,9 +104,9 @@ describe("initializeConfig", () => {
     const config = buildStableConfig()
     const migrated = {
       ...config,
-      siteControl: {
-        ...config.siteControl,
-        mode: "whitelist" as const,
+      language: {
+        ...config.language,
+        targetCode: "eng" as const,
       },
     }
 

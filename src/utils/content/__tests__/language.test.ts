@@ -1,31 +1,56 @@
-import { franc } from "franc"
+import type { LLMProviderConfig } from "@/types/config/provider"
 import { beforeEach, describe, expect, it, vi } from "vitest"
+import { sendMessage } from "@/utils/message"
 import { detectLanguageWithSource } from "../language"
 
-vi.mock("franc", () => ({
-  franc: vi.fn(),
+vi.mock("@/utils/message", () => ({
+  sendMessage: vi.fn(),
 }))
 
-const mockFranc = vi.mocked(franc)
+vi.mock("@/utils/config/storage", () => ({
+  getLocalConfig: vi.fn(),
+}))
+
+const mockSendMessage = vi.mocked(sendMessage)
+
+const providerConfig: LLMProviderConfig = {
+  id: "openai-default",
+  name: "OpenAI",
+  description: "OpenAI",
+  enabled: true,
+  provider: "openai",
+  apiKey: "test-api-key",
+  model: {
+    model: "gpt-5-mini",
+    isCustomModel: false,
+    customModel: null,
+  },
+  providerOptions: {},
+  temperature: 0,
+}
 
 describe("detectLanguageWithSource", () => {
   beforeEach(() => {
-    mockFranc.mockReset()
+    mockSendMessage.mockReset()
   })
 
-  it("returns franc result when it is a supported language code", async () => {
-    mockFranc.mockReturnValue("eng")
+  it("returns LLM result when it is a supported language code", async () => {
+    mockSendMessage.mockResolvedValue({
+      text: JSON.stringify({ reason: "English text.", code: "eng" }),
+    })
 
-    await expect(detectLanguageWithSource("This is enough text to detect language.")).resolves.toEqual({
+    await expect(detectLanguageWithSource("This is enough text to detect language.", { providerConfig })).resolves.toEqual({
       code: "eng",
-      source: "franc",
+      source: "llm",
     })
   })
 
-  it("falls back when franc returns an unsupported language code", async () => {
-    mockFranc.mockReturnValue("vmw")
+  it("falls back when LLM returns an unsupported language code", async () => {
+    mockSendMessage.mockResolvedValue({
+      text: JSON.stringify({ reason: "Unsupported language.", code: "und" }),
+    })
 
-    await expect(detectLanguageWithSource("Eyi je oro ni ede Yoruba fun idanwo wiwa ede.")).resolves.toEqual({
+    await expect(detectLanguageWithSource("Eyi je oro ni ede Yoruba fun idanwo wiwa ede.", { providerConfig })).resolves.toEqual({
       code: "und",
       source: "fallback",
     })

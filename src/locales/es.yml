@@ -15,8 +15,6 @@ popup:
   translate: Traducir
   showOriginal: Mostrar original
   alwaysTranslate: Traducir siempre este sitio
-  addToWhitelist: Activar extensión en este sitio
-  addToBlacklist: Desactivar extensión en este sitio
   options: Opciones
   hover: Pasar el cursor
   translateParagraph: para traducir el párrafo
@@ -191,29 +189,6 @@ options:
         confirm: Confirmar
         cancel: Cancelar
         description: Esta operación borrará toda la caché de traducción. Esta acción no se puede deshacer.
-    languageDetection:
-      title: Detección de idioma
-      description: Afecta la detección de idioma para traducción automática, la detección de idiomas omitidos y la precisión de selección de voz.
-      mode:
-        basic: Básica
-        llm: LLM
-      provider:
-        label: Proveedor de detección
-        placeholder: Selecciona un proveedor
-      status:
-        noProviders: Configura primero un proveedor LLM
-        basicRecommend: Se recomienda activar LLM
-        llmEnabled: Detección LLM activada
-  siteControl:
-    title: Control de sitios
-    mode:
-      title: Modo de activación de la extensión
-      description: Usa el modo de lista negra para desactivar la extensión en sitios específicos, o el modo de lista blanca para limitarla solo a sitios específicos.
-      blacklist: Desactivar solo en sitios listados
-      whitelist: Ejecutar solo en sitios listados
-    patterns:
-      enterUrlPattern: Introduce patrón de URL (p. ej., example.com)
-      urlPattern: Patrón de URL
   translation:
     title: Traducción
     requestQueueConfig:
@@ -235,7 +210,6 @@ options:
       maxItemsPerBatch:
         title: Recuento máximo de párrafos
         description: Número máximo de párrafos para cada traducción por lote para controlar el volumen de contenido de cada traducción
-      statisticsLink: Se ahorraron aproximadamente $1 de coste en los últimos 7 días
     autoTranslateWebsite:
       title: Traducción automática por sitio web
       description: Traducir siempre este sitio web
@@ -359,34 +333,17 @@ options:
       title: Traducción automática por idioma
       description: Traduce automáticamente el contenido de la página cuando se detectan idiomas específicos
       selectLanguages: Seleccionar idiomas
-      detection:
-        label: Detección de idioma
-        basic: Básica
-        llm: LLM
-        description: La detección básica es rápida y gratis. La detección LLM es más precisa, pero añade latencia y costes de API. Requiere idiomas de traducción automática configurados.
     skipLanguages:
       title: Omisión automática por idioma
       description: Omite automáticamente la traducción de párrafos cuando se detectan idiomas específicos
       targetLanguageSkip: Omitir idioma de destino
       targetLanguageSkipDescription: Antes de traducir, detecta si el párrafo ya está en el idioma de destino. El texto coincidente se omite sin enviar una solicitud. Desactivar esto no cambia la protección posterior que oculta salidas de traducción sin cambios.
       selectLanguages: Seleccionar idiomas
-      detection:
-        label: Detección de idioma
-        basic: Básica
-        llm: LLM
-        description: La detección básica es rápida y gratis. La detección LLM es más precisa, pero añade latencia y costes de API.
     aiContentAware:
       title: Traducción con contexto inteligente de IA
       description: Mejora la calidad de la traducción proporcionando contexto de la página web a la AI
       enable: Activar traducción con contexto inteligente de IA
       enableDescription: La AI usa el resumen de la página web para mejorar la precisión de traducción. Requiere proveedor LLM. Añade latencia al empezar a traducir una página y aumenta los costes de API.
-  statistics:
-    title: Estadísticas
-    batchRequest:
-      title: Solicitudes de traducción por lotes ahorradas
-      description: Porcentaje de solicitudes ahorradas por traducción por lotes en el periodo
-      originalRequestCount: Recuento de solicitudes originales
-      batchRequestCount: Recuento de solicitudes por lotes
   config:
     title: Configuración
     about:
@@ -450,8 +407,6 @@ noAPIKeyConfig:
     firstOnThe: primero en la
     optionsPage: opciones
     page: página
-languageDetection:
-  llmFailed: Falló la detección de idioma LLM; se recurrió a la detección básica
 translation:
   sameLanguage: Los idiomas de origen y destino deben ser diferentes
   autoModeSameLanguage: El idioma detectado '$1' es el mismo que el idioma de destino

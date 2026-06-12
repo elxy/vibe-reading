@@ -5,7 +5,6 @@ import { version } from "../../../package.json"
 import { AISmartContext } from "./components/ai-smart-context"
 import { AlwaysTranslate } from "./components/always-translate"
 import LanguageOptionsSelector from "./components/language-options-selector"
-import { SiteControlToggle } from "./components/site-control-toggle"
 import TranslateButton from "./components/translate-button"
 import TranslatePromptSelector from "./components/translate-prompt-selector"
 import TranslateProviderField from "./components/translate-provider-field"
@@ -25,7 +24,6 @@ function App() {
           <TranslationModeSelector />
           <TranslateButton className="min-w-0 flex-1" />
         </div>
-        <SiteControlToggle />
         <AlwaysTranslate />
         <AISmartContext />
       </div>

@@ -15,8 +15,6 @@ popup:
   translate: Dịch
   showOriginal: Hiển thị bản gốc
   alwaysTranslate: Luôn dịch trang web này
-  addToWhitelist: Bật tiện ích trên trang web này
-  addToBlacklist: Tắt tiện ích trên trang web này
   options: Tùy chọn
   hover: Di chuột
   translateParagraph: để dịch đoạn văn
@@ -190,29 +188,6 @@ options:
         confirm: Xác nhận
         cancel: Hủy
         description: Thao tác này sẽ xóa tất cả bộ nhớ đệm dịch. Hành động này không thể hoàn tác.
-    languageDetection:
-      title: Phát hiện ngôn ngữ
-      description: Ảnh hưởng đến phát hiện ngôn ngữ tự động dịch, phát hiện ngôn ngữ bỏ qua và độ chính xác chọn giọng nói.
-      mode:
-        basic: Cơ bản
-        llm: LLM
-      provider:
-        label: Nhà cung cấp phát hiện
-        placeholder: Chọn nhà cung cấp
-      status:
-        noProviders: Hãy cấu hình nhà cung cấp LLM trước
-        basicRecommend: Khuyến nghị bật LLM
-        llmEnabled: Phát hiện LLM đã bật
-  siteControl:
-    title: Kiểm soát trang web
-    mode:
-      title: Chế độ kích hoạt tiện ích mở rộng
-      description: Sử dụng chế độ danh sách đen để tắt tiện ích trên các trang web cụ thể, hoặc chế độ danh sách trắng để giới hạn chỉ các trang web cụ thể.
-      blacklist: Chỉ tắt trên các trang web được liệt kê
-      whitelist: Chỉ chạy trên các trang web được liệt kê
-    patterns:
-      enterUrlPattern: Nhập mẫu URL (ví dụ example.com)
-      urlPattern: Mẫu URL
   translation:
     title: Dịch thuật
     requestQueueConfig:
@@ -234,7 +209,6 @@ options:
       maxItemsPerBatch:
         title: Số đoạn văn tối đa
         description: Số đoạn văn tối đa cho mỗi bản dịch lô để kiểm soát khối lượng nội dung của mỗi bản dịch
-      statisticsLink: Đã tiết kiệm khoảng $1 chi phí trong 7 ngày qua
     autoTranslateWebsite:
       title: Tự động dịch theo trang web
       description: Luôn dịch trang web này
@@ -358,34 +332,17 @@ options:
       title: Tự động dịch theo ngôn ngữ
       description: Tự động dịch nội dung trang khi phát hiện các ngôn ngữ cụ thể
       selectLanguages: Chọn ngôn ngữ
-      detection:
-        label: Phát hiện ngôn ngữ
-        basic: Cơ bản
-        llm: LLM
-        description: Phát hiện cơ bản nhanh và miễn phí. Phát hiện LLM chính xác hơn nhưng thêm độ trễ và chi phí API. Yêu cầu các ngôn ngữ tự động dịch đã cấu hình.
     skipLanguages:
       title: Tự động bỏ qua theo ngôn ngữ
       description: Tự động bỏ qua dịch đoạn văn khi phát hiện các ngôn ngữ cụ thể
       targetLanguageSkip: Bỏ qua ngôn ngữ đích
       targetLanguageSkipDescription: Trước khi dịch, phát hiện đoạn văn đã ở ngôn ngữ đích hay chưa. Văn bản khớp sẽ bị bỏ qua mà không gửi yêu cầu. Tắt tùy chọn này không thay đổi lớp bảo vệ sau đó, nơi kết quả dịch không thay đổi vẫn bị ẩn.
       selectLanguages: Chọn ngôn ngữ
-      detection:
-        label: Phát hiện ngôn ngữ
-        basic: Cơ bản
-        llm: LLM
-        description: Phát hiện cơ bản nhanh và miễn phí. Phát hiện LLM chính xác hơn nhưng thêm độ trễ và chi phí API.
     aiContentAware:
       title: Dịch ngữ cảnh thông minh AI
       description: Nâng cao chất lượng dịch bằng cách cung cấp ngữ cảnh trang web cho AI
       enable: Bật dịch ngữ cảnh thông minh AI
       enableDescription: AI sử dụng tóm tắt trang web để cải thiện độ chính xác dịch. Yêu cầu nhà cung cấp LLM. Thêm độ trễ khi bắt đầu dịch trang và tăng chi phí API.
-  statistics:
-    title: Thống kê
-    batchRequest:
-      title: Đã tiết kiệm yêu cầu dịch theo lô
-      description: Tỷ lệ phần trăm yêu cầu đã tiết kiệm bằng dịch theo lô trong khoảng thời gian
-      originalRequestCount: Số yêu cầu ban đầu
-      batchRequestCount: Số yêu cầu theo lô
   config:
     title: Cấu hình
     about:
@@ -449,8 +406,6 @@ noAPIKeyConfig:
     firstOnThe: trước trên trang
     optionsPage: tùy chọn
     page: ""
-languageDetection:
-  llmFailed: Phát hiện ngôn ngữ LLM thất bại, đã chuyển về phát hiện cơ bản
 translation:
   sameLanguage: Ngôn ngữ nguồn và đích phải khác nhau
   autoModeSameLanguage: Ngôn ngữ phát hiện '$1' giống với ngôn ngữ đích

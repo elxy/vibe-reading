@@ -6,7 +6,6 @@ import { useState } from "react"
 import { i18n } from "#imports"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/base-ui/collapsible"
 import { Switch } from "@/components/ui/base-ui/switch"
-import { isLLMProvider } from "@/types/config/provider"
 import { configAtom, writeConfigAtom } from "@/utils/atoms/config"
 import { buildFeatureProviderPatch, FEATURE_KEYS, FEATURE_PROVIDER_DEFS, getFeatureLabelI18nKey } from "@/utils/constants/feature-providers"
 import { cn } from "@/utils/styles/utils"
@@ -23,7 +22,6 @@ export const FeatureProviderSection = withForm({
 
     const compatibleFeatures = FEATURE_KEYS
       .filter(featureKey => FEATURE_PROVIDER_DEFS[featureKey].isProvider(providerType))
-    const supportsLanguageDetection = isLLMProvider(providerType)
 
     const getEnableCurrentProviderPatch = () => {
       const targetProvider = config.providersConfig.find(provider => provider.id === providerId)
@@ -36,7 +34,7 @@ export const FeatureProviderSection = withForm({
       )
     }
 
-    if (compatibleFeatures.length === 0 && !supportsLanguageDetection)
+    if (compatibleFeatures.length === 0)
       return null
 
     return (
@@ -82,39 +80,6 @@ export const FeatureProviderSection = withForm({
                 </div>
               )
             })}
-            {supportsLanguageDetection && (
-              <div className="flex items-center gap-2">
-                <Switch
-                  checked={config.languageDetection.mode === "llm" && config.languageDetection.providerId === providerId}
-                  disabled={config.languageDetection.mode === "llm" && config.languageDetection.providerId === providerId}
-                  onCheckedChange={(checked) => {
-                    if (checked) {
-                      const providersConfigPatch = getEnableCurrentProviderPatch()
-                      if (providersConfigPatch) {
-                        void setConfig({
-                          providersConfig: providersConfigPatch,
-                          languageDetection: {
-                            mode: "llm",
-                            providerId,
-                          },
-                        })
-                        return
-                      }
-
-                      void setConfig({
-                        languageDetection: {
-                          mode: "llm",
-                          providerId,
-                        },
-                      })
-                    }
-                  }}
-                />
-                <span className="text-sm">
-                  {i18n.t("options.general.languageDetection.title")}
-                </span>
-              </div>
-            )}
           </div>
         </CollapsibleContent>
       </Collapsible>

@@ -1,11 +1,6 @@
-import type { FrameInfoForSiteControl } from "./iframe-injection-utils"
-import type { Config } from "@/types/config/config"
 import { browser } from "#imports"
-import { getLocalConfig } from "@/utils/config/storage"
 import { logger } from "@/utils/logger"
-import { isSiteEnabled, SITE_CONTROL_URL_WINDOW_KEY } from "@/utils/site-control"
 import { matchDomainPattern } from "@/utils/url"
-import { resolveSiteControlUrl } from "./iframe-injection-utils"
 import { getPageTranslationEnabled } from "./page-translation-state"
 
 const HOST_CONTENT_SCRIPT_FILE = "/content-scripts/host.js" as const
@@ -21,13 +16,16 @@ interface FrameInjectionDetails {
   tabId: number
   frameId: number
   documentId?: string
-  parentFrameId?: number
   url?: string
 }
 
 interface InjectHostContentIntoTabIframesOptions {
   requirePageTranslationEnabled?: boolean
-  siteControlUrlOverride?: string
+}
+
+interface FrameInfo {
+  frameId: number
+  url?: string
 }
 
 function getDocumentInjectionKey(details: FrameInjectionDetails) {
@@ -86,18 +84,6 @@ function pruneInjectedFrames(tabId: number, liveFrameIds: Set<number>) {
   }
 }
 
-function getParentFrameIdHint(details: object): number | undefined {
-  if ("parentFrameId" in details && typeof details.parentFrameId === "number") {
-    return details.parentFrameId
-  }
-
-  return undefined
-}
-
-function setInjectedSiteControlUrl(propertyName: string, siteControlUrl: string) {
-  ;(globalThis as Record<string, unknown>)[propertyName] = siteControlUrl
-}
-
 function getInjectionTarget(details: FrameInjectionDetails) {
   if (details.documentId) {
     return { tabId: details.tabId, documentIds: [details.documentId] }
@@ -106,7 +92,7 @@ function getInjectionTarget(details: FrameInjectionDetails) {
   return { tabId: details.tabId, frameIds: [details.frameId] }
 }
 
-async function getFrameSnapshot(tabId: number): Promise<FrameInfoForSiteControl[]> {
+async function getFrameSnapshot(tabId: number): Promise<FrameInfo[]> {
   return await browser.webNavigation.getAllFrames({ tabId }) ?? []
 }
 
@@ -119,26 +105,15 @@ function isFullRuntimeAutoInjectUrl(url: string | undefined): url is string {
 
 async function getShouldInjectHostContentIntoTabIframes(
   tabId: number,
-  existingConfig?: Config | null,
   options: InjectHostContentIntoTabIframesOptions = {},
-): Promise<{ config: Config | null, shouldInject: boolean }> {
+): Promise<boolean> {
   const requirePageTranslationEnabled = options.requirePageTranslationEnabled ?? true
-  const [isPageTranslationEnabled, config] = await Promise.all([
-    requirePageTranslationEnabled ? getPageTranslationEnabled(tabId) : Promise.resolve(true),
-    existingConfig === undefined ? getLocalConfig() : Promise.resolve(existingConfig),
-  ])
-
-  return {
-    config,
-    shouldInject: isPageTranslationEnabled,
-  }
+  return requirePageTranslationEnabled ? await getPageTranslationEnabled(tabId) : true
 }
 
 async function injectHostContentIntoFrame(
   details: FrameInjectionDetails,
-  frames?: FrameInfoForSiteControl[],
-  existingConfig?: Config | null,
-  options: InjectHostContentIntoTabIframesOptions = {},
+  frames?: FrameInfo[],
 ) {
   const documentKey = getDocumentInjectionKey(details)
   const filesToInject = [HOST_CONTENT_SCRIPT_FILE].filter((file) => {
@@ -157,27 +132,11 @@ async function injectHostContentIntoFrame(
   }
 
   try {
-    let siteControlUrl: string | undefined
-
     try {
-      const [config, frameSnapshot] = await Promise.all([
-        existingConfig === undefined ? getLocalConfig() : Promise.resolve(existingConfig),
-        frames === undefined ? getFrameSnapshot(details.tabId) : Promise.resolve(frames),
-      ])
+      const frameSnapshot = frames === undefined ? await getFrameSnapshot(details.tabId) : frames
       const liveFrameIds = new Set(frameSnapshot.map(frame => frame.frameId))
       liveFrameIds.add(details.frameId)
       pruneInjectedFrames(details.tabId, liveFrameIds)
-
-      siteControlUrl = options.siteControlUrlOverride ?? resolveSiteControlUrl(
-        details.frameId,
-        details.url,
-        frameSnapshot,
-        getParentFrameIdHint(details),
-      )
-
-      if (!siteControlUrl || !isSiteEnabled(siteControlUrl, config)) {
-        return
-      }
     }
     catch (error) {
       logger.error("[Background][IframeInjection] Failed to resolve iframe injection prerequisites", error)
@@ -186,12 +145,6 @@ async function injectHostContentIntoFrame(
 
     try {
       const target = getInjectionTarget(details) as Parameters<typeof browser.scripting.executeScript>[0]["target"]
-
-      await browser.scripting.executeScript({
-        target,
-        func: setInjectedSiteControlUrl,
-        args: [SITE_CONTROL_URL_WINDOW_KEY, siteControlUrl],
-      })
 
       for (const file of filesToInject) {
         await browser.scripting.executeScript({
@@ -220,10 +173,9 @@ export async function injectHostContentIntoTabIframes(
   tabId: number,
   options: InjectHostContentIntoTabIframesOptions = {},
 ) {
-  let config: Config | null
   let shouldInject: boolean
   try {
-    ({ config, shouldInject } = await getShouldInjectHostContentIntoTabIframes(tabId, undefined, options))
+    shouldInject = await getShouldInjectHostContentIntoTabIframes(tabId, options)
   }
   catch (error) {
     logger.warn("[Background][IframeInjection] Failed to resolve iframe injection state", error)
@@ -233,7 +185,7 @@ export async function injectHostContentIntoTabIframes(
   if (!shouldInject)
     return
 
-  let frames: FrameInfoForSiteControl[]
+  let frames: FrameInfo[]
   try {
     frames = await getFrameSnapshot(tabId)
   }
@@ -250,9 +202,8 @@ export async function injectHostContentIntoTabIframes(
     .map(frame => injectHostContentIntoFrame({
       tabId,
       frameId: frame.frameId,
-      parentFrameId: frame.parentFrameId,
       url: frame.url,
-    }, frames, config, options)))
+    }, frames)))
 }
 
 export async function injectHostContentIntoCurrentTabIframesAfterNodeTranslation(tabId: number) {
@@ -284,26 +235,20 @@ export function setupIframeInjection() {
       }
 
       fullRuntimeAutoInjectUrlByTab.set(details.tabId, details.url)
-      await injectHostContentIntoTabIframes(details.tabId, {
-        requirePageTranslationEnabled: false,
-        siteControlUrlOverride: details.url,
-      })
+      await injectHostContentIntoTabIframes(details.tabId, { requirePageTranslationEnabled: false })
       return
     }
 
     const fullRuntimeAutoInjectUrl = fullRuntimeAutoInjectUrlByTab.get(details.tabId)
       ?? (isFullRuntimeAutoInjectUrl(details.url) ? details.url : undefined)
     if (fullRuntimeAutoInjectUrl) {
-      await injectHostContentIntoFrame(details, undefined, undefined, {
-        siteControlUrlOverride: fullRuntimeAutoInjectUrl,
-      })
+      await injectHostContentIntoFrame(details)
       return
     }
 
-    let config: Config | null
     let shouldInject: boolean
     try {
-      ({ config, shouldInject } = await getShouldInjectHostContentIntoTabIframes(details.tabId))
+      shouldInject = await getShouldInjectHostContentIntoTabIframes(details.tabId)
       if (!shouldInject)
         return
     }
@@ -312,6 +257,6 @@ export function setupIframeInjection() {
       return
     }
 
-    await injectHostContentIntoFrame(details, undefined, config)
+    await injectHostContentIntoFrame(details)
   })
 }

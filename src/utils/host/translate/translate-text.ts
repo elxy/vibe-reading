@@ -20,21 +20,17 @@ import { prepareTranslationText } from "./text-preparation"
 export const MIN_LENGTH_FOR_SKIP_LLM_DETECTION = 10
 
 /**
- * Check if text should be skipped based on language detection.
- * Uses LLM detection if enabled, falls back to franc library.
+ * Check if text should be skipped based on LLM language detection.
  * @param text - Text to detect language for
  * @param skipLanguages - List of languages to skip translation for
- * @param enableLLM - Whether to use LLM for language detection
  * @returns true if text language is in skipLanguages list (should skip translation)
  */
 export async function shouldSkipByLanguage(
   text: string,
   skipLanguages: LangCodeISO6393[],
-  enableLLM: boolean,
 ): Promise<boolean> {
   const detectedLang = await detectLanguage(text, {
     minLength: MIN_LENGTH_FOR_SKIP_LLM_DETECTION,
-    enableLLM,
   })
 
   if (!detectedLang) {

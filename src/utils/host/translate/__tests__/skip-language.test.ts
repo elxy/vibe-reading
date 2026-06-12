@@ -25,10 +25,12 @@ describe("shouldSkipByLanguage", () => {
       const result = await shouldSkipByLanguage(
         japaneseText,
         skipLanguages,
-        false,
       )
 
       expect(result).toBe(true)
+      expect(mockedDetect).toHaveBeenCalledWith(japaneseText, {
+        minLength: 10,
+      })
     })
 
     it("should return false when detected language is not in skipLanguages", async () => {
@@ -40,7 +42,6 @@ describe("shouldSkipByLanguage", () => {
       const result = await shouldSkipByLanguage(
         englishText,
         skipLanguages,
-        false,
       )
 
       expect(result).toBe(false)
@@ -55,7 +56,6 @@ describe("shouldSkipByLanguage", () => {
       const result = await shouldSkipByLanguage(
         japaneseText,
         skipLanguages,
-        false,
       )
 
       expect(result).toBe(false)
@@ -70,33 +70,13 @@ describe("shouldSkipByLanguage", () => {
       const result = await shouldSkipByLanguage(
         undetectableText,
         skipLanguages,
-        false,
       )
 
       expect(result).toBe(false)
     })
   })
 
-  describe("with LLM detection enabled", () => {
-    it("should use LLM detection when enabled", async () => {
-      mockedDetect.mockResolvedValueOnce("jpn")
-
-      const text = "これは日本語のテストです。日本語で書かれたテキストです。"
-      const skipLanguages: LangCodeISO6393[] = ["jpn"]
-
-      const result = await shouldSkipByLanguage(
-        text,
-        skipLanguages,
-        true,
-      )
-
-      expect(mockedDetect).toHaveBeenCalledWith(text, {
-        minLength: 10,
-        enableLLM: true,
-      })
-      expect(result).toBe(true)
-    })
-
+  describe("llm detection", () => {
     it("should return false when detectLanguage returns null", async () => {
       mockedDetect.mockResolvedValueOnce(null)
 
@@ -106,7 +86,6 @@ describe("shouldSkipByLanguage", () => {
       const result = await shouldSkipByLanguage(
         japaneseText,
         skipLanguages,
-        true,
       )
 
       expect(mockedDetect).toHaveBeenCalled()
@@ -122,12 +101,10 @@ describe("shouldSkipByLanguage", () => {
       await shouldSkipByLanguage(
         japaneseText,
         skipLanguages,
-        true,
       )
 
       expect(mockedDetect).toHaveBeenCalledWith(japaneseText, {
         minLength: 10,
-        enableLLM: true,
       })
     })
   })
