@@ -1,5 +1,5 @@
 name: Vibe Reading
-extName: Vibe Reading - Web Page Translation
+extName: Vibe Reading (fork) - Web Page Translation
 extDescription: Vibe Reading is an open source browser extension for reading and translating web pages with your own AI or translation providers.
 dataTypes:
   string: Text

@@ -36,8 +36,28 @@ pnpm type-check
 pnpm build
 ```
 
+## Fork 源流
+
+本项目是一个下游 fork，谱系如下：
+
+[mengxi-ream/read-frog](https://github.com/mengxi-ream/read-frog) →
+[Xuanwo/vibe-reading](https://github.com/Xuanwo/vibe-reading) →
+[elxy/vibe-reading](https://github.com/elxy/vibe-reading)（本仓库）
+
+为了与上游 `Xuanwo/vibe-reading` 区分，本 fork 在扩展商店发布时使用名称 **“Vibe Reading (fork)”**。
+
+## 相对上游的修改
+
+### 相对 `Xuanwo/vibe-reading`
+
+_目前无功能性变动，仅包含打包和提交用的准备工作（为避免名称冲突重命名、添加当前 AMO 政策所需的 Firefox manifest 字段、构建与隐私文档）。_
+
+### 相对 `mengxi-ream/read-frog`
+
+继承自 `Xuanwo/vibe-reading`，详见上方的“骨傲地不支持”表格。
+
 ## 授权与致谢
 
-Vibe Reading 修改自 [Read Frog](https://github.com/mengxi-ream/read-frog)。感谢 Read Frog 的作者和贡献者提供原始 GPL 授权作品。
+本项目修改自 [Xuanwo/vibe-reading](https://github.com/Xuanwo/vibe-reading)，后者又修改自 [mengxi-ream/read-frog](https://github.com/mengxi-ream/read-frog)。感谢两个上游项目的作者和贡献者提供原始 GPL 授权作品。
 
-本项目按 GNU General Public License version 3 分发，完整许可证见 [LICENSE](./LICENSE)。作为修改版本，Vibe Reading 遵守 GPLv3 条款，继续以同一许可证提供源码，并明确标记本 fork 已发生修改，避免将本 fork 的问题归因于上游项目。
+本项目按 GNU General Public License version 3 分发，完整许可证见 [LICENSE](./LICENSE)。作为修改版本，本 fork 遵守 GPLv3 条款，继续以同一许可证提供源码，并明确标记本 fork 已发生修改，避免将本 fork 的问题归因于上游项目。

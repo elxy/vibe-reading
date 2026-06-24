@@ -2,7 +2,9 @@
 
 ## 项目概述
 
-Vibe Reading 是一个专注于网页阅读翻译的浏览器扩展，基于 WXT 框架构建，fork 自 Read Frog。扩展不依赖项目自建后端，AI/翻译能力由用户自行配置的服务商和 API Key 提供。
+Vibe Reading 是一个专注于网页阅读翻译的浏览器扩展，基于 WXT 框架构建。扩展不依赖项目自建后端，AI/翻译能力由用户自行配置的服务商和 API Key 提供。
+
+**Fork 谱系**：[mengxi-ream/read-frog](https://github.com/mengxi-ream/read-frog) → [Xuanwo/vibe-reading](https://github.com/Xuanwo/vibe-reading) → [elxy/vibe-reading](https://github.com/elxy/vibe-reading)（本仓库）。为避免与上游 `Xuanwo/vibe-reading` 同名，在扩展商店以 **“Vibe Reading (fork)”** 发布。
 
 ## 技术栈
 

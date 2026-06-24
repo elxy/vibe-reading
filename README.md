@@ -65,14 +65,41 @@ pnpm type-check
 pnpm build
 ```
 
+## Fork Lineage
+
+This project is a downstream fork. The lineage is:
+
+[mengxi-ream/read-frog](https://github.com/mengxi-ream/read-frog) →
+[Xuanwo/vibe-reading](https://github.com/Xuanwo/vibe-reading) →
+[elxy/vibe-reading](https://github.com/elxy/vibe-reading) (this repository)
+
+To avoid confusion with the upstream `Xuanwo/vibe-reading`, this fork is
+published to extension stores as **"Vibe Reading (fork)"**.
+
+## Changes from Upstream
+
+### Relative to `Xuanwo/vibe-reading`
+
+_No functional changes yet. This fork currently only contains packaging and
+submission preparation (rebranding for store disambiguation, Firefox manifest
+fields required by current AMO policy, build and privacy documentation)._
+
+### Relative to `mengxi-ream/read-frog`
+
+Inherited from `Xuanwo/vibe-reading`. See the
+["Proudly Missing"](#proudly-missing) and
+["Removed Upstream Features"](#removed-upstream-features) tables above.
+
 ## License And Attribution
 
-Vibe Reading is a modified fork of
-[Read Frog](https://github.com/mengxi-ream/read-frog). Thanks to the Read Frog
-authors and contributors for the original GPL-licensed work.
+This project is a modified fork of
+[Xuanwo/vibe-reading](https://github.com/Xuanwo/vibe-reading), which is itself a
+fork of [mengxi-ream/read-frog](https://github.com/mengxi-ream/read-frog).
+Thanks to the authors and contributors of both upstream projects for the
+original GPL-licensed work.
 
 This project is distributed under the GNU General Public License version 3. See
-[LICENSE](./LICENSE) for the full license text. As a modified version, Vibe
-Reading preserves the GPLv3 terms, keeps the source available under the same
-license, and marks the work as changed so issues in this fork are not attributed
-to the upstream project.
+[LICENSE](./LICENSE) for the full license text. As a modified version, this
+fork preserves the GPLv3 terms, keeps the source available under the same
+license, and marks the work as changed so issues in this fork are not
+attributed to the upstream projects.
