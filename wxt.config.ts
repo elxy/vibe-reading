@@ -43,8 +43,14 @@ export default defineConfig({
       },
       browser_specific_settings: {
         gecko: {
-          id: "{bd311a81-4530-4fcc-9178-74006155461b}",
+          id: "{0c4b8b7e-f644-4047-aa2e-e212a51129bd}",
           strict_min_version: "112.0",
+          // Firefox now requires extensions to declare what user data they
+          // collect. Vibe Reading has no backend and collects nothing.
+          // See: https://extensionworkshop.com/documentation/develop/data-collection/
+          data_collection_permissions: {
+            required: ["none"],
+          },
         },
       },
     }),
