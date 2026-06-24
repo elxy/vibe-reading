@@ -295,6 +295,22 @@ options:
       title: Hakkında
       description: Vibe Reading Nisan 2025'te doğdu
       mission: Vibe Reading, yapay zeka çağında yüksek kaliteli eğitime daha eşit erişimi genişletmek için, dil öğrenimi, tıp ve bilgi yoğun diğer alanlarda gerçek bir öğretmene daha yakın hissettiren öğrenme deneyimlerini daha ulaşılabilir maliyetlerle sunmayı hedefler.
+    importExport:
+      title: Yapılandırmayı İçe / Dışa Aktar
+      description: Tüm ayarları yedekleyin veya geri yükleyin. Çeviri önbelleği dahil değildir.
+      apiKeyWarning: Dışa aktarılan dosya, API anahtarlarınızı düz metin olarak içerir. Güvenli bir yerde saklayın.
+      exportButton: Dışa aktar
+      importButton: İçe aktar
+      exportSuccess: Yapılandırma dışa aktarıldı.
+      exportFailed: Yapılandırma dışa aktarılamadı.
+      importSuccess: Yapılandırma içe aktarıldı.
+      importFailed: Yapılandırma içe aktarılamadı.
+      importInvalidFile: Geçersiz yapılandırma dosyası. Bu uzantıdan dışa aktarıldığından emin olun.
+      dialog:
+        title: Mevcut yapılandırma değiştirilsin mi?
+        description: Bu işlem, tüm mevcut ayarlarınızı içe aktarılan yapılandırma ile değiştirir. Bu işlem geri alınamaz.
+        confirm: Değiştir
+        cancel: İptal
     resetConfig:
       title: Yapılandırmayı Sıfırla
       description: Tüm yapılandırmayı varsayılan değere sıfırla

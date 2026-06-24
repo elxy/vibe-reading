@@ -296,6 +296,22 @@ options:
       title: 关于
       description: Vibe Reading 出生于 2025 年 4 月
       mission: Vibe Reading 致力于在 AI 时代扩大高质量教育机会的平等可及性，通过更低成本地提供尽可能接近真人教师的学习体验，覆盖语言学习、医学以及其他知识密集型领域。
+    importExport:
+      title: 导入 / 导出配置
+      description: 备份或恢复全部设置。翻译缓存不包含在内。
+      apiKeyWarning: 导出文件包含明文 API Key，请妥善保管。
+      exportButton: 导出
+      importButton: 导入
+      exportSuccess: 配置已导出。
+      exportFailed: 导出配置失败。
+      importSuccess: 配置已导入。
+      importFailed: 导入配置失败。
+      importInvalidFile: 配置文件无效，请确认文件由本扩展导出。
+      dialog:
+        title: 替换当前配置？
+        description: 此操作将使用导入的配置完全替换当前的所有设置，且无法撤销。
+        confirm: 替换
+        cancel: 取消
     resetConfig:
       title: 恢复默认配置
       description: 将所有配置重置为默认

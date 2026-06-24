@@ -295,6 +295,22 @@ options:
       title: Giới thiệu
       description: Vibe Reading ra đời vào tháng 4 năm 2025
       mission: Vibe Reading hướng tới việc mở rộng cơ hội tiếp cận bình đẳng với giáo dục chất lượng cao trong thời đại AI bằng cách mang lại trải nghiệm học tập gần với cảm giác được giáo viên thật hướng dẫn, nhưng với chi phí hợp lý hơn trong học ngôn ngữ, y học và các lĩnh vực giàu tri thức khác.
+    importExport:
+      title: Nhập / Xuất cấu hình
+      description: Sao lưu hoặc khôi phục toàn bộ thiết lập. Bộ nhớ đệm dịch không được bao gồm.
+      apiKeyWarning: Tệp xuất ra chứa khóa API ở dạng văn bản thuần. Hãy lưu trữ ở nơi an toàn.
+      exportButton: Xuất
+      importButton: Nhập
+      exportSuccess: Đã xuất cấu hình.
+      exportFailed: Xuất cấu hình thất bại.
+      importSuccess: Đã nhập cấu hình.
+      importFailed: Nhập cấu hình thất bại.
+      importInvalidFile: Tệp cấu hình không hợp lệ. Hãy đảm bảo tệp được xuất từ tiện ích mở rộng này.
+      dialog:
+        title: Thay thế cấu hình hiện tại?
+        description: Thao tác này sẽ thay thế toàn bộ thiết lập hiện tại bằng cấu hình đã nhập. Hành động này không thể hoàn tác.
+        confirm: Thay thế
+        cancel: Hủy
     resetConfig:
       title: Đặt lại cấu hình
       description: Đặt lại tất cả cấu hình về giá trị mặc định

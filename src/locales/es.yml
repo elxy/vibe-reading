@@ -296,6 +296,22 @@ options:
       title: Acerca de
       description: Vibe Reading nació en abril de 2025
       mission: Vibe Reading busca ampliar el acceso igualitario a educación de alta calidad en la era de la AI haciendo asequibles experiencias de aprendizaje que se sientan más cercanas a un profesor real, en el aprendizaje de idiomas, medicina y otros campos intensivos en conocimiento.
+    importExport:
+      title: Importar / Exportar configuración
+      description: Haz una copia de seguridad o restaura todos los ajustes. La caché de traducción no se incluye.
+      apiKeyWarning: El archivo exportado contiene tus claves de API en texto plano. Guárdalo en un lugar seguro.
+      exportButton: Exportar
+      importButton: Importar
+      exportSuccess: Configuración exportada.
+      exportFailed: No se pudo exportar la configuración.
+      importSuccess: Configuración importada.
+      importFailed: No se pudo importar la configuración.
+      importInvalidFile: Archivo de configuración no válido. Asegúrate de que se exportó desde esta extensión.
+      dialog:
+        title: ¿Reemplazar la configuración actual?
+        description: Esto reemplazará todos los ajustes actuales con la configuración importada. Esta acción no se puede deshacer.
+        confirm: Reemplazar
+        cancel: Cancelar
     resetConfig:
       title: Restablecer configuración
       description: Restablecer toda la configuración al valor predeterminado

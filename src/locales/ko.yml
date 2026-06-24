@@ -295,6 +295,22 @@ options:
       title: 소개
       description: Vibe Reading는 2025년 4월에 태어났습니다
       mission: Vibe Reading는 언어 학습, 의학 등 지식 집약적 분야에서 AI 시대의 고품질 교육 기회에 더 평등하게 접근할 수 있도록, 실제 교사에 가까운 학습 경험을 더 낮은 비용으로 제공하는 것을 목표로 합니다.
+    importExport:
+      title: 설정 가져오기 / 내보내기
+      description: 모든 설정을 백업하거나 복원합니다. 번역 캐시는 포함되지 않습니다.
+      apiKeyWarning: 내보낸 파일에는 API 키가 평문으로 포함됩니다. 안전한 곳에 보관하세요.
+      exportButton: 내보내기
+      importButton: 가져오기
+      exportSuccess: 설정을 내보냈습니다.
+      exportFailed: 설정 내보내기에 실패했습니다.
+      importSuccess: 설정을 가져왔습니다.
+      importFailed: 설정 가져오기에 실패했습니다.
+      importInvalidFile: 잘못된 설정 파일입니다. 이 확장 프로그램에서 내보낸 파일인지 확인하세요.
+      dialog:
+        title: 현재 설정을 교체하시겠습니까?
+        description: 이 작업은 현재 모든 설정을 가져온 설정으로 교체합니다. 되돌릴 수 없습니다.
+        confirm: 교체
+        cancel: 취소
     resetConfig:
       title: 기본 설정 복원
       description: 모든 설정을 기본값으로 재설정
