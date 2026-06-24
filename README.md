@@ -80,9 +80,13 @@ published to extension stores as **"Vibe Reading (fork)"**.
 
 ### Relative to `Xuanwo/vibe-reading`
 
-_No functional changes yet. This fork currently only contains packaging and
-submission preparation (rebranding for store disambiguation, Firefox manifest
-fields required by current AMO policy, build and privacy documentation)._
+- **Restored configuration import/export.** Back up or restore all settings
+  (excluding the translation cache) as a versioned JSON file from the
+  `/config` page. Upstream removed config backup intentionally; this fork
+  re-adds a minimal local-only variant for migration between devices.
+- **Packaging and submission preparation.** Rebranding for store
+  disambiguation, Firefox manifest fields required by current AMO policy,
+  build and privacy documentation.
 
 ### Relative to `mengxi-ream/read-frog`
 
