@@ -1,6 +1,6 @@
 name: Vibe Reading
-extName: Vibe Reading - 번역하고 배우기
-extDescription: Vibe Reading는 모든 웹사이트에서 언어를 깊이 있게 학습할 수 있도록 도와주는 오픈 소스 브라우저 확장 프로그램입니다.
+extName: Vibe Reading - 웹 페이지 번역
+extDescription: Vibe Reading는 사용자가 직접 설정한 AI 또는 번역 제공업체를 사용하여 웹 페이지를 읽고 번역하기 위한 오픈 소스 브라우저 확장 프로그램입니다.
 dataTypes:
   string: 텍스트
   number: 숫자

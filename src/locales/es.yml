@@ -1,6 +1,6 @@
 name: Vibe Reading
-extName: Vibe Reading - Traduce y aprende
-extDescription: Vibe Reading es una extensión de navegador de código abierto diseñada para ayudarte a aprender idiomas en profundidad desde cualquier sitio web.
+extName: Vibe Reading - Traducción de páginas web
+extDescription: Vibe Reading es una extensión de navegador de código abierto para leer y traducir páginas web con tus propios proveedores de IA o traducción.
 dataTypes:
   string: Texto
   number: Número

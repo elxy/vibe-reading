@@ -1,6 +1,6 @@
 name: Vibe Reading
-extName: Vibe Reading - Dịch và học
-extDescription: Vibe Reading là tiện ích mở rộng trình duyệt mã nguồn mở được thiết kế để giúp bạn học ngôn ngữ sâu từ bất kỳ trang web nào.
+extName: Vibe Reading - Dịch trang web
+extDescription: Vibe Reading là tiện ích mở rộng trình duyệt mã nguồn mở để đọc và dịch trang web với các nhà cung cấp AI hoặc dịch thuật của riêng bạn.
 dataTypes:
   string: Văn bản
   number: Số

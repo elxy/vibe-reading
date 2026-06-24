@@ -1,6 +1,6 @@
-name: 陪讀蛙
-extName: 陪讀蛙 - 翻譯與學習
-extDescription: 陪讀蛙是一款開放原始碼的瀏覽器擴充功能，幫助你在任何網站上深入學習語言。
+name: Vibe Reading
+extName: Vibe Reading - 網頁翻譯閱讀
+extDescription: Vibe Reading 是一款開源瀏覽器擴充功能，使用你自己配置的 AI 或翻譯服務商，專注於網頁閱讀和翻譯。
 dataTypes:
   string: 文字
   number: 數字
