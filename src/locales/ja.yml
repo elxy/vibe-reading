@@ -1,6 +1,6 @@
 name: Vibe Reading
 extName: Vibe Reading (fork) - ウェブページ翻訳
-extDescription: Vibe Reading は、ご自身で設定した AI または翻訳プロバイダーを使ってウェブページを読み、翻訳するためのオープンソースのブラウザ拡張機能です。
+extDescription: Vibe Reading は、ご自身で設定した AI または翻訳プロバイダーを使ってウェブページを読み、翻訳するためのオープンソースのブラウザ拡張機能です。Xuanwo/vibe-reading と mengxi-ream/read-frog から fork されています。
 dataTypes:
   string: テキスト
   number: 数値

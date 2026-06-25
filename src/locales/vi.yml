@@ -1,6 +1,6 @@
 name: Vibe Reading
 extName: Vibe Reading (fork) - Dịch trang web
-extDescription: Vibe Reading là tiện ích mở rộng trình duyệt mã nguồn mở để đọc và dịch trang web với các nhà cung cấp AI hoặc dịch thuật của riêng bạn.
+extDescription: Vibe Reading là tiện ích mở rộng trình duyệt mã nguồn mở để đọc và dịch trang web với các nhà cung cấp AI hoặc dịch thuật của riêng bạn. Fork từ Xuanwo/vibe-reading và mengxi-ream/read-frog.
 dataTypes:
   string: Văn bản
   number: Số

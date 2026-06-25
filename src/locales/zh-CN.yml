@@ -1,6 +1,6 @@
 name: Vibe Reading
 extName: Vibe Reading (fork) - 网页翻译阅读
-extDescription: Vibe Reading 是一款开源浏览器扩展，使用你自己配置的 AI 或翻译服务商，专注于网页阅读和翻译。
+extDescription: Vibe Reading 是一款开源浏览器扩展，使用你自己配置的 AI 或翻译服务商，专注于网页阅读和翻译。Fork 自 Xuanwo/vibe-reading 和 mengxi-ream/read-frog。
 dataTypes:
   string: 文本
   number: 数字

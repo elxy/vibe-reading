@@ -1,6 +1,6 @@
 name: Vibe Reading
 extName: Vibe Reading (fork) - Web Sayfası Çevirisi
-extDescription: Vibe Reading, kendi AI veya çeviri sağlayıcılarınızla web sayfalarını okumak ve çevirmek için açık kaynaklı bir tarayıcı uzantısıdır.
+extDescription: Vibe Reading, kendi AI veya çeviri sağlayıcılarınızla web sayfalarını okumak ve çevirmek için açık kaynaklı bir tarayıcı uzantısıdır. Xuanwo/vibe-reading ve mengxi-ream/read-frog projelerinden fork edilmiştir.
 dataTypes:
   string: Metin
   number: Sayı
