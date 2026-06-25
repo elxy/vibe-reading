@@ -27,6 +27,10 @@ popup:
         action: Nhấp để chuyển sang song ngữ
   aiSmartContext: Ngữ cảnh thông minh AI
   aiSmartContextDescription: Sử dụng ngữ cảnh trang web để cải thiện chất lượng dịch. Yêu cầu nhà cung cấp dịch LLM.
+content:
+  floatingTranslateButton:
+    translate: Dịch trang
+    showOriginal: Hiển thị bản gốc
 errorRecovery:
   title: Đã xảy ra sự cố
   description: Recovery mode is active. Refresh the page or reset settings and try again.
@@ -259,6 +263,11 @@ options:
     pageTranslationShortcut:
       title: Phím tắt dịch trang
       description: Tùy chỉnh phím tắt để dịch toàn bộ trang web
+    floatingTranslateButton:
+      title: Nút dịch nổi
+      description: Hiển thị một nút nổi trên trang web để bật/tắt dịch trang.
+      enable: Hiển thị nút dịch nổi
+      enableDescription: Mặc định bật trên thiết bị di động và tắt trên máy tính. Nhấp vào nút để dịch trang; nhấp lại để hiển thị bản gốc.
     preloadConfig:
       title: Phạm vi dịch trước
       description: Kiểm soát lượng nội dung bên dưới vùng nhìn được dịch trước để tiết kiệm chi phí API

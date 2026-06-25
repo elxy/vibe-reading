@@ -6,6 +6,7 @@ import { ensurePresetStyles } from "@/utils/host/translate/ui/style-injector"
 import { logger } from "@/utils/logger"
 import { onMessage, sendMessage } from "@/utils/message"
 import { areSamePageTranslationOrigin } from "@/utils/url"
+import { mountFloatingTranslateButton } from "./floating-translate-button"
 import { setupUrlChangeListener } from "./listen"
 import { mountHostToast } from "./mount-host-toast"
 import { bindTranslationShortcutKey } from "./translation-control/bind-translation-shortcut"
@@ -31,6 +32,14 @@ export async function bootstrapHostContent(ctx: ContentScriptContext, initialCon
   const cleanupPageTranslationTriggers = manager.registerPageTranslationTriggers()
 
   const cleanupTranslationShortcut = await bindTranslationShortcutKey(manager)
+
+  const removeFloatingTranslateButton = mountFloatingTranslateButton({
+    initialConfig,
+    isActive: () => manager.isActive,
+    toggle: () => {
+      manager.isActive ? manager.stop() : void manager.start()
+    },
+  })
 
   const detectAndReportPageLanguage = async (url: string) => {
     const { detectedCodeOrUnd } = await detectPageLanguageLightweight()
@@ -99,6 +108,7 @@ export async function bootstrapHostContent(ctx: ContentScriptContext, initialCon
 
   ctx.onInvalidated(() => {
     removeHostToast()
+    removeFloatingTranslateButton()
     cleanupUrlListener()
     teardownNodeTranslation()
     cleanupPageTranslationTriggers()

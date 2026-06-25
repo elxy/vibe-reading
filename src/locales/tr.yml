@@ -27,6 +27,10 @@ popup:
         action: İki dilli moda geçmek için tıklayın
   aiSmartContext: AI Akıllı Bağlam
   aiSmartContextDescription: Çeviri kalitesini artırmak için web sayfası bağlamını kullanır. LLM çeviri sağlayıcısı gerektirir.
+content:
+  floatingTranslateButton:
+    translate: Sayfayı çevir
+    showOriginal: Orijinali göster
 errorRecovery:
   title: Bir sorun oluştu
   description: Recovery mode is active. Refresh the page or reset settings and try again.
@@ -259,6 +263,11 @@ options:
     pageTranslationShortcut:
       title: Sayfa Çeviri Kısayolu
       description: Tüm web sayfalarını çevirmek için kısayol tuşunu özelleştirin
+    floatingTranslateButton:
+      title: Yüzen çeviri düğmesi
+      description: Sayfa çevirisini açıp kapatmak için web sayfalarında yüzen bir düğme gösterir.
+      enable: Yüzen çeviri düğmesini göster
+      enableDescription: Mobilde varsayılan olarak açık, masaüstünde varsayılan olarak kapalıdır. Sayfayı çevirmek için düğmeye tıklayın; orijinali göstermek için tekrar tıklayın.
     preloadConfig:
       title: Ön Çeviri Aralığı
       description: API maliyetlerinden tasarruf etmek için görünüm alanının altındaki ne kadar içeriğin önceden çevrileceğini kontrol edin

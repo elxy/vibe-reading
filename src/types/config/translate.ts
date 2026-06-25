@@ -96,6 +96,7 @@ export const translateConfigSchema = z.object({
     preload: preloadConfigSchema,
     minCharactersPerNode: z.number().min(MIN_CHARACTERS_PER_NODE),
     minWordsPerNode: z.number().min(MIN_WORDS_PER_NODE),
+    floatingButtonEnabled: z.boolean().nullable().default(null),
   }),
   enableAIContentAware: z.boolean(),
   customPromptsConfig: customPromptsConfigSchema,

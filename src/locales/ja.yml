@@ -27,6 +27,10 @@ popup:
         action: クリックしてバイリンガルへ切り替え
   aiSmartContext: AI スマートコンテキスト
   aiSmartContextDescription: ウェブページのコンテキストを使用して翻訳品質を向上させます。LLM翻訳プロバイダーが必要です。
+content:
+  floatingTranslateButton:
+    translate: ページを翻訳
+    showOriginal: 原文を表示
 errorRecovery:
   title: 問題が発生しました
   description: Recovery mode is active. Refresh the page or reset settings and try again.
@@ -259,6 +263,11 @@ options:
     pageTranslationShortcut:
       title: ページ翻訳ショートカットキー
       description: ウェブページ全体を翻訳するショートカットキーをカスタマイズします
+    floatingTranslateButton:
+      title: フローティング翻訳ボタン
+      description: ウェブページ上にフローティングボタンを表示し、ページ翻訳を切り替えます。
+      enable: フローティング翻訳ボタンを表示
+      enableDescription: モバイルでは既定でオン、デスクトップでは既定でオフです。ボタンをクリックするとページを翻訳し、もう一度クリックすると原文を表示します。
     preloadConfig:
       title: 事前翻訳範囲
       description: ビューポート下のコンテンツをどれだけ事前翻訳するかを制御し、API コストを節約します

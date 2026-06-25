@@ -27,6 +27,10 @@ popup:
         action: 點擊切換為雙語對照
   aiSmartContext: AI 智慧上下文
   aiSmartContextDescription: 結合網頁上下文提升翻譯效果。需要設定 LLM 翻譯服務提供者。
+content:
+  floatingTranslateButton:
+    translate: 翻譯網頁
+    showOriginal: 顯示原文
 errorRecovery:
   title: 應用程式發生異常
   description: Recovery mode is active. Refresh the page or reset settings and try again.
@@ -259,6 +263,11 @@ options:
     pageTranslationShortcut:
       title: 網頁翻譯快速鍵
       description: 自訂翻譯整個網頁的快速鍵
+    floatingTranslateButton:
+      title: 浮動翻譯按鈕
+      description: 在網頁中顯示浮動按鈕，用於切換網頁翻譯。
+      enable: 顯示浮動翻譯按鈕
+      enableDescription: 行動裝置預設開啟，桌面端預設關閉。點擊按鈕翻譯網頁，再次點擊顯示原文。
     preloadConfig:
       title: 預翻譯範圍
       description: 控制視窗下方多少內容會被預先翻譯，以節省 API 費用

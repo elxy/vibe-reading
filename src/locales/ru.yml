@@ -27,6 +27,10 @@ popup:
         action: Нажмите, чтобы переключиться на двуязычный
   aiSmartContext: Умный контекст ИИ
   aiSmartContextDescription: Использует контекст веб-страницы для улучшения качества перевода. Требуется LLM-провайдер перевода.
+content:
+  floatingTranslateButton:
+    translate: Перевести страницу
+    showOriginal: Показать оригинал
 errorRecovery:
   title: Что-то пошло не так
   description: Recovery mode is active. Refresh the page or reset settings and try again.
@@ -259,6 +263,11 @@ options:
     pageTranslationShortcut:
       title: Горячая клавиша перевода страницы
       description: Настройте горячую клавишу для перевода всей веб-страницы
+    floatingTranslateButton:
+      title: Плавающая кнопка перевода
+      description: Показывать на веб-страницах плавающую кнопку для переключения перевода страницы.
+      enable: Показывать плавающую кнопку перевода
+      enableDescription: По умолчанию включено на мобильных устройствах и выключено на компьютере. Нажмите кнопку, чтобы перевести страницу; нажмите ещё раз, чтобы показать оригинал.
     preloadConfig:
       title: Диапазон предварительного перевода
       description: Управляйте количеством контента ниже области просмотра, который будет предварительно переведён для экономии затрат на API

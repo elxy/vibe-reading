@@ -85,6 +85,12 @@ export class PageTranslationManager implements IPageTranslationManager {
     return this.isPageTranslating
   }
 
+  private dispatchTranslationStateChanged(): void {
+    window.dispatchEvent(new CustomEvent("vibe-reading:page-translation-state-changed", {
+      detail: { active: this.isPageTranslating },
+    }))
+  }
+
   async start(): Promise<void> {
     if (this.isPageTranslating) {
       console.warn("PageTranslationManager is already active")
@@ -113,6 +119,7 @@ export class PageTranslationManager implements IPageTranslationManager {
     })
 
     this.isPageTranslating = true
+    this.dispatchTranslationStateChanged()
     await this.primeDocumentTitleContext(
       config.translate.enableAIContentAware && isLLMProviderConfig(providerConfig),
     )
@@ -175,6 +182,7 @@ export class PageTranslationManager implements IPageTranslationManager {
     }
 
     this.isPageTranslating = false
+    this.dispatchTranslationStateChanged()
     this.walkId = null
     this.walkBlockedElementsCache = new WeakSet()
     this.stopDocumentTitleTracking()

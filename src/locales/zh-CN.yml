@@ -27,6 +27,10 @@ popup:
         action: 点击切换为双语对照
   aiSmartContext: AI 智能上下文
   aiSmartContextDescription: 结合网页上下文提升翻译效果。需要配置 LLM 翻译服务商。
+content:
+  floatingTranslateButton:
+    translate: 翻译网页
+    showOriginal: 显示原文
 errorRecovery:
   title: 应用发生异常
   description: Recovery mode is active. Refresh the page or reset settings and try again.
@@ -260,6 +264,11 @@ options:
     pageTranslationShortcut:
       title: 网页翻译快捷键
       description: 自定义翻译整个网页的快捷键
+    floatingTranslateButton:
+      title: 浮动翻译按钮
+      description: 在网页中显示浮动按钮，用于切换网页翻译。
+      enable: 显示浮动翻译按钮
+      enableDescription: 移动端默认开启，桌面端默认关闭。点击按钮翻译网页，再次点击显示原文。
     preloadConfig:
       title: 预翻译范围
       description: 控制视口下方多少内容会被预先翻译，以节省 API 费用

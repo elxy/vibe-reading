@@ -3,6 +3,7 @@ import { PageLayout } from "../../components/page-layout"
 import { AIContentAware } from "./ai-content-aware"
 import { ClearCacheConfig } from "./clear-cache-config"
 import { CustomTranslationStyle } from "./custom-translation-style"
+import { FloatingTranslateButton } from "./floating-translate-button"
 import { PageTranslationShortcut } from "./page-translation-shortcut"
 import { PersonalizedPrompts } from "./personalized-prompt"
 import { PreloadConfig } from "./preload-config"
@@ -18,6 +19,7 @@ export function TranslationPage() {
       <TranslationMode />
       <TranslateRange />
       <PageTranslationShortcut />
+      <FloatingTranslateButton />
       <CustomTranslationStyle />
       <AIContentAware />
       <PersonalizedPrompts />

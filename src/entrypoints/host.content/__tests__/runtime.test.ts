@@ -9,6 +9,7 @@ const {
   managerInstances,
   mockBindTranslationShortcutKey,
   mockDetectPageLanguageLightweight,
+  mockMountFloatingTranslateButton,
   mockEnsurePresetStyles,
   mockMountHostToast,
   mockOnMessage,
@@ -26,6 +27,7 @@ const {
   }>,
   mockBindTranslationShortcutKey: vi.fn(),
   mockDetectPageLanguageLightweight: vi.fn(),
+  mockMountFloatingTranslateButton: vi.fn(),
   mockEnsurePresetStyles: vi.fn(),
   mockMountHostToast: vi.fn(),
   mockOnMessage: vi.fn(),
@@ -53,6 +55,10 @@ vi.mock("@/utils/logger", () => ({
 vi.mock("@/utils/message", () => ({
   onMessage: mockOnMessage,
   sendMessage: mockSendMessage,
+}))
+
+vi.mock("../floating-translate-button", () => ({
+  mountFloatingTranslateButton: mockMountFloatingTranslateButton,
 }))
 
 vi.mock("../listen", () => ({
@@ -125,6 +131,7 @@ describe("bootstrapHostContent URL changes", () => {
 
     mockSetupUrlChangeListener.mockReturnValue(vi.fn())
     mockMountHostToast.mockReturnValue(vi.fn())
+    mockMountFloatingTranslateButton.mockReturnValue(vi.fn())
     mockRegisterNodeTranslationTriggers.mockReturnValue(vi.fn())
     mockBindTranslationShortcutKey.mockResolvedValue(vi.fn())
     mockOnMessage.mockImplementation((name: string, handler: (msg?: any) => any) => {

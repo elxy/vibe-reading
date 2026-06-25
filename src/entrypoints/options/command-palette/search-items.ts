@@ -60,6 +60,13 @@ export const SEARCH_ITEMS: SearchItem[] = [
     pageKey: "options.translation.title",
   },
   {
+    sectionId: "floating-translate-button",
+    route: "/translation",
+    titleKey: "options.translation.floatingTranslateButton.title",
+    descriptionKey: "options.translation.floatingTranslateButton.description",
+    pageKey: "options.translation.title",
+  },
+  {
     sectionId: "custom-translation-style",
     route: "/translation",
     titleKey: "options.translation.translationStyle.title",

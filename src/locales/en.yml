@@ -27,6 +27,10 @@ popup:
         action: Click to switch to bilingual
   aiSmartContext: AI Smart Context
   aiSmartContextDescription: Uses webpage context to improve translation quality. Requires LLM translation provider.
+content:
+  floatingTranslateButton:
+    translate: Translate page
+    showOriginal: Show original
 errorRecovery:
   title: Something went wrong
   description: Recovery mode is active. Refresh the page or reset settings and try again.
@@ -260,6 +264,11 @@ options:
     pageTranslationShortcut:
       title: Page Translation Shortcut
       description: Customize the shortcut key for translating entire web pages
+    floatingTranslateButton:
+      title: Floating Translate Button
+      description: Show a floating button on webpages to toggle page translation.
+      enable: Show floating translate button
+      enableDescription: Defaults to on on mobile and off on desktop. Click the button to translate the page; click again to show the original.
     preloadConfig:
       title: Pre-translate Range
       description: Control how much content below the viewport gets pre-translated to save API costs
