@@ -261,6 +261,14 @@ options:
       range:
         main: 主要内容
         all: 全部内容
+        smart: 智能内容
+    smartContentRules:
+      title: 智能内容规则
+      description: 为智能内容页面翻译配置选择器规则。
+      customRules: 自定义规则
+      help: "语法：[!]<域名> <CSS 选择器>。前缀 ! 表示跳过翻译，省略则强制翻译。域名格式：example.com（根域 + 子域）、=example.com（精确匹配）、*.example.com（仅子域）、*（任意域名）。"
+      line: 第
+      debug: 智能内容检测调试
     pageTranslationShortcut:
       title: 网页翻译快捷键
       description: 自定义翻译整个网页的快捷键

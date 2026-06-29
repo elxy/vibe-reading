@@ -260,6 +260,14 @@ options:
       range:
         main: 주요 내용
         all: 전체 내용
+        smart: Smart Content
+    smartContentRules:
+      title: Smart Content Rules
+      description: Configure selector rules for Smart Content page translation.
+      customRules: Custom Rules
+      help: "Syntax: [!]<domain> <css-selector>. Prefix ! to skip translation, omit to force translate. Domain forms: example.com (root + subdomains), =example.com (exact), *.example.com (subdomains only), * (any host)."
+      line: Line
+      debug: Debug smart content detection
     pageTranslationShortcut:
       title: 페이지 번역 단축키
       description: 전체 웹페이지를 번역하는 단축키를 사용자 지정합니다

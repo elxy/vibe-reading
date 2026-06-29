@@ -260,6 +260,14 @@ options:
       range:
         main: Ana İçerik
         all: Tüm İçerik
+        smart: Smart Content
+    smartContentRules:
+      title: Smart Content Rules
+      description: Configure selector rules for Smart Content page translation.
+      customRules: Custom Rules
+      help: "Syntax: [!]<domain> <css-selector>. Prefix ! to skip translation, omit to force translate. Domain forms: example.com (root + subdomains), =example.com (exact), *.example.com (subdomains only), * (any host)."
+      line: Line
+      debug: Debug smart content detection
     pageTranslationShortcut:
       title: Sayfa Çeviri Kısayolu
       description: Tüm web sayfalarını çevirmek için kısayol tuşunu özelleştirin

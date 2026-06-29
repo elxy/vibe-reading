@@ -1,16 +1,19 @@
 import type { Config } from "@/types/config/config"
-import { isLLMProviderConfig } from "@/types/config/provider"
+import type { SmartContentConfidence, SmartContentDetectionSource } from "@/utils/host/translate/smart/content-detector"
+import type { SmartParagraphDecision } from "@/utils/host/translate/smart/paragraph-filter"
+import type { ParsedSmartRule, SmartRuleParseError } from "@/utils/host/translate/smart/user-rules"
 import { getLocalConfig } from "@/utils/config/storage"
 import { CONTENT_WRAPPER_CLASS } from "@/utils/constants/dom-labels"
-import { resolveProviderConfig } from "@/utils/constants/feature-providers"
+import { SMART_CONTENT_DETECTION_TIMEOUT_MS, SMART_DEFAULT_MIN_CHARACTERS_PER_NODE, SMART_DEFAULT_MIN_WORDS_PER_NODE } from "@/utils/constants/translate"
 import { getRandomUUID } from "@/utils/crypto-polyfill"
 import { hasNoWalkAncestor, isDontWalkIntoAndDontTranslateAsChildElement, isDontWalkIntoButTranslateAsChildElement, isHTMLElement } from "@/utils/host/dom/filter"
 import { deepQueryTopLevelSelector } from "@/utils/host/dom/find"
 import { walkAndLabelElement } from "@/utils/host/dom/traversal"
 import { removeAllTranslatedWrapperNodes, translateWalkedElement } from "@/utils/host/translate/node-manipulation"
+import { detectSmartContentRoot } from "@/utils/host/translate/smart/content-detector"
+import { shouldTranslateSmartParagraph } from "@/utils/host/translate/smart/paragraph-filter"
+import { matchSmartRulesForElement, parseSmartRules } from "@/utils/host/translate/smart/user-rules"
 import { validateTranslationConfigAndToast } from "@/utils/host/translate/translate-text"
-import { translateTextForPageTitle } from "@/utils/host/translate/translate-variants"
-import { getOrCreateWebPageContext } from "@/utils/host/translate/webpage-context"
 import { logger } from "@/utils/logger"
 import { sendMessage } from "@/utils/message"
 
@@ -48,6 +51,15 @@ interface IPageTranslationManager {
   registerPageTranslationTriggers: () => () => void
 }
 
+interface SmartPageContext {
+  root: HTMLElement
+  source: SmartContentDetectionSource
+  confidence: SmartContentConfidence
+  parsedRules: ParsedSmartRule[]
+  ruleErrors: SmartRuleParseError[]
+  debug: boolean
+}
+
 export class PageTranslationManager implements IPageTranslationManager {
   private static readonly MAX_DURATION = 500
   private static readonly MOVE_THRESHOLD = 30 * 30
@@ -63,10 +75,9 @@ export class PageTranslationManager implements IPageTranslationManager {
   private walkId: string | null = null
   private intersectionOptions: IntersectionObserverInit
   private walkBlockedElementsCache = new WeakSet<HTMLElement>()
-  private titleObserver: MutationObserver | null = null
-  private lastSourceTitle: string | null = null
-  private lastAppliedTranslatedTitle: string | null = null
-  private titleRequestVersion = 0
+  private smartContext: SmartPageContext | null = null
+  private parsedSmartRules: ParsedSmartRule[] = []
+  private smartRuleErrors: SmartRuleParseError[] = []
 
   constructor(intersectionOptions: SimpleIntersectionOptions = {}) {
     if (intersectionOptions.threshold !== undefined) {
@@ -111,8 +122,6 @@ export class PageTranslationManager implements IPageTranslationManager {
       return
     }
 
-    const providerConfig = resolveProviderConfig(config, "translate")
-
     await sendMessage("setAndNotifyPageTranslationStateChangedByManager", {
       enabled: true,
       url: window.location.href,
@@ -120,10 +129,58 @@ export class PageTranslationManager implements IPageTranslationManager {
 
     this.isPageTranslating = true
     this.dispatchTranslationStateChanged()
-    await this.primeDocumentTitleContext(
-      config.translate.enableAIContentAware && isLLMProviderConfig(providerConfig),
-    )
-    this.startDocumentTitleTracking()
+
+    // Parse user rules (applies to all page translation ranges)
+    const parsedRules = parseSmartRules(config.translate.page.smart.customRules)
+    this.parsedSmartRules = parsedRules.rules
+    this.smartRuleErrors = parsedRules.errors
+
+    // Smart mode: detect content root
+    if (config.translate.page.range === "smart") {
+      const debugEnabled = config.translate.page.smart.debug
+      try {
+        const detectionResult = await detectSmartContentRoot(document, {
+          hostname: window.location.hostname,
+          timeoutMs: SMART_CONTENT_DETECTION_TIMEOUT_MS,
+          debug: debugEnabled,
+        })
+
+        this.smartContext = {
+          root: detectionResult.root,
+          source: detectionResult.source,
+          confidence: detectionResult.confidence,
+          parsedRules: parsedRules.rules,
+          ruleErrors: parsedRules.errors,
+          debug: debugEnabled,
+        }
+
+        if (debugEnabled) {
+          logger.info(`[smart] detection: source=${detectionResult.source}, confidence=${detectionResult.confidence}, root=${detectionResult.root.tagName}`)
+          if (detectionResult.debug.candidates.length > 0) {
+            logger.info("[smart] candidate scores:", detectionResult.debug.candidates)
+          }
+          if (detectionResult.debug.fallbackReason) {
+            logger.info(`[smart] fallback reason: ${detectionResult.debug.fallbackReason}`)
+          }
+        }
+      }
+      catch (error) {
+        this.smartContext = null
+        if (debugEnabled) {
+          logger.info("[smart] detection failed, falling back to main behavior:", error)
+        }
+      }
+    }
+    else {
+      this.smartContext = null
+    }
+
+    // Log user rule errors when debug is enabled
+    if (config.translate.page.smart.debug && parsedRules.errors.length > 0) {
+      for (const err of parsedRules.errors) {
+        logger.info(`[smart] rule parse error at line ${err.line}: ${err.message}`)
+      }
+    }
 
     // Listen to existing elements when they enter the viewport
     const walkId = getRandomUUID()
@@ -147,10 +204,12 @@ export class PageTranslationManager implements IPageTranslationManager {
     }, this.intersectionOptions)
 
     // Initialize walkability state for existing elements
-    this.addWalkBlockedElements(document.body, config)
-    await this.observeTopLevelParagraphs(document.body, config)
+    const startContainer = this.smartContext?.root ?? document.body
+    this.addWalkBlockedElements(startContainer, config)
+    await this.observeTopLevelParagraphs(startContainer, config)
 
-    // Start observing mutations from document.body and all shadow roots
+    // Always observe mutations from document.body so that external additions
+    // can be detected for user-include handling in smart mode
     this.observeMutations(document.body)
   }
 
@@ -185,7 +244,9 @@ export class PageTranslationManager implements IPageTranslationManager {
     this.dispatchTranslationStateChanged()
     this.walkId = null
     this.walkBlockedElementsCache = new WeakSet()
-    this.stopDocumentTitleTracking()
+    this.smartContext = null
+    this.parsedSmartRules = []
+    this.smartRuleErrors = []
 
     if (this.intersectionObserver) {
       this.intersectionObserver.disconnect()
@@ -255,127 +316,47 @@ export class PageTranslationManager implements IPageTranslationManager {
     }
   }
 
-  private shouldManageDocumentTitle(): boolean {
-    return window === window.top
-  }
+  /**
+   * Determine whether a candidate element should be observed for translation.
+   * Applies user rules and (in smart mode) smart paragraph filtering.
+   */
+  private shouldObserveCandidate(el: HTMLElement, config: Config): boolean {
+    const hostname = window.location.hostname
 
-  private async primeDocumentTitleContext(shouldPrimeWebPageContext: boolean): Promise<void> {
-    if (!this.shouldManageDocumentTitle() || !shouldPrimeWebPageContext) {
-      return
+    // Apply user rules
+    const userDecision = matchSmartRulesForElement(el, hostname, this.parsedSmartRules)
+
+    if (userDecision.action === "exclude") {
+      if (this.smartContext?.debug) {
+        logger.info(`[smart] user exclude rule matched: ${el.tagName}`)
+      }
+      return false
     }
 
-    try {
-      await getOrCreateWebPageContext()
-    }
-    catch (error) {
-      logger.warn("Failed to prime webpage context before translating document title:", error)
-    }
-  }
-
-  private startDocumentTitleTracking(): void {
-    if (!this.shouldManageDocumentTitle()) {
-      return
+    if (userDecision.action === "include") {
+      return true
     }
 
-    this.lastSourceTitle = document.title || ""
-    this.lastAppliedTranslatedTitle = null
-    this.titleRequestVersion = 0
+    // Smart mode: apply paragraph filter
+    if (this.smartContext) {
+      const minChars = config.translate.page.minCharactersPerNode || SMART_DEFAULT_MIN_CHARACTERS_PER_NODE
+      const minWords = config.translate.page.minWordsPerNode || SMART_DEFAULT_MIN_WORDS_PER_NODE
 
-    this.observeDocumentTitle()
-    void this.syncDocumentTitle(this.lastSourceTitle)
-  }
+      const decision: SmartParagraphDecision = shouldTranslateSmartParagraph(el, {
+        hostname,
+        minCharacters: minChars,
+        minWords,
+      })
 
-  private stopDocumentTitleTracking(): void {
-    if (!this.shouldManageDocumentTitle()) {
-      return
-    }
-
-    const currentTitle = document.title || ""
-    if (currentTitle !== this.lastAppliedTranslatedTitle) {
-      this.lastSourceTitle = currentTitle
-    }
-
-    if (this.titleObserver) {
-      this.titleObserver.disconnect()
-      this.titleObserver = null
-    }
-
-    this.titleRequestVersion++
-
-    if (this.lastSourceTitle !== null && document.title !== this.lastSourceTitle) {
-      document.title = this.lastSourceTitle
-    }
-
-    this.lastSourceTitle = null
-    this.lastAppliedTranslatedTitle = null
-  }
-
-  private observeDocumentTitle(): void {
-    if (!document.head) {
-      return
-    }
-
-    if (this.titleObserver) {
-      this.titleObserver.disconnect()
-    }
-
-    this.titleObserver = new MutationObserver(() => {
-      this.handleDocumentTitleMutation()
-    })
-
-    this.titleObserver.observe(document.head, {
-      childList: true,
-      subtree: true,
-      characterData: true,
-    })
-  }
-
-  private handleDocumentTitleMutation(): void {
-    if (!this.isPageTranslating || !this.shouldManageDocumentTitle()) {
-      return
-    }
-
-    const currentTitle = document.title || ""
-
-    if (currentTitle === this.lastSourceTitle) {
-      return
-    }
-
-    if (currentTitle === this.lastAppliedTranslatedTitle) {
-      return
-    }
-
-    this.lastSourceTitle = currentTitle
-    void this.syncDocumentTitle(currentTitle)
-  }
-
-  private async syncDocumentTitle(sourceTitle: string): Promise<void> {
-    if (!sourceTitle.trim() || !this.isPageTranslating || !this.shouldManageDocumentTitle()) {
-      return
-    }
-
-    const requestVersion = ++this.titleRequestVersion
-
-    try {
-      const translatedTitle = await translateTextForPageTitle(sourceTitle)
-      if (!this.isPageTranslating || requestVersion !== this.titleRequestVersion) {
-        return
+      if (!decision.shouldTranslate && this.smartContext.debug) {
+        logger.info(`[smart] filtered out: ${decision.reason}`, el.tagName)
       }
 
-      const nextTitle = translatedTitle || sourceTitle
-      this.lastAppliedTranslatedTitle = nextTitle
-
-      if (document.title === nextTitle) {
-        return
-      }
-
-      document.title = nextTitle
+      return decision.shouldTranslate
     }
-    catch (error) {
-      if (requestVersion === this.titleRequestVersion) {
-        logger.warn("Failed to translate document title:", error)
-      }
-    }
+
+    // all/main mode: observe everything not excluded by user rules
+    return true
   }
 
   private async observeTopLevelParagraphs(container: HTMLElement, existingConfig?: Config): Promise<void> {
@@ -408,7 +389,11 @@ export class PageTranslationManager implements IPageTranslationManager {
       //  • the ancestor is *not* inside container
       return !ancestor || !container.contains(ancestor)
     })
-    topLevelParagraphs.forEach(el => observer.observe(el))
+    topLevelParagraphs.forEach((el) => {
+      if (this.shouldObserveCandidate(el, config)) {
+        observer.observe(el)
+      }
+    })
   }
 
   /**
@@ -511,6 +496,23 @@ export class PageTranslationManager implements IPageTranslationManager {
       if (rec.type === "childList") {
         rec.addedNodes.forEach((node) => {
           if (isHTMLElement(node)) {
+            // Smart mode: skip nodes outside smart root unless user-include forces observation
+            if (this.smartContext) {
+              const insideSmartRoot = this.smartContext.root === node || this.smartContext.root.contains(node)
+              if (!insideSmartRoot) {
+                const userDecision = matchSmartRulesForElement(node, window.location.hostname, this.parsedSmartRules)
+                if (userDecision.action !== "include") {
+                  if (this.smartContext.debug) {
+                    logger.info(`[smart] skipped mutation outside smart root: ${node.tagName}`)
+                  }
+                  return
+                }
+                if (this.smartContext.debug) {
+                  logger.info(`[smart] user-include forced mutation outside smart root: ${node.tagName}`)
+                }
+              }
+            }
+
             this.addWalkBlockedElements(node, config)
             void this.observeTopLevelParagraphs(node, config)
             this.observeIsolatedDescendantsMutations(node)

@@ -26,7 +26,7 @@ export const DEFAULT_CONFIG: Config = {
       hotkey: "control",
     },
     page: {
-      range: "all",
+      range: "main",
       shortcut: DEFAULT_AUTO_TRANSLATE_SHORTCUT_KEY,
       preload: {
         margin: DEFAULT_PRELOAD_MARGIN,
@@ -35,6 +35,10 @@ export const DEFAULT_CONFIG: Config = {
       minCharactersPerNode: DEFAULT_MIN_CHARACTERS_PER_NODE,
       minWordsPerNode: DEFAULT_MIN_WORDS_PER_NODE,
       floatingButtonEnabled: null,
+      smart: {
+        customRules: "",
+        debug: false,
+      },
     },
     enableAIContentAware: false,
     customPromptsConfig: DEFAULT_TRANSLATE_PROMPTS_CONFIG,
@@ -60,4 +64,5 @@ export const PAGE_TRANSLATE_RANGE_ITEMS: Record<
 > = {
   main: { label: "Main" },
   all: { label: "All" },
+  smart: { label: "Smart" },
 }

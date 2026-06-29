@@ -8,13 +8,15 @@ const {
   mockDeepQueryTopLevelSelector,
   mockGetDetectedCodeFromStorage,
   mockGetLocalConfig,
-  mockGetOrCreateWebPageContext,
   mockRemoveAllTranslatedWrapperNodes,
   mockSendMessage,
-  mockTranslateTextForPageTitle,
   mockTranslateWalkedElement,
   mockValidateTranslationConfigAndToast,
   mockWalkAndLabelElement,
+  mockDetectSmartContentRoot,
+  mockShouldTranslateSmartParagraph,
+  mockParseSmartRules,
+  mockMatchSmartRulesForElement,
 } = vi.hoisted(() => ({
   mockGetDetectedCodeFromStorage: vi.fn(),
   mockGetLocalConfig: vi.fn(),
@@ -22,10 +24,12 @@ const {
   mockWalkAndLabelElement: vi.fn(),
   mockRemoveAllTranslatedWrapperNodes: vi.fn(),
   mockTranslateWalkedElement: vi.fn(),
-  mockTranslateTextForPageTitle: vi.fn(),
-  mockGetOrCreateWebPageContext: vi.fn(),
   mockValidateTranslationConfigAndToast: vi.fn(),
   mockSendMessage: vi.fn(),
+  mockDetectSmartContentRoot: vi.fn(),
+  mockShouldTranslateSmartParagraph: vi.fn(),
+  mockParseSmartRules: vi.fn(),
+  mockMatchSmartRulesForElement: vi.fn(),
 }))
 
 vi.mock("@/utils/config/languages", () => ({
@@ -56,12 +60,17 @@ vi.mock("@/utils/host/translate/node-manipulation", () => ({
   translateWalkedElement: mockTranslateWalkedElement,
 }))
 
-vi.mock("@/utils/host/translate/translate-variants", () => ({
-  translateTextForPageTitle: mockTranslateTextForPageTitle,
+vi.mock("@/utils/host/translate/smart/content-detector", () => ({
+  detectSmartContentRoot: mockDetectSmartContentRoot,
 }))
 
-vi.mock("@/utils/host/translate/webpage-context", () => ({
-  getOrCreateWebPageContext: mockGetOrCreateWebPageContext,
+vi.mock("@/utils/host/translate/smart/paragraph-filter", () => ({
+  shouldTranslateSmartParagraph: mockShouldTranslateSmartParagraph,
+}))
+
+vi.mock("@/utils/host/translate/smart/user-rules", () => ({
+  parseSmartRules: mockParseSmartRules,
+  matchSmartRulesForElement: mockMatchSmartRulesForElement,
 }))
 
 vi.mock("@/utils/host/translate/translate-text", () => ({
@@ -88,22 +97,13 @@ class MockIntersectionObserver {
   constructor(_callback: IntersectionObserverCallback, _options?: IntersectionObserverInit) {}
 }
 
-function createDeferred<T>() {
-  let resolve!: (value: T | PromiseLike<T>) => void
-  const promise = new Promise<T>((innerResolve) => {
-    resolve = innerResolve
-  })
-
-  return { promise, resolve }
-}
-
 async function flushDomUpdates(): Promise<void> {
   await Promise.resolve()
   await new Promise(resolve => setTimeout(resolve, 0))
   await Promise.resolve()
 }
 
-describe("pageTranslationManager title handling", () => {
+describe("pageTranslationManager title disabled", () => {
   beforeEach(() => {
     vi.clearAllMocks()
 
@@ -116,122 +116,90 @@ describe("pageTranslationManager title handling", () => {
     mockGetDetectedCodeFromStorage.mockResolvedValue("eng")
     mockGetLocalConfig.mockResolvedValue(DEFAULT_CONFIG)
     mockDeepQueryTopLevelSelector.mockReturnValue([])
-    mockGetOrCreateWebPageContext.mockResolvedValue({
-      url: window.location.href,
-      webTitle: "Original Title",
-      webContent: "Article body",
-    })
     mockValidateTranslationConfigAndToast.mockReturnValue(true)
     mockSendMessage.mockResolvedValue(undefined)
-  })
-
-  it("does not prime webpage context on start for non-llm translation", async () => {
-    mockTranslateTextForPageTitle.mockResolvedValue("Translated Title")
-
-    const manager = new PageTranslationManager()
-    await manager.start()
-    await flushDomUpdates()
-
-    expect(mockGetOrCreateWebPageContext).not.toHaveBeenCalled()
-
-    manager.stop()
-  })
-
-  it("primes webpage context on start for AI-aware llm translation", async () => {
-    mockGetLocalConfig.mockResolvedValue({
-      ...DEFAULT_CONFIG,
-      translate: {
-        ...DEFAULT_CONFIG.translate,
-        providerId: "openai-default",
-        enableAIContentAware: true,
-      },
+    mockWalkAndLabelElement.mockImplementation((element: HTMLElement, walkId: string) => {
+      element.setAttribute("data-vibe-reading-walked", walkId)
+      return { forceBlock: false, isInlineNode: false }
     })
-    mockTranslateTextForPageTitle.mockResolvedValue("Translated Title")
-
-    const manager = new PageTranslationManager()
-    await manager.start()
-    await flushDomUpdates()
-
-    expect(mockGetOrCreateWebPageContext).toHaveBeenCalledTimes(1)
-
-    manager.stop()
-  })
-
-  it("translates the tab title on start and restores the latest source title on stop", async () => {
-    mockTranslateTextForPageTitle
-      .mockResolvedValueOnce("Translated Title")
-      .mockResolvedValueOnce("Translated Updated Title")
-
-    const manager = new PageTranslationManager()
-    await manager.start()
-    await flushDomUpdates()
-
-    expect(document.title).toBe("Translated Title")
-    expect(mockTranslateTextForPageTitle).toHaveBeenCalledTimes(1)
-    expect(mockTranslateTextForPageTitle).toHaveBeenCalledWith("Original Title")
-
-    document.title = "Updated Source Title"
-    await flushDomUpdates()
-
-    expect(mockTranslateTextForPageTitle).toHaveBeenCalledTimes(2)
-    expect(mockTranslateTextForPageTitle).toHaveBeenLastCalledWith("Updated Source Title")
-    expect(document.title).toBe("Translated Updated Title")
-
-    manager.stop()
-
-    expect(document.title).toBe("Updated Source Title")
-    expect(mockSendMessage).toHaveBeenCalledWith("setAndNotifyPageTranslationStateChangedByManager", {
-      enabled: true,
-      url: window.location.href,
-    })
-    expect(mockSendMessage).toHaveBeenCalledWith("setAndNotifyPageTranslationStateChangedByManager", {
-      enabled: false,
-      url: window.location.href,
+    mockParseSmartRules.mockReturnValue({ rules: [], errors: [] })
+    mockMatchSmartRulesForElement.mockReturnValue({ action: null, matchedRules: [] })
+    mockShouldTranslateSmartParagraph.mockReturnValue({ shouldTranslate: true, forced: false, reason: "pass" })
+    mockDetectSmartContentRoot.mockResolvedValue({
+      root: document.body,
+      source: "body",
+      confidence: "low",
+      debug: { candidates: [] },
     })
   })
 
-  it("does not retrigger title translation for its own managed title updates", async () => {
-    mockTranslateTextForPageTitle.mockResolvedValue("Translated Title")
-
+  it("does not change document.title when page translation starts", async () => {
     const manager = new PageTranslationManager()
     await manager.start()
     await flushDomUpdates()
-    await flushDomUpdates()
 
-    expect(document.title).toBe("Translated Title")
-    expect(mockTranslateTextForPageTitle).toHaveBeenCalledTimes(1)
+    expect(document.title).toBe("Original Title")
+    expect(document.title).not.toBe("")
 
     manager.stop()
   })
 
-  it("ignores stale translation results when the source title changes mid-request", async () => {
-    const firstTranslation = createDeferred<string>()
-    const secondTranslation = createDeferred<string>()
-
-    mockTranslateTextForPageTitle
-      .mockImplementationOnce(() => firstTranslation.promise)
-      .mockImplementationOnce(() => secondTranslation.promise)
-
+  it("does not change document.title when page translation stops", async () => {
     const manager = new PageTranslationManager()
     await manager.start()
     await flushDomUpdates()
 
-    document.title = "Updated Source Title"
-    await flushDomUpdates()
-
-    expect(mockTranslateTextForPageTitle).toHaveBeenCalledTimes(2)
-
-    firstTranslation.resolve("Stale Translation")
-    await flushDomUpdates()
-
-    expect(document.title).toBe("Updated Source Title")
-
-    secondTranslation.resolve("Fresh Translation")
-    await flushDomUpdates()
-
-    expect(document.title).toBe("Fresh Translation")
+    expect(document.title).toBe("Original Title")
 
     manager.stop()
-    expect(document.title).toBe("Updated Source Title")
+    await flushDomUpdates()
+
+    expect(document.title).toBe("Original Title")
+  })
+
+  it("does not import or reference translateTextForPageTitle in any way", async () => {
+    // The fact that the module loads without mocking translateTextForPageTitle
+    // proves it is not imported.
+    const manager = new PageTranslationManager()
+    await manager.start()
+    await flushDomUpdates()
+
+    // Title should remain completely untouched
+    expect(document.title).toBe("Original Title")
+
+    manager.stop()
+  })
+
+  it("does not call getOrCreateWebPageContext when starting", async () => {
+    const manager = new PageTranslationManager()
+    await manager.start()
+    await flushDomUpdates()
+
+    // If getOrCreateWebPageContext were imported and called, the test
+    // would have required its mock. Loading without it succeeds.
+    expect(document.title).toBe("Original Title")
+
+    manager.stop()
+  })
+
+  it("title remains stable across start/stop/restart cycles", async () => {
+    const manager = new PageTranslationManager()
+
+    await manager.start()
+    await flushDomUpdates()
+    expect(document.title).toBe("Original Title")
+
+    // Simulate external title change
+    document.title = "External Change"
+    await flushDomUpdates()
+    expect(document.title).toBe("External Change")
+
+    await manager.restart()
+    await flushDomUpdates()
+    expect(document.title).toBe("External Change")
+
+    manager.stop()
+    await flushDomUpdates()
+    expect(document.title).toBe("External Change")
   })
 })

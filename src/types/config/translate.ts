@@ -17,7 +17,7 @@ export const batchQueueConfigSchema = z.object({
 export const TRANSLATION_MODES = ["bilingual", "translationOnly"] as const
 export const translationModeSchema = z.enum(TRANSLATION_MODES)
 
-export const pageTranslateRangeSchema = z.enum(["main", "all"])
+export const pageTranslateRangeSchema = z.enum(["main", "all", "smart"])
 export type PageTranslateRange = z.infer<typeof pageTranslateRangeSchema>
 
 export const preloadConfigSchema = z.object({
@@ -97,6 +97,13 @@ export const translateConfigSchema = z.object({
     minCharactersPerNode: z.number().min(MIN_CHARACTERS_PER_NODE),
     minWordsPerNode: z.number().min(MIN_WORDS_PER_NODE),
     floatingButtonEnabled: z.boolean().nullable().default(null),
+    smart: z.object({
+      customRules: z.string(),
+      debug: z.boolean(),
+    }).default({
+      customRules: "",
+      debug: false,
+    }),
   }),
   enableAIContentAware: z.boolean(),
   customPromptsConfig: customPromptsConfigSchema,

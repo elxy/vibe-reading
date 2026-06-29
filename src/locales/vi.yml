@@ -260,6 +260,14 @@ options:
       range:
         main: Nội dung chính
         all: Tất cả nội dung
+        smart: Smart Content
+    smartContentRules:
+      title: Smart Content Rules
+      description: Configure selector rules for Smart Content page translation.
+      customRules: Custom Rules
+      help: "Syntax: [!]<domain> <css-selector>. Prefix ! to skip translation, omit to force translate. Domain forms: example.com (root + subdomains), =example.com (exact), *.example.com (subdomains only), * (any host)."
+      line: Line
+      debug: Debug smart content detection
     pageTranslationShortcut:
       title: Phím tắt dịch trang
       description: Tùy chỉnh phím tắt để dịch toàn bộ trang web

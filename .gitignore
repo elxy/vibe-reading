@@ -46,3 +46,5 @@ docs/
 scripts/output/
 
 reference/
+# pi orchestrator (worktrees, runs, spec snapshots)
+.pi/

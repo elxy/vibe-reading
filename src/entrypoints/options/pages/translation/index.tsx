@@ -10,6 +10,7 @@ import { PreloadConfig } from "./preload-config"
 import { RequestBatch } from "./request-batch"
 import { RequestRate } from "./request-rate"
 import { SmallParagraphFilter } from "./small-paragraph-filter"
+import { SmartContentRules } from "./smart-content-rules"
 import { TranslateRange } from "./translate-range"
 import { TranslationMode } from "./translation-mode"
 
@@ -18,6 +19,7 @@ export function TranslationPage() {
     <PageLayout title={i18n.t("options.translation.title")} innerClassName="*:border-b [&>*:last-child]:border-b-0">
       <TranslationMode />
       <TranslateRange />
+      <SmartContentRules />
       <PageTranslationShortcut />
       <FloatingTranslateButton />
       <CustomTranslationStyle />

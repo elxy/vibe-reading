@@ -260,6 +260,14 @@ options:
       range:
         main: 主要內容
         all: 全部內容
+        smart: Smart Content
+    smartContentRules:
+      title: Smart Content Rules
+      description: Configure selector rules for Smart Content page translation.
+      customRules: Custom Rules
+      help: "Syntax: [!]<domain> <css-selector>. Prefix ! to skip translation, omit to force translate. Domain forms: example.com (root + subdomains), =example.com (exact), *.example.com (subdomains only), * (any host)."
+      line: Line
+      debug: Debug smart content detection
     pageTranslationShortcut:
       title: 網頁翻譯快速鍵
       description: 自訂翻譯整個網頁的快速鍵
